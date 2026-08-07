@@ -1,8 +1,10 @@
 import {
   DeepSeekError,
   generateTravelPlan,
+  isDeepSeekConfigured,
   type TravelRequest,
 } from "@/lib/deepseek";
+import { collectTravelEvidence, enrichPlanWithRoutes } from "@/lib/travel-data";
 
 const allowedPaces = new Set(["松弛", "舒展", "充实"]);
 const allowedBudgets = new Set(["经济", "适中", "舒适"]);
@@ -65,8 +67,28 @@ export async function POST(request: Request) {
       );
     }
 
-    const plan = await generateTravelPlan(input);
-    return Response.json({ plan, provider: "deepseek" });
+    if (!isDeepSeekConfigured()) {
+      throw new DeepSeekError("DeepSeek API 尚未配置", 503, "DEEPSEEK_NOT_CONFIGURED");
+    }
+
+    const evidence = await collectTravelEvidence(input);
+    const generatedPlan = await generateTravelPlan(input, evidence);
+    const routeResult = await enrichPlanWithRoutes(generatedPlan, input);
+    const warnings = [...evidence.warnings, ...(routeResult.warning ? [routeResult.warning] : [])];
+    const searchStatus = !evidence.searchConfigured ? "off" : evidence.sources.length ? "live" : "partial";
+    const mapStatus = !routeResult.mapConfigured ? "off" : routeResult.routeCount ? "live" : "partial";
+    const plan = {
+      ...routeResult.plan,
+      liveData: {
+        searchedAt: evidence.searchedAt,
+        searchStatus,
+        mapStatus,
+        routeCount: routeResult.routeCount,
+        sources: evidence.sources,
+        warnings,
+      },
+    };
+    return Response.json({ plan, provider: "deepseek", dataProviders: { search: "bocha", map: "amap" } });
   } catch (error) {
     if (error instanceof SyntaxError) {
       return Response.json(

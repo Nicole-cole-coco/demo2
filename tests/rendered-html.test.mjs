@@ -54,6 +54,22 @@ test("exposes a secret-safe AI status route", async () => {
   assert.equal("apiKey" in payload, false);
 });
 
+test("exposes secret-safe external data status", async () => {
+  const worker = await getWorker();
+  const response = await worker.fetch(
+    new Request("http://localhost/api/data/status"),
+    env,
+    ctx,
+  );
+
+  assert.equal(response.status, 200);
+  const payload = await response.json();
+  assert.equal(typeof payload.searchConfigured, "boolean");
+  assert.equal(typeof payload.mapConfigured, "boolean");
+  assert.equal(payload.strategy, "free-quota-first");
+  assert.equal("apiKey" in payload, false);
+});
+
 test("validates the public generation request before calling DeepSeek", async () => {
   const worker = await getWorker();
   const response = await worker.fetch(

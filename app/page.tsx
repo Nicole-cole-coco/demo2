@@ -7,7 +7,12 @@ import type { TravelPlan } from "@/lib/deepseek";
 
 const REGIONS = ["全部", "华北", "华东", "华南", "西南", "西北"] as const;
 const INTERESTS = ["地道美食", "历史古迹", "山水自然", "城市夜景", "博物馆", "轻徒步", "摄影", "街区漫游"];
-const PROGRESS = ["理解偏好与预算", "筛选城市精华", "组合顺路动线", "核对交通与花费"];
+const PROGRESS = ["联网检索城市资料", "核对门票与开放时间", "计算景点间路线", "生成预算与日程"];
+
+type DataStatus = {
+  searchConfigured: boolean;
+  mapConfigured: boolean;
+};
 
 function findCityProfile(city: string) {
   return CITY_PROFILES.find((item) => city.includes(item.city) || item.city.includes(city)) ?? CITY_PROFILES[0];
@@ -30,6 +35,7 @@ export default function Home() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [aiConfigured, setAiConfigured] = useState<boolean | null>(null);
+  const [dataStatus, setDataStatus] = useState<DataStatus | null>(null);
   const [toast, setToast] = useState("");
   const plannerRef = useRef<HTMLElement>(null);
   const resultRef = useRef<HTMLElement>(null);
@@ -45,10 +51,18 @@ export default function Home() {
   }), [region, cityQuery]);
 
   useEffect(() => {
-    fetch("/api/ai/status")
-      .then((response) => response.json())
-      .then((data: { configured?: boolean }) => setAiConfigured(Boolean(data.configured)))
-      .catch(() => setAiConfigured(false));
+    Promise.all([
+      fetch("/api/ai/status").then((response) => response.json()),
+      fetch("/api/data/status").then((response) => response.json()),
+    ])
+      .then(([ai, data]: [{ configured?: boolean }, DataStatus]) => {
+        setAiConfigured(Boolean(ai.configured));
+        setDataStatus(data);
+      })
+      .catch(() => {
+        setAiConfigured(false);
+        setDataStatus({ searchConfigured: false, mapConfigured: false });
+      });
   }, []);
 
   useEffect(() => {
@@ -128,7 +142,11 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="旅策首页"><span>旅</span><div><b>旅策</b><small>ROUTE &amp; TASTE</small></div></a>
         <nav aria-label="主导航"><a href="#cities">选城市</a><a href="#planner">定偏好</a><a href="#result">看方案</a></nav>
-        <div className={`api-badge ${aiConfigured ? "connected" : ""}`}><i />{aiConfigured === null ? "检查接口" : aiConfigured ? "DeepSeek 已连接" : "演示模式"}</div>
+        <div className="api-stack" aria-label="数据服务状态">
+          <div className={`api-badge ${aiConfigured ? "connected" : ""}`}><i />{aiConfigured === null ? "检查接口" : aiConfigured ? "AI 已连接" : "演示模式"}</div>
+          <div className={`api-badge ${dataStatus?.searchConfigured ? "connected" : ""}`}><i />{dataStatus?.searchConfigured ? "联网搜索" : "搜索待接入"}</div>
+          <div className={`api-badge ${dataStatus?.mapConfigured ? "connected" : ""}`}><i />{dataStatus?.mapConfigured ? "路线已连接" : "路线待接入"}</div>
+        </div>
       </header>
 
       <section className="hero" id="top">
@@ -137,7 +155,7 @@ export default function Home() {
         <div className="hero-content">
           <p className="eyebrow">CHINA CITY TRAVEL PLANNER</p>
           <h1>不是列景点，<br /><em>是选出最适合你的走法。</em></h1>
-          <p>从城市特色出发，把必吃、必看、交通和预算排进同一条顺路行程。只做中国城市，给出有取舍的最佳方案。</p>
+          <p>只做中国城市。从城市特色出发，把必吃、必看、交通和预算排进同一条顺路行程；联网检索门票、开放时间与官方提示，再用地图接口计算顺路动线。</p>
           <div className="hero-actions"><a href="#planner" className="primary">生成最佳方案 <span>↗</span></a><a href="#cities" className="ghost">先找灵感</a></div>
         </div>
         <div className="hero-insight">
@@ -178,8 +196,8 @@ export default function Home() {
         <div className="planner-intro">
           <p className="eyebrow dark">BUILD YOUR BEST ROUTE</p>
           <h2>只问真正影响方案的事</h2>
-          <p>不再统计无意义的人数。城市、天数、预算、节奏、交通方式与兴趣，才决定景点取舍和每天怎么走。</p>
-          <div className="planning-principles"><span><b>01</b> 城市特色优先</span><span><b>02</b> 预算决定取舍</span><span><b>03</b> 动线减少折返</span></div>
+          <p>不再统计无意义的人数。城市、天数、预算、节奏、交通方式与兴趣，才决定景点取舍和每天怎么走。联网结果保留来源与查询时间，未核验的信息会明确标注。</p>
+          <div className="planning-principles"><span><b>01</b> 联网查门票与开放时间</span><span><b>02</b> 地图计算相邻路线</span><span><b>03</b> DeepSeek 做方案取舍</span><span><b>04</b> 只展示参考价，不冒充成交价</span></div>
         </div>
         <form className="planner" onSubmit={generatePlan}>
           <div className="form-row two">
@@ -219,6 +237,13 @@ export default function Home() {
           <div className="match-metric"><span>为什么推荐</span><p>{plan.matchReason}</p></div>
         </div>
 
+        <div className="live-data-strip">
+          <div><span className={plan.liveData?.searchStatus === "live" ? "status-dot live" : "status-dot"} /><p>联网资料</p><b>{plan.liveData?.searchStatus === "live" ? `${plan.liveData.sources.length} 条来源` : "等待搜索 API"}</b></div>
+          <div><span className={plan.liveData?.mapStatus === "live" ? "status-dot live" : "status-dot"} /><p>路线计算</p><b>{plan.liveData?.mapStatus === "live" ? `${plan.liveData.routeCount} 段已计算` : "等待地图 API"}</b></div>
+          <div><p>价格口径</p><b>联网参考价 · 非成交价</b><small>{plan.liveData?.searchedAt ? `查询于 ${new Date(plan.liveData.searchedAt).toLocaleString("zh-CN", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}` : "动态信息出发前复核"}</small></div>
+          <div><p>成本控制</p><b>缓存 24 小时 · 限制调用量</b><small>优先使用免费配额</small></div>
+        </div>
+
         <div className="content-heading"><div><span>01 · CITY ESSENTIALS</span><h2>最值得放进行程的城市精华</h2></div><p>每一项都说明“为什么值得”，而不是只给名字。</p></div>
         <div className="highlight-grid">{plan.highlights.map((item,index) => <article key={item.name}><div><span>{String(index + 1).padStart(2,"0")}</span><em>{item.type}</em></div><h3>{item.name}</h3><p>{item.why}</p><small>建议安排 {item.duration}</small></article>)}</div>
 
@@ -232,9 +257,14 @@ export default function Home() {
 
         <div className="content-heading itinerary-heading"><div><span>05 · DAY BY DAY</span><h2>每天一条主线，吃与玩一起排</h2></div><p>行程按区域组织，保留休息和临场调整空间。</p></div>
         <div className="day-tabs" role="tablist" aria-label="选择行程日期">{plan.days.map((day,index) => <button type="button" role="tab" aria-selected={activeDay === index} className={activeDay === index ? "active" : ""} key={day.label} onClick={() => setActiveDay(index)}><span>{day.label}</span><b>{day.date.split(" · ")[0]}</b><small>{day.theme.split(" · ")[0]}</small></button>)}</div>
-        {activePlanDay && <article className="day-plan"><div className="day-plan-head"><div><span>{activePlanDay.label} · {activePlanDay.date}</span><h2>{activePlanDay.theme}</h2><p>{activePlanDay.note}</p></div><button type="button" onClick={() => setToast("配置 DeepSeek 后，可按新偏好重新生成局部行程")}>调整这一天</button></div><div className="timeline">{activePlanDay.stops.map((stop,index) => <div className="timeline-row" key={`${stop.time}-${stop.title}`}><time>{stop.time}</time><div className={`dot ${stop.tone}`}>{index + 1}</div><div className="stop"><div><h3>{stop.title}</h3><span>{stop.meta}</span></div><p>{stop.detail}</p>{stop.source && <small>◇ {stop.source}</small>}</div></div>)}</div></article>}
+        {activePlanDay && <article className="day-plan"><div className="day-plan-head"><div><span>{activePlanDay.label} · {activePlanDay.date}</span><h2>{activePlanDay.theme}</h2><p>{activePlanDay.note}</p></div><button type="button" onClick={() => setToast("修改偏好后，可重新联网生成完整方案")}>调整方案</button></div><div className="timeline">{activePlanDay.stops.map((stop,index) => <div className="timeline-row" key={`${stop.time}-${stop.title}`}><time>{stop.time}</time><div className={`dot ${stop.tone}`}>{index + 1}</div><div className="stop"><div><h3>{stop.title}</h3><span>{stop.meta}</span></div><p>{stop.detail}</p>{stop.source && <small>◇ {stop.source}</small>}{stop.routeToNext && <div className="route-to-next"><span>下一程 · {stop.routeToNext.mode}</span><b>{stop.routeToNext.duration}</b><em>{stop.routeToNext.distance}{stop.routeToNext.cost ? ` · ${stop.routeToNext.cost}` : ""}</em><small>高德地图参考</small></div>}</div></div>)}</div></article>}
 
-        <div className="verification"><span>信息边界</span><p>{plan.verificationNote}</p><b>AI 负责生成最佳结构；天气、票务、营业时间与交通管制应接入专业数据 API 或在出发前通过官方渠道复核。</b></div>
+        {plan.liveData?.sources && plan.liveData.sources.length > 0 && <>
+          <div className="content-heading source-heading"><div><span>06 · LIVE SOURCES</span><h2>本次方案参考了哪些联网资料</h2></div><p>来源经过整理后展示，不堆砌原始网址；点击可前往原页面核验。</p></div>
+          <div className="source-grid">{plan.liveData.sources.slice(0, 12).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><div><span>{source.category}</span>{source.official && <em>官方优先</em>}</div><h3>{source.title}</h3><p>{source.snippet || "打开来源查看详细信息"}</p><footer><b>{source.siteName}</b><span>核验原文 ↗</span></footer></a>)}</div>
+        </>}
+
+        <div className="verification"><span>信息边界</span><p>{plan.verificationNote}</p><b>{plan.liveData?.searchStatus === "live" ? "已联网检索公开资料，但搜索价格仍是参考价；余票、库存、临时闭馆和最终支付金额以官方页面为准。" : "当前未接入搜索 API，AI 不会把知识库内容冒充实时信息。接入后将自动展示来源和查询时间。"}</b></div>
       </section>
 
       <section className="final-cta"><div><span>YOUR CITY, YOUR WAY</span><h2>不把城市塞满，<br />只留下真正值得的部分。</h2></div><a href="#planner">重新设置偏好 <span>↗</span></a></section>
