@@ -1,130 +1,119 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import type { TravelDay, TravelPlan } from "@/lib/deepseek";
 
-type DayPlan = {
-  label: string;
-  date: string;
-  theme: string;
-  note: string;
-  stops: Array<{
-    time: string;
-    title: string;
-    meta: string;
-    detail: string;
-    tone: "sage" | "clay" | "lavender" | "blue";
-    source?: string;
-  }>;
-};
+type DayPlan = TravelDay;
 
-const DAY_PLANS: DayPlan[] = [
+const DEMO_DAY_PLANS: DayPlan[] = [
   {
     label: "DAY 01",
     date: "10月23日 · 周五",
-    theme: "东山慢行 · 从晨光到灯火",
-    note: "同一区域顺路安排，下午保留 70 分钟自由时间。",
+    theme: "西湖初见 · 从晨雾到暮色",
+    note: "沿湖顺时针慢行，下午保留一段坐船或喝茶的自由时间。",
     stops: [
       {
-        time: "07:10",
-        title: "伏见稻荷大社",
-        meta: "神社 · 建议停留 1小时40分",
-        detail: "趁人流还轻，走到千本鸟居中段即可折返，不必一次登顶。",
+        time: "08:00",
+        title: "断桥与白堤",
+        meta: "湖畔 · 建议停留 1小时20分",
+        detail: "从北山街一侧进入，清晨沿白堤步行，避开午后较密集的人流。",
+        tone: "blue",
+      },
+      {
+        time: "10:00",
+        title: "孤山与浙江省博物馆",
+        meta: "人文 · 建议停留 1小时40分",
+        detail: "把园林、湖景与室内参观放在同一片区；具体展馆开放安排需出发前核验。",
+        tone: "sage",
+        source: "出发前核验",
+      },
+      {
+        time: "12:20",
+        title: "湖滨午餐",
+        meta: "餐饮 · 杭帮菜",
+        detail: "优先选择离下一段动线近的餐厅，不为单一热门店跨区往返。",
         tone: "clay",
       },
       {
-        time: "10:20",
-        title: "清水寺",
-        meta: "寺院 · 建议停留 1小时30分",
-        detail: "官方 06:00 开门；先到主殿，再沿音羽瀑布方向顺行离场。",
-        tone: "lavender",
-        source: "官方开放信息",
-      },
-      {
-        time: "12:10",
-        title: "二年坂的午餐与散步",
-        meta: "餐饮 · 人均约 ¥120–180",
-        detail: "把午餐与街区散步合并，避开往返；预留排队弹性。",
+        time: "15:20",
+        title: "曲院风荷至苏堤",
+        meta: "散步 · 建议停留 1小时30分",
+        detail: "沿湖慢走并主动留白，体力不足时可缩短为曲院风荷周边小环线。",
         tone: "sage",
-      },
-      {
-        time: "15:10",
-        title: "祇园白川",
-        meta: "街区 · 建议停留 1小时10分",
-        detail: "沿白川缓慢步行，傍晚光线柔和，也便于直接前往晚餐。",
-        tone: "blue",
       },
     ],
   },
   {
     label: "DAY 02",
     date: "10月24日 · 周六",
-    theme: "岚山绿意 · 留一点空白",
-    note: "早出避开高峰，下午不跨区，给咖啡和河畔散步留白。",
+    theme: "灵隐山色 · 寺院与茶村",
+    note: "上午集中在灵隐片区，午后沿梅灵路移动，避免在市区与山间反复折返。",
     stops: [
       {
-        time: "07:30",
-        title: "竹林小径",
-        meta: "自然 · 建议停留 50分",
-        detail: "从小径北侧进入，和天龙寺安排在同一动线。",
+        time: "07:40",
+        title: "灵隐飞来峰",
+        meta: "石刻与山林 · 建议停留 1小时40分",
+        detail: "早点进入片区，把飞来峰造像与山林步道安排在客流高峰前。",
         tone: "sage",
+        source: "出发前核验",
       },
       {
-        time: "09:00",
-        title: "天龙寺",
+        time: "10:00",
+        title: "灵隐寺",
         meta: "寺院 · 建议停留 1小时20分",
-        detail: "重点看曹源池庭园；开放与票务信息将在生成时再次核验。",
+        detail: "参观节奏以主轴线为主，票务、开放时间与预约要求在出发前再次确认。",
         tone: "lavender",
         source: "出发前核验",
       },
       {
-        time: "12:00",
-        title: "渡月桥北岸午餐",
-        meta: "餐饮 · 人均约 ¥140–220",
-        detail: "选择不绕路的小店，避开商业街最拥挤的中心段。",
+        time: "12:30",
+        title: "梅灵路午餐",
+        meta: "餐饮 · 茶香简餐",
+        detail: "不追逐排队名店，用一顿顺路午餐衔接下午茶村动线。",
         tone: "clay",
       },
       {
-        time: "15:00",
-        title: "大堰川河畔",
-        meta: "散步 · 建议停留 1小时30分",
-        detail: "这段是主动留白；若下雨，可替换为室内文化空间。",
-        tone: "blue",
+        time: "14:30",
+        title: "梅家坞茶村",
+        meta: "茶村 · 建议停留 1小时30分",
+        detail: "选择可信茶空间短坐，重点感受茶园环境，不把购物作为必选环节。",
+        tone: "sage",
       },
     ],
   },
   {
     label: "DAY 03",
     date: "10月25日 · 周日",
-    theme: "城中日常 · 市场与庭园",
-    note: "把城市生活、轻购物和传统庭园排在步行友好的范围内。",
+    theme: "运河日常 · 街巷与工业遗存",
+    note: "从小河直街一路走向拱宸桥，体验与西湖不同的杭州城市肌理。",
     stops: [
       {
-        time: "08:40",
-        title: "锦市场",
-        meta: "市场 · 建议停留 1小时20分",
-        detail: "以轻食为主，保留午餐胃口；注意各店营业时间不同。",
+        time: "09:00",
+        title: "小河直街",
+        meta: "历史街区 · 建议停留 1小时20分",
+        detail: "从临水街巷开始，观察传统民居与当代小店共存的生活尺度。",
+        tone: "blue",
+      },
+      {
+        time: "10:50",
+        title: "桥西历史文化街区",
+        meta: "街区 · 建议停留 1小时",
+        detail: "沿运河向北移动，把手工艺展馆与街区散步合并，减少碎片化换乘。",
         tone: "clay",
       },
       {
-        time: "10:40",
-        title: "京都御苑",
-        meta: "庭园 · 建议停留 1小时20分",
-        detail: "宽阔平缓，作为前两天步行后的轻松段落。",
-        tone: "sage",
-      },
-      {
-        time: "14:20",
-        title: "京都国际漫画博物馆",
-        meta: "室内 · 建议停留 1小时40分",
-        detail: "室内备选点，遇雨可延长停留并取消后续散步。",
+        time: "13:30",
+        title: "中国京杭大运河博物馆",
+        meta: "博物馆 · 建议停留 1小时30分",
+        detail: "作为理解运河城市脉络的室内段落，预约与展厅开放信息需提前核验。",
         tone: "lavender",
         source: "出发前核验",
       },
       {
-        time: "17:00",
-        title: "鸭川河畔",
-        meta: "散步 · 建议停留 50分",
-        detail: "根据体力决定是否保留，随时可提前结束。",
+        time: "16:00",
+        title: "拱宸桥与运河畔",
+        meta: "散步 · 建议停留 1小时",
+        detail: "在桥边收尾，是否继续乘船或停留看夜景可根据体力临场决定。",
         tone: "blue",
       },
     ],
@@ -132,29 +121,28 @@ const DAY_PLANS: DayPlan[] = [
   {
     label: "DAY 04",
     date: "10月26日 · 周一",
-    theme: "北山收尾 · 从容返程",
-    note: "只安排两个主站点，避免最后一天赶路和行李焦虑。",
+    theme: "九溪收尾 · 龙井山色",
+    note: "最后一天只走一条山间动线，并为取行李和返程保留充足缓冲。",
     stops: [
       {
         time: "09:00",
-        title: "金阁寺",
-        meta: "寺院 · 建议停留 1小时15分",
-        detail: "路线单向清晰，上午参观后直接向市中心移动。",
-        tone: "lavender",
-        source: "出发前核验",
+        title: "九溪烟树",
+        meta: "山林 · 建议停留 1小时30分",
+        detail: "根据天气与路况决定步行长度；雨后湿滑时缩短为入口附近轻徒步。",
+        tone: "sage",
       },
       {
-        time: "11:20",
-        title: "北野天满宫周边午餐",
-        meta: "餐饮 · 人均约 ¥100–160",
-        detail: "用一顿不赶时间的午餐结束旅程，之后回酒店取行李。",
+        time: "11:10",
+        title: "龙井村",
+        meta: "茶村 · 建议停留 1小时10分",
+        detail: "短暂停留看茶园与村落，不安排强制消费，也不购买来源不明的高价茶叶。",
         tone: "clay",
       },
       {
-        time: "14:10",
+        time: "13:40",
         title: "返回酒店取行李",
-        meta: "交通 · 预计 35分",
-        detail: "已为返程预留 90 分钟缓冲，不再插入临时景点。",
+        meta: "交通 · 预留缓冲",
+        detail: "为市内交通和取行李预留弹性，不再临时加入跨区景点。",
         tone: "blue",
       },
     ],
@@ -163,13 +151,30 @@ const DAY_PLANS: DayPlan[] = [
 
 const progressSteps = ["理解偏好", "核实开放与交通信息", "安排顺路路线", "检查时间与预算"];
 
+function formatDateRange(startDate: string, days: number) {
+  const start = new Date(`${startDate}T00:00:00+08:00`);
+  if (Number.isNaN(start.getTime())) return "待选择";
+  const end = new Date(start);
+  end.setDate(start.getDate() + Math.max(days - 1, 0));
+  const compact = (date: Date) => `${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+  return `${compact(start)} — ${compact(end)}`;
+}
+
 export default function Home() {
+  const [dayPlans, setDayPlans] = useState<DayPlan[]>(DEMO_DAY_PLANS);
   const [activeDay, setActiveDay] = useState(0);
   const [selectedStop, setSelectedStop] = useState(1);
-  const [destination, setDestination] = useState("京都");
+  const [destination, setDestination] = useState("杭州");
+  const [startDate, setStartDate] = useState("2026-10-23");
+  const [travelDays, setTravelDays] = useState(4);
+  const [party, setParty] = useState<"solo" | "couple" | "friends" | "family">("couple");
   const [pace, setPace] = useState("舒展");
   const [budget, setBudget] = useState("适中");
   const [interests, setInterests] = useState(["古迹人文", "街区漫游", "在地餐食"]);
+  const [tripTitle, setTripTitle] = useState("杭州，湖山之间的四日");
+  const [tripSubtitle, setTripSubtitle] = useState("2026.10.23 — 10.26 · 两人 · 舒展节奏");
+  const [verificationNote, setVerificationNote] = useState("演示行程未使用实时数据；开放、预约、交通与天气需在出发前核验。");
+  const [aiConfigured, setAiConfigured] = useState<boolean | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const [toast, setToast] = useState("");
@@ -177,8 +182,8 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const resultRef = useRef<HTMLElement>(null);
 
-  const plan = DAY_PLANS[activeDay];
-  const destinationLabel = destination.trim() || "京都";
+  const plan = dayPlans[activeDay] ?? dayPlans[0] ?? DEMO_DAY_PLANS[0];
+  const destinationLabel = destination.trim() || "杭州";
 
   const mapStops = useMemo(() => plan.stops.slice(0, 4), [plan]);
 
@@ -189,20 +194,22 @@ export default function Home() {
   }, [toast]);
 
   useEffect(() => {
+    let cancelled = false;
+    fetch("/api/ai/status")
+      .then((response) => response.json())
+      .then((data: { configured?: boolean }) => {
+        if (!cancelled) setAiConfigured(Boolean(data.configured));
+      })
+      .catch(() => {
+        if (!cancelled) setAiConfigured(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
     if (!isGenerating) return;
     const interval = window.setInterval(() => {
-      setProgress((current) => {
-        if (current >= progressSteps.length - 1) {
-          window.clearInterval(interval);
-          window.setTimeout(() => {
-            setIsGenerating(false);
-            setToast("攻略已生成，并完成了基础约束检查");
-            resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 500);
-          return current;
-        }
-        return current + 1;
-      });
+      setProgress((current) => Math.min(current + 1, progressSteps.length - 1));
     }, 720);
     return () => window.clearInterval(interval);
   }, [isGenerating]);
@@ -217,10 +224,56 @@ export default function Home() {
     );
   }
 
-  function handleGenerate(event: FormEvent) {
+  async function handleGenerate(event: FormEvent) {
     event.preventDefault();
     setProgress(0);
     setIsGenerating(true);
+
+    try {
+      const response = await fetch("/api/ai/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          destination: destinationLabel,
+          startDate,
+          days: travelDays,
+          party,
+          pace,
+          budget,
+          interests,
+        }),
+      });
+      const payload = await response.json() as {
+        error?: string;
+        message?: string;
+        plan?: TravelPlan;
+      };
+
+      if (!response.ok || !payload.plan) {
+        if (payload.error === "DEEPSEEK_NOT_CONFIGURED") {
+          setAiConfigured(false);
+          setToast("当前为演示模式；配置 DeepSeek 后即可生成真实个性化攻略");
+          resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        throw new Error(payload.message || "生成失败，请稍后重试");
+      }
+
+      setDayPlans(payload.plan.days);
+      setTripTitle(payload.plan.title);
+      setTripSubtitle(payload.plan.subtitle);
+      setVerificationNote(payload.plan.verificationNote);
+      setDestination(payload.plan.destination);
+      setActiveDay(0);
+      setSelectedStop(0);
+      setAiConfigured(true);
+      setToast("DeepSeek 攻略已生成，并完成了结构检查");
+      window.setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+    } catch (error) {
+      setToast(error instanceof Error ? error.message : "生成失败，请稍后重试");
+    } finally {
+      setIsGenerating(false);
+    }
   }
 
   async function handleShare() {
@@ -286,14 +339,14 @@ export default function Home() {
         <div className="hero-visual" id="inspiration">
           <div className="postcard postcard-main">
             <img
-              src="https://images.unsplash.com/photo-1578399337856-c661ba5e5cec?auto=format&fit=crop&fm=jpg&q=78&w=1400"
-              alt="京都清水寺的木质建筑与山景"
+              src="https://images.unsplash.com/photo-1697395884990-f4958339f335?auto=format&fit=crop&fm=jpg&q=78&w=1400"
+              alt="杭州西湖的湖面、游船与中式建筑"
             />
             <div className="photo-shade" />
             <div className="postcard-top"><span>本周灵感</span><span>35.0116° N</span></div>
             <div className="postcard-copy">
-              <small>KYOTO · AUTUMN</small>
-              <strong>京都的秋天，<br />适合慢一点走。</strong>
+              <small>HANGZHOU · AUTUMN</small>
+              <strong>杭州的秋天，<br />在湖山之间慢一点走。</strong>
               <span>4日 · 人文与街区 · 舒展节奏</span>
             </div>
           </div>
@@ -340,17 +393,28 @@ export default function Home() {
                 />
                 <small>推荐</small>
               </div>
-              <p className="field-hint">可试试：京都、杭州、潮州、清迈</p>
+              <p className="field-hint">仅支持中国境内城市，可试试：杭州、潮州、泉州、大同</p>
             </div>
 
             <div className="form-grid">
               <div className="form-block">
                 <label htmlFor="departure">出发日期</label>
-                <input id="departure" className="simple-input" type="date" defaultValue="2026-10-23" />
+                <input
+                  id="departure"
+                  className="simple-input"
+                  type="date"
+                  value={startDate}
+                  onChange={(event) => setStartDate(event.target.value)}
+                />
               </div>
               <div className="form-block">
                 <label htmlFor="days">旅行天数</label>
-                <select id="days" className="simple-input" defaultValue="4">
+                <select
+                  id="days"
+                  className="simple-input"
+                  value={travelDays}
+                  onChange={(event) => setTravelDays(Number(event.target.value))}
+                >
                   <option value="3">3 天</option>
                   <option value="4">4 天</option>
                   <option value="5">5 天</option>
@@ -359,7 +423,12 @@ export default function Home() {
               </div>
               <div className="form-block">
                 <label htmlFor="party">和谁出发</label>
-                <select id="party" className="simple-input" defaultValue="couple">
+                <select
+                  id="party"
+                  className="simple-input"
+                  value={party}
+                  onChange={(event) => setParty(event.target.value as typeof party)}
+                >
                   <option value="solo">一个人</option>
                   <option value="couple">两人同行</option>
                   <option value="friends">朋友出行</option>
@@ -418,10 +487,15 @@ export default function Home() {
           </div>
 
           <aside className="planner-summary">
-            <span className="summary-kicker">YOUR TRIP</span>
-            <h3>{destinationLabel}<small>4 DAYS</small></h3>
-            <div className="summary-line"><span>日期</span><b>10.23 — 10.26</b></div>
-            <div className="summary-line"><span>同行</span><b>2 位成人</b></div>
+            <div className="summary-kicker-row">
+              <span className="summary-kicker">YOUR TRIP</span>
+              <span className={`ai-status ${aiConfigured ? "connected" : "demo"}`}>
+                <i />{aiConfigured === null ? "检查接口" : aiConfigured ? "DeepSeek 已连接" : "演示模式"}
+              </span>
+            </div>
+            <h3>{destinationLabel}<small>{travelDays} DAYS</small></h3>
+            <div className="summary-line"><span>日期</span><b>{formatDateRange(startDate, travelDays)}</b></div>
+            <div className="summary-line"><span>同行</span><b>{{ solo: "一人", couple: "两人同行", friends: "朋友出行", family: "亲子家庭" }[party]}</b></div>
             <div className="summary-line"><span>节奏</span><b>{pace}</b></div>
             <div className="summary-line"><span>预算</span><b>{budget}</b></div>
             <div className="summary-tags">
@@ -431,7 +505,7 @@ export default function Home() {
               <span>{isGenerating ? "正在生成" : "生成我的旅行"}</span>
               <b aria-hidden="true">✦</b>
             </button>
-            <p className="summary-disclaimer">生成时会核实开放、票务与交通信息；无法确认的内容会明确标记。</p>
+            <p className="summary-disclaimer">API Key 只保存在服务器。未配置时展示示例，配置后由 DeepSeek 生成中国城市攻略。</p>
           </aside>
 
           {isGenerating && (
@@ -455,9 +529,9 @@ export default function Home() {
       <section className="trip-section" id="trip" ref={resultRef}>
         <div className="trip-toolbar">
           <div>
-            <span className="trip-kicker">GENERATED ITINERARY · 示例</span>
-            <h2>京都，留白的四日</h2>
-            <p>2026.10.23 — 10.26 · 两人 · 舒展节奏</p>
+            <span className="trip-kicker">GENERATED ITINERARY · {aiConfigured ? "DEEPSEEK" : "示例"}</span>
+            <h2>{tripTitle}</h2>
+            <p>{tripSubtitle}</p>
           </div>
           <div className="toolbar-actions">
             <button type="button" onClick={() => { setSaved((value) => !value); setToast(saved ? "已取消收藏" : "行程已收藏在本机预览"); }}>
@@ -471,8 +545,8 @@ export default function Home() {
         <div className="fact-banner">
           <div className="fact-icon">✓</div>
           <div>
-            <b>7 项关键信息已核验</b>
-            <span>开放与交通来源更新于 2026.08.02；天气和即时拥堵将在出发前刷新。</span>
+            <b>{aiConfigured ? "已生成可执行行程" : "当前展示杭州示例行程"}</b>
+            <span>{verificationNote}</span>
           </div>
           <button type="button" onClick={() => document.getElementById("sources")?.scrollIntoView({ behavior: "smooth" })}>查看来源</button>
         </div>
@@ -485,7 +559,7 @@ export default function Home() {
         </div>
 
         <div className="day-tabs" role="tablist" aria-label="选择行程日期">
-          {DAY_PLANS.map((day, index) => (
+          {dayPlans.map((day, index) => (
             <button
               key={day.label}
               role="tab"
@@ -558,8 +632,8 @@ export default function Home() {
                   onClick={() => setSelectedStop(index)}
                 >{index + 1}</button>
               ))}
-              <div className="map-label label-one">HIGASHIYAMA</div>
-              <div className="map-label label-two">KAMO RIVER</div>
+              <div className="map-label label-one">CITY ROUTE</div>
+              <div className="map-label label-two">LOCAL AREA</div>
             </div>
             <div className="map-selection">
               <span>{String(selectedStop + 1).padStart(2, "0")}</span>
@@ -574,26 +648,26 @@ export default function Home() {
           <div className="source-title">
             <span>DATA NOTES</span>
             <h3>这份行程，哪些信息可以相信？</h3>
-            <p>演示版只把已核验内容标为“官方”。未接入或可能变化的内容保持透明，不会假装实时。</p>
+            <p>AI 负责组织路线，不等于实时数据库。开放、预约、交通与天气等动态信息会明确提示复核。</p>
           </div>
           <div className="source-list">
-            <a href="https://www.kiyomizudera.or.jp/en/faq/" target="_blank" rel="noreferrer">
-              <span className="source-level">S0 · 官方</span>
-              <b>清水寺开放信息</b>
-              <small>官网确认 06:00 开门，闭门时间随季节与活动调整。</small>
-              <em>2026.08.02 核验 ↗</em>
+            <a href="https://westlake.hangzhou.gov.cn/" target="_blank" rel="noreferrer">
+              <span className="source-level">官方入口</span>
+              <b>杭州西湖风景名胜区</b>
+              <small>出发前从景区管理部门核验临时关闭、活动和游览管理信息。</small>
+              <em>打开政府网站 ↗</em>
             </a>
-            <a href="https://www2.city.kyoto.lg.jp/kotsu/webguide/en/fare/fare_bus.html" target="_blank" rel="noreferrer">
-              <span className="source-level">S0 · 官方</span>
-              <b>京都市巴士票价</b>
-              <small>均一区间成人普通票价 230 日元；观光特急巴士 500 日元。</small>
-              <em>2026.08.02 核验 ↗</em>
+            <a href="https://www.hangzhou.gov.cn/" target="_blank" rel="noreferrer">
+              <span className="source-level">官方入口</span>
+              <b>杭州市人民政府门户</b>
+              <small>涉及交通管理、公共服务等会变化的信息，应以最新官方公告为准。</small>
+              <em>打开政府网站 ↗</em>
             </a>
             <div className="source-pending">
-              <span className="source-level pending">待刷新</span>
-              <b>天气与即时拥堵</b>
-              <small>尚未接入可靠的实时接口，将在出发前 14 天开始刷新。</small>
-              <em>未作为确定事实使用</em>
+              <span className="source-level pending">接口预留</span>
+              <b>DeepSeek 与实时数据服务</b>
+              <small>DeepSeek 生成行程结构；天气、地图、票务可通过独立 API 在后续接入。</small>
+              <em>密钥只保存在服务端</em>
             </div>
           </div>
         </div>

@@ -1,98 +1,118 @@
-# vinext-starter
+# 旅策｜中国城市旅行攻略生成网站
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+“旅策”是一个可在普通浏览器直接访问的旅行攻略网站。页面不依赖 ChatGPT 登录；AI 能力通过网站自己的服务端接口调用 DeepSeek，浏览器永远接触不到 API Key。
 
-## Prerequisites
+## 当前能力
 
-- Node.js `>=22.13.0`
+- 公开网页：普通浏览器可直接浏览，未接入 AI 时自动展示杭州示例
+- 中国城市限定：生成提示词只接受中国境内（含港澳台）城市
+- DeepSeek 适配：`POST /api/ai/generate`
+- 接入状态：`GET /api/ai/status`
+- 安全边界：密钥只读取服务端环境变量，不写进客户端或仓库
+- 结构化输出：DeepSeek JSON 输出经服务端解析和结构检查后再返回页面
 
-## Quick Start
+## 本地启动
+
+要求 Node.js `>=22.13.0`。
 
 ```bash
 npm install
+Copy-Item .env.example .env.local
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+未填写 DeepSeek Key 也能启动，此时页面会显示“演示模式”。
 
-## Included Shape
+## 接入 DeepSeek
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+### 1. 创建 API Key
 
-## Workspace Auth Headers
+登录 DeepSeek 开放平台，在 API Keys 页面创建密钥。不要把密钥发到聊天、写进前端代码或提交到 Git。
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+### 2. 填写本地环境变量
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+复制 `.env.example` 为 `.env.local`，只替换第一项：
 
-Treat the full name as optional and fall back to email when it is absent:
+```dotenv
+DEEPSEEK_API_KEY=你的真实密钥
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-v4-flash
+DEEPSEEK_TIMEOUT_MS=45000
+```
 
-```tsx
-import { headers } from "next/headers";
+保存后重启开发服务。页面右侧状态会从“演示模式”变为“DeepSeek 已连接”。
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
+### 3. 在正式网站配置密钥
 
-  const displayName = fullName ?? email;
-  // ...
+在网站托管平台的项目设置中新增服务端 Secret：
+
+- 名称：`DEEPSEEK_API_KEY`
+- 值：你的真实 DeepSeek Key
+
+可选再添加 `DEEPSEEK_MODEL`、`DEEPSEEK_BASE_URL` 和 `DEEPSEEK_TIMEOUT_MS`。保存后重新部署。不要把 `.env.local` 上传到服务器，也不要把 Key 写入 `.openai/hosting.json`。
+
+## API 使用方式
+
+网页调用本站同源接口：
+
+```http
+POST /api/ai/generate
+Content-Type: application/json
+```
+
+请求示例：
+
+```json
+{
+  "destination": "泉州",
+  "startDate": "2026-10-23",
+  "days": 4,
+  "party": "couple",
+  "pace": "舒展",
+  "budget": "适中",
+  "interests": ["古迹人文", "街区漫游", "在地餐食"]
 }
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+成功响应：
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```json
+{
+  "provider": "deepseek",
+  "plan": {
+    "title": "泉州，海丝旧城的四日",
+    "subtitle": "10.23 — 10.26 · 两人同行 · 舒展节奏",
+    "destination": "泉州",
+    "verificationNote": "开放、预约和交通信息请在出发前复核",
+    "days": []
+  }
+}
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+状态接口：
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+```http
+GET /api/ai/status
+```
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+它只返回是否已配置、服务商和模型名，不会返回 API Key。
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## 代码位置
 
-## Useful Commands
+- `app/api/ai/generate/route.ts`：网站对外的 AI 生成接口
+- `app/api/ai/status/route.ts`：配置状态接口
+- `lib/deepseek.ts`：DeepSeek 调用、提示词、超时和 JSON 校验
+- `.env.example`：环境变量模板
+- `app/page.tsx`：页面表单和结果展示
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+## 上线前安全建议
 
-## Learn More
+公开网站的服务端接口会消耗你的 DeepSeek 额度。正式推广前建议在托管层增加限流、异常用量告警和人机验证；同时限制单次天数、输入长度与输出长度。当前代码已经做了基础参数限制、45 秒超时和 6000 token 上限，但托管层限流仍然必要。
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+## 验证
+
+```bash
+npm run build
+```
+
+构建成功后再部署。DeepSeek 官方接口为 `POST https://api.deepseek.com/chat/completions`，通过 Bearer Token 鉴权，并使用 JSON Output 模式返回结构化攻略。
