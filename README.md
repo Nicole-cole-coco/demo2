@@ -6,6 +6,8 @@
 
 - 公开网页：普通浏览器可直接浏览，未接入 AI 时自动展示杭州示例
 - 中国城市限定：生成提示词只接受中国境内（含港澳台）城市
+- 14 座城市灵感库：每座城市都有本地实景图、代表美食、特色景点、交通逻辑和预算带
+- 完整方案结构：推荐理由、城市精华、必吃清单、交通策略、预算拆分和逐日路线
 - DeepSeek 适配：`POST /api/ai/generate`
 - 接入状态：`GET /api/ai/status`
 - 安全边界：密钥只读取服务端环境变量，不写进客户端或仓库
@@ -64,13 +66,15 @@ Content-Type: application/json
 
 ```json
 {
+  "originCity": "上海",
   "destination": "泉州",
   "startDate": "2026-10-23",
   "days": 4,
-  "party": "couple",
   "pace": "舒展",
   "budget": "适中",
-  "interests": ["古迹人文", "街区漫游", "在地餐食"]
+  "transport": "公共交通优先",
+  "interests": ["地道美食", "历史古迹", "街区漫游"],
+  "constraints": "每天午后留一小时休息"
 }
 ```
 
@@ -83,7 +87,15 @@ Content-Type: application/json
     "title": "泉州，海丝旧城的四日",
     "subtitle": "10.23 — 10.26 · 两人同行 · 舒展节奏",
     "destination": "泉州",
+    "heroSummary": "围绕海丝古城与闽南味道组织路线",
+    "estimatedDailyBudget": "¥420–650 / 人",
+    "estimatedTotalBudget": "¥1,680–2,600 / 人",
+    "transportSummary": "古城步行与公交为主",
     "verificationNote": "开放、预约和交通信息请在出发前复核",
+    "highlights": [],
+    "foods": [],
+    "transportPlan": [],
+    "budgetBreakdown": [],
     "days": []
   }
 }
@@ -116,3 +128,7 @@ npm run build
 ```
 
 构建成功后再部署。DeepSeek 官方接口为 `POST https://api.deepseek.com/chat/completions`，通过 Bearer Token 鉴权，并使用 JSON Output 模式返回结构化攻略。
+
+## 城市图片
+
+页面中的城市照片已保存为 `public/cities/` 下的本地资源，浏览页面时不会跳转到图片来源网站。素材来自 Unsplash 免费许可图片，分别对应杭州、北京、上海、成都、重庆、西安、桂林、苏州、广州、大理、泉州、拉萨、青岛和南京；原始页面与作者信息保留在项目提交记录和制作过程记录中。

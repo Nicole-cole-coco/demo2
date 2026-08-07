@@ -31,9 +31,10 @@ test("renders the public China travel planner", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>旅策｜把灵感排成真正走得通的旅行<\/title>/);
+  assert.match(html, /<title>旅策｜中国城市美食、景点、交通与预算一体规划<\/title>/);
   assert.match(html, /杭州/);
-  assert.match(html, /仅支持中国境内城市/);
+  assert.match(html, /只做中国城市/);
+  assert.match(html, /把特色美食安排到正确的一餐/);
   assert.doesNotMatch(html, /京都|KYOTO/);
 });
 

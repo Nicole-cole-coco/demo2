@@ -1,11 +1,13 @@
 export type TravelRequest = {
   destination: string;
+  originCity?: string;
   startDate: string;
   days: number;
-  party: "solo" | "couple" | "friends" | "family";
   pace: "松弛" | "舒展" | "充实";
   budget: "经济" | "适中" | "舒适";
   interests: string[];
+  transport: "公共交通优先" | "打车节省时间" | "自驾周边";
+  constraints?: string;
 };
 
 export type TravelStop = {
@@ -29,27 +31,27 @@ export type TravelPlan = {
   title: string;
   subtitle: string;
   destination: string;
+  heroSummary: string;
+  bestFor: string[];
+  estimatedDailyBudget: string;
+  estimatedTotalBudget: string;
+  transportSummary: string;
+  matchReason: string;
+  highlights: Array<{ name: string; type: string; why: string; duration: string }>;
+  foods: Array<{ name: string; category: string; suggestion: string; budget: string; note: string }>;
+  transportPlan: Array<{ scene: string; choice: string; detail: string }>;
+  budgetBreakdown: Array<{ category: string; amount: string; percent: number }>;
   days: TravelDay[];
   verificationNote: string;
 };
 
 type DeepSeekChatResponse = {
-  choices?: Array<{
-    message?: {
-      content?: string | null;
-    };
-  }>;
-  error?: {
-    message?: string;
-  };
+  choices?: Array<{ message?: { content?: string | null } }>;
+  error?: { message?: string };
 };
 
 export class DeepSeekError extends Error {
-  constructor(
-    message: string,
-    readonly status = 502,
-    readonly code = "DEEPSEEK_ERROR",
-  ) {
+  constructor(message: string, readonly status = 502, readonly code = "DEEPSEEK_ERROR") {
     super(message);
     this.name = "DeepSeekError";
   }
@@ -67,7 +69,6 @@ export function getDeepSeekConfig() {
   const timeoutMs = Number.isFinite(configuredTimeout) && configuredTimeout > 0
     ? Math.min(configuredTimeout, 90_000)
     : DEFAULT_TIMEOUT_MS;
-
   return { apiKey, baseUrl, model, timeoutMs };
 }
 
@@ -78,124 +79,96 @@ export function isDeepSeekConfigured() {
 function systemPrompt() {
   return `你是“旅策”的中国城市旅行规划引擎。你只能规划中国境内（含港澳台）的城市旅行。
 
-输出必须是一个合法 JSON 对象，不要使用 Markdown，不要添加 JSON 之外的文字。
+你的核心任务不是堆砌景点，而是根据旅行偏好、预算、节奏和交通方式，选出“最值得、最顺路、最符合预算”的最佳方案。必须覆盖城市代表性美食、特色景点、区域动线、交通策略和预算拆分。
 
-如果目的地不属于中国，输出：
+输出必须是一个合法 JSON 对象，不使用 Markdown，不添加 JSON 之外的文字。如果目的地不属于中国，输出：
 {"error":"UNSUPPORTED_DESTINATION","message":"目前仅支持中国境内城市"}
 
 正常输出严格遵守以下 JSON 结构：
 {
-  "title": "有编辑感的行程标题",
-  "subtitle": "日期、同行人与节奏的简短摘要",
-  "destination": "规范城市名",
-  "verificationNote": "说明哪些时效信息需出发前复核",
-  "days": [
-    {
-      "label": "DAY 01",
-      "date": "10月23日 · 周五",
-      "theme": "当日主题 · 动线摘要",
-      "note": "当天安排原则和留白说明",
-      "stops": [
-        {
-          "time": "09:00",
-          "title": "地点或活动",
-          "meta": "类型 · 建议停留 1小时",
-          "detail": "具体、克制、可执行的建议",
-          "tone": "sage",
-          "source": "出发前核验"
-        }
-      ]
-    }
-  ]
+  "title":"城市与方案标题",
+  "subtitle":"天数、节奏和核心偏好的摘要",
+  "destination":"规范城市名",
+  "heroSummary":"100字内说明这座城市怎么玩最合适",
+  "bestFor":["适合人群或场景，3项"],
+  "estimatedDailyBudget":"人民币每人每日区间",
+  "estimatedTotalBudget":"人民币每人全程区间，不含往返大交通时需说明",
+  "transportSummary":"一句话城市交通总策略",
+  "matchReason":"为什么这个方案最符合用户偏好、预算和节奏",
+  "highlights":[{"name":"特色景点或体验","type":"分类","why":"为什么值得去以及如何避免同质化","duration":"建议时长"}],
+  "foods":[{"name":"特色食物","category":"分类","suggestion":"适合哪一餐或怎么点","budget":"人均区间","note":"在地吃法与避坑提示"}],
+  "transportPlan":[{"scene":"使用场景","choice":"推荐方式","detail":"具体策略"}],
+  "budgetBreakdown":[{"category":"住宿/餐饮/市内交通/门票与体验/机动预算","amount":"金额区间","percent":40}],
+  "days":[{"label":"DAY 01","date":"10月23日 · 周五","theme":"当日主题 · 区域动线","note":"安排原则与留白","stops":[{"time":"09:00","title":"地点、活动或用餐","meta":"类型 · 时长或预算","detail":"可执行建议","tone":"sage","source":"出发前核验"}]}],
+  "verificationNote":"需要出发前核验的动态信息"
 }
 
-要求：
-1. days 数量必须与用户要求一致，每天 3 至 5 个顺路站点，并保留合理用餐、交通与休息时间。
-2. tone 只能是 sage、clay、lavender、blue 之一。
-3. 不虚构实时天气、票价、营业时间、拥堵或“已核验”结论；会变化的信息写“出发前核验”。
-4. 不提供没有依据的精确价格，用预算级别给出克制建议。
-5. 使用简体中文，优先呈现当地代表性、地域辨识度高的体验，避免同质化网红清单。`;
+硬性要求：
+1. days 数量与用户要求一致；每天 3–5 个顺路节点，至少包含一项当地饮食安排，不跨区域来回折返。
+2. highlights 至少 4 项、foods 至少 4 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。
+3. budgetBreakdown 百分比合计约 100，金额与用户预算等级一致；不要假装精确报价。
+4. tone 只能是 sage、clay、lavender、blue。
+5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容标记“出发前核验”。
+6. 使用简体中文，避免网红清单式文案和泛化景点描述。`;
 }
 
 function userPrompt(input: TravelRequest) {
-  const partyLabels: Record<TravelRequest["party"], string> = {
-    solo: "一人出行",
-    couple: "两人同行",
-    friends: "朋友出行",
-    family: "亲子家庭",
-  };
-
-  return `请生成 JSON 旅行攻略：
+  return `请生成 JSON 最佳旅行方案：
+- 出发城市：${input.originCity || "未指定"}
 - 目的地：${input.destination}
 - 出发日期：${input.startDate}
 - 天数：${input.days} 天
-- 同行：${partyLabels[input.party]}
 - 节奏：${input.pace}
 - 预算：${input.budget}
-- 兴趣：${input.interests.join("、") || "城市代表性体验"}`;
+- 市内交通偏好：${input.transport}
+- 核心兴趣：${input.interests.join("、") || "城市代表性体验"}
+- 其他要求：${input.constraints || "无"}`;
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
 function isTravelPlan(value: unknown): value is TravelPlan {
   if (!value || typeof value !== "object") return false;
   const plan = value as Partial<TravelPlan>;
-  if (
-    typeof plan.title !== "string" ||
-    typeof plan.subtitle !== "string" ||
-    typeof plan.destination !== "string" ||
-    typeof plan.verificationNote !== "string" ||
-    !Array.isArray(plan.days)
-  ) return false;
+  const headerValid = [plan.title, plan.subtitle, plan.destination, plan.heroSummary, plan.estimatedDailyBudget,
+    plan.estimatedTotalBudget, plan.transportSummary, plan.matchReason, plan.verificationNote].every(isString);
+  if (!headerValid || !Array.isArray(plan.bestFor) || !plan.bestFor.every(isString)) return false;
+  if (!Array.isArray(plan.highlights) || plan.highlights.length < 4) return false;
+  if (!Array.isArray(plan.foods) || plan.foods.length < 4) return false;
+  if (!Array.isArray(plan.transportPlan) || plan.transportPlan.length < 3) return false;
+  if (!Array.isArray(plan.budgetBreakdown) || plan.budgetBreakdown.length < 4) return false;
+  if (!Array.isArray(plan.days)) return false;
 
-  return plan.days.every((day) => {
-    if (!day || typeof day !== "object") return false;
-    const candidate = day as Partial<TravelDay>;
-    return (
-      typeof candidate.label === "string" &&
-      typeof candidate.date === "string" &&
-      typeof candidate.theme === "string" &&
-      typeof candidate.note === "string" &&
-      Array.isArray(candidate.stops) &&
-      candidate.stops.length >= 1 &&
-      candidate.stops.every((stop) => {
-        if (!stop || typeof stop !== "object") return false;
-        const item = stop as Partial<TravelStop>;
-        return (
-          typeof item.time === "string" &&
-          typeof item.title === "string" &&
-          typeof item.meta === "string" &&
-          typeof item.detail === "string" &&
-          ["sage", "clay", "lavender", "blue"].includes(item.tone ?? "")
-        );
-      })
-    );
-  });
+  const detailValid = plan.highlights.every((item) => isString(item?.name) && isString(item?.type) && isString(item?.why) && isString(item?.duration))
+    && plan.foods.every((item) => isString(item?.name) && isString(item?.category) && isString(item?.suggestion) && isString(item?.budget) && isString(item?.note))
+    && plan.transportPlan.every((item) => isString(item?.scene) && isString(item?.choice) && isString(item?.detail))
+    && plan.budgetBreakdown.every((item) => isString(item?.category) && isString(item?.amount) && typeof item?.percent === "number");
+  if (!detailValid) return false;
+
+  return plan.days.every((day) => isString(day?.label) && isString(day?.date) && isString(day?.theme) && isString(day?.note)
+    && Array.isArray(day.stops) && day.stops.length >= 1 && day.stops.every((stop) => isString(stop?.time)
+      && isString(stop?.title) && isString(stop?.meta) && isString(stop?.detail)
+      && ["sage", "clay", "lavender", "blue"].includes(stop?.tone)));
 }
 
 export async function generateTravelPlan(input: TravelRequest): Promise<TravelPlan> {
   const { apiKey, baseUrl, model, timeoutMs } = getDeepSeekConfig();
-  if (!apiKey) {
-    throw new DeepSeekError("DeepSeek API 尚未配置", 503, "DEEPSEEK_NOT_CONFIGURED");
-  }
+  if (!apiKey) throw new DeepSeekError("DeepSeek API 尚未配置", 503, "DEEPSEEK_NOT_CONFIGURED");
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
-
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model,
-        messages: [
-          { role: "system", content: systemPrompt() },
-          { role: "user", content: userPrompt(input) },
-        ],
+        messages: [{ role: "system", content: systemPrompt() }, { role: "user", content: userPrompt(input) }],
         response_format: { type: "json_object" },
-        temperature: 0.45,
-        max_tokens: 6000,
+        temperature: 0.4,
+        max_tokens: 8000,
         stream: false,
       }),
       signal: controller.signal,
@@ -203,44 +176,26 @@ export async function generateTravelPlan(input: TravelRequest): Promise<TravelPl
 
     const payload = await response.json() as DeepSeekChatResponse;
     if (!response.ok) {
-      throw new DeepSeekError(
-        payload.error?.message || `DeepSeek 请求失败（${response.status}）`,
-        response.status >= 400 && response.status < 500 ? 502 : response.status,
-        "DEEPSEEK_UPSTREAM_ERROR",
-      );
+      throw new DeepSeekError(payload.error?.message || `DeepSeek 请求失败（${response.status}）`, 502, "DEEPSEEK_UPSTREAM_ERROR");
     }
-
     const content = payload.choices?.[0]?.message?.content?.trim();
-    if (!content) {
-      throw new DeepSeekError("DeepSeek 返回了空内容，请重试", 502, "DEEPSEEK_EMPTY_RESPONSE");
-    }
+    if (!content) throw new DeepSeekError("DeepSeek 返回了空内容，请重试", 502, "DEEPSEEK_EMPTY_RESPONSE");
 
     let parsed: unknown;
-    try {
-      parsed = JSON.parse(content);
-    } catch {
-      throw new DeepSeekError("DeepSeek 返回内容不是合法 JSON，请重试", 502, "DEEPSEEK_INVALID_JSON");
-    }
+    try { parsed = JSON.parse(content); }
+    catch { throw new DeepSeekError("DeepSeek 返回内容不是合法 JSON，请重试", 502, "DEEPSEEK_INVALID_JSON"); }
 
     if (parsed && typeof parsed === "object" && "error" in parsed) {
       const rejection = parsed as { error?: string; message?: string };
-      throw new DeepSeekError(
-        rejection.message || "目前仅支持中国境内城市",
-        422,
-        rejection.error || "UNSUPPORTED_DESTINATION",
-      );
+      throw new DeepSeekError(rejection.message || "目前仅支持中国境内城市", 422, rejection.error || "UNSUPPORTED_DESTINATION");
     }
-
     if (!isTravelPlan(parsed) || parsed.days.length !== input.days) {
       throw new DeepSeekError("DeepSeek 返回的攻略结构不完整，请重试", 502, "DEEPSEEK_INVALID_SCHEMA");
     }
-
     return parsed;
   } catch (error) {
     if (error instanceof DeepSeekError) throw error;
-    if (error instanceof Error && error.name === "AbortError") {
-      throw new DeepSeekError("DeepSeek 响应超时，请稍后重试", 504, "DEEPSEEK_TIMEOUT");
-    }
+    if (error instanceof Error && error.name === "AbortError") throw new DeepSeekError("DeepSeek 响应超时，请稍后重试", 504, "DEEPSEEK_TIMEOUT");
     throw new DeepSeekError("暂时无法连接 DeepSeek，请稍后重试", 502, "DEEPSEEK_NETWORK_ERROR");
   } finally {
     clearTimeout(timeout);
