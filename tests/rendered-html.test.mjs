@@ -40,10 +40,15 @@ test("renders an anonymous China planner with 40 regional cities", async () => {
     assert.match(html, new RegExp(city));
   }
   assert.match(html, /CITY COLLECTION[\s\S]{0,80}40[\s\S]{0,80}CITIES/);
-  assert.match(html, /区域动线建议/);
-  assert.match(html, /营业时间和收费信息可能调整，出发前建议通过景区官方渠道确认/);
+  assert.match(html, /简易衔接/);
+  assert.match(html, /营业时间、预约和收费信息可能调整/);
+  assert.match(html, /4[\s\S]{0,24}日行程摘要/);
+  assert.match(html, /逐日行程是这份攻略的主体/);
+  assert.match(html, /DAY 01[\s\S]{0,24}参考花费/);
+  assert.match(html, /楼外楼（孤山路）/);
+  assert.match(html, /<details class="source-details">/);
   assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数|DeepSeek 待接入|搜索待接入|等待搜索 API|0 次搜索|缓存 24 小时|成本控制|DEMO MODE|AI预算估算|待配置/);
-  assert.doesNotMatch(html, /<dt>门票参考<\/dt>/);
+  assert.doesNotMatch(html, /在地图中查看景点|打开地图核验|map\.baidu|住在哪，决定每天怎么走|钱主要花在哪里|本次方案参考了哪些资料|source-grid|budget-list/);
 });
 
 test("keeps consecutive static homepage renders deterministic", async () => {
@@ -54,7 +59,7 @@ test("keeps consecutive static homepage renders deterministic", async () => {
   const secondHtml = await (await worker.fetch(request(), env, ctx)).text();
 
   assert.equal(secondHtml, firstHtml);
-  assert.match(firstHtml, /营业时间和收费信息可能调整/);
+  assert.match(firstHtml, /营业时间.*收费信息可能调整/);
 
   const [citiesSource, pageSource] = await Promise.all([
     readFile(new URL("../lib/cities.ts", import.meta.url), "utf8"),
@@ -67,7 +72,7 @@ test("keeps consecutive static homepage renders deterministic", async () => {
 });
 
 test("shows ticket and dynamic facts only with a reliable source and checked date", async () => {
-  const { canShowBookingInfo, canShowOpeningInfo, canShowTicketPrice, publicFacingText, visibleBudgetItems } = await import(new URL("../lib/public-trip.ts", import.meta.url));
+  const { canShowBookingInfo, canShowOpeningInfo, canShowTicketPrice, isSpecificEvidenceSource, publicFacingText, visibleBudgetItems } = await import(new URL("../lib/public-trip.ts", import.meta.url));
   const source = { title: "示例景区官方网站", url: "https://example.gov.cn/tickets", queriedAt: "2026-08-08T00:00:00+08:00" };
   const reliable = {
     ticketReference: "¥40—60",
@@ -91,6 +96,8 @@ test("shows ticket and dynamic facts only with a reliable source and checked dat
   assert.equal(canShowTicketPrice({ ...reliable, priceType: "AI预算估算" }), false);
   assert.equal(canShowOpeningInfo({ ...reliable, openingHours: "暂无" }), false);
   assert.equal(canShowBookingInfo({ ...reliable, bookingNote: "待搜索" }), false);
+  assert.equal(isSpecificEvidenceSource(source), true);
+  assert.equal(isSpecificEvidenceSource({ ...source, url: "https://example.gov.cn/" }), false);
 
   const budget = [
     { category: "住宿", amount: "¥800", percent: 42 },
@@ -104,6 +111,25 @@ test("shows ticket and dynamic facts only with a reliable source and checked dat
   assert.equal(visibleBudgetItems(budget, true).length, 4);
   assert.equal(publicFacingText("预置城市资料 · AI预算估算"), "城市资料 · 参考预算");
   assert.doesNotMatch(publicFacingText("当前未使用实时接口，所有动态信息均待核验。"), /接口|未联网/);
+});
+
+test("ships a complete four-day Hangzhou editorial itinerary", async () => {
+  const worker = await getWorker();
+  const response = await worker.fetch(jsonRequest("/api/ai/generate", {
+    ...tripRequest("杭州"), days: 4,
+  }), env, ctx);
+  assert.equal(response.status, 200);
+  const { plan } = await response.json();
+  assert.equal(plan.days.length, 4);
+  assert.ok(plan.days.every((day) => day.area && day.arrangementReason && day.optionalToDrop));
+  assert.ok(plan.days.every((day) => day.costItems.some((item) => item.label === "当日合计")));
+  assert.ok(plan.days.every((day) => day.stops.some((stop) => /午餐/.test(stop.title))));
+  assert.ok(plan.days.every((day) => day.stops.some((stop) => /晚餐/.test(stop.title) || /晚餐/.test(stop.meta))));
+  assert.ok(plan.restaurants.length >= 3);
+  assert.ok(plan.restaurants.every((item) => item.source?.url && item.checkedAt && item.why && item.signatureDishes.length));
+  assert.ok(plan.highlights.every((item) => item.bestTime && item.pitfall));
+  assert.ok(plan.preDepartureChecklist.length >= 4);
+  assert.ok(plan.liveData.sources.every((source) => !/^\/(?:index(?:\.html?)?)?\/?$/i.test(new URL(source.url).pathname)));
 });
 
 test("keeps all 40 city covers unique and records image licenses", async () => {

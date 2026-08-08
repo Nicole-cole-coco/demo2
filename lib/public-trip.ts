@@ -4,6 +4,8 @@ type PublicSource = {
   queriedAt?: string;
 };
 
+const HOMEPAGE_PATH = /^\/(?:index(?:\.html?)?)?\/?$/i;
+
 export type PublicHighlight = {
   ticketReference?: string;
   ticketSource?: PublicSource;
@@ -51,6 +53,16 @@ export function canShowOpeningInfo(item: PublicHighlight) {
 export function canShowBookingInfo(item: PublicHighlight) {
   return hasUsableValue(item.bookingNote)
     && hasReliableSource(item.bookingSource, item.bookingCheckedAt);
+}
+
+export function isSpecificEvidenceSource(source?: PublicSource) {
+  if (!source?.title?.trim() || !source.url) return false;
+  try {
+    const url = new URL(source.url);
+    return /^https?:$/.test(url.protocol) && !HOMEPAGE_PATH.test(url.pathname);
+  } catch {
+    return false;
+  }
 }
 
 export function visibleBudgetItems(items: PublicBudgetItem[], hasReliableTicketData: boolean) {

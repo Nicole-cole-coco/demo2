@@ -2,7 +2,7 @@ import type { CityProfile } from "./cities";
 import { getCityKnowledge, type CityKnowledge } from "./city-knowledge";
 import type { TravelRequest } from "./deepseek";
 
-export type TravelSourceCategory = "门票与开放" | "预约与通知" | "城市交通" | "往返交通";
+export type TravelSourceCategory = "门票与开放" | "预约与通知" | "城市交通" | "往返交通" | "餐厅与美食";
 export type PriceType = "官方公开价" | "联网搜索参考价" | "非价格信息" | "出发前待核验";
 
 export type TravelSource = {

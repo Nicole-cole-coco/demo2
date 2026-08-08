@@ -6,7 +6,7 @@ import {
   type TravelRequest,
 } from "@/lib/deepseek";
 import { createCityDemoPlan, findCityProfile } from "@/lib/cities";
-import { canShowTicketPrice, visibleBudgetItems } from "@/lib/public-trip";
+import { canShowTicketPrice, isSpecificEvidenceSource, visibleBudgetItems } from "@/lib/public-trip";
 import { collectTravelEvidence, type TravelEvidence, type TravelSource } from "@/lib/travel-data";
 import { guardJsonRequest } from "@/lib/request-guard";
 
@@ -42,6 +42,8 @@ function attachReliableDynamicFacts(plan: TravelPlan, evidence: TravelEvidence, 
       why: item.why,
       duration: item.duration,
       area: item.area || knowledgePoi?.area,
+      bestTime: item.bestTime,
+      pitfall: item.pitfall,
     };
 
     if (ticketSource && usableDynamicValue(item.ticketReference)
@@ -158,12 +160,7 @@ export async function POST(request: Request) {
     const generatedPlan = attachReliableDynamicFacts(await generateTravelPlan(input, evidence), evidence, input.days);
     const warnings = [...evidence.warnings];
     const searchStatus = !evidence.searchConfigured ? "off" : evidence.sources.length ? "live" : "partial";
-    const baselineSources = evidence.cityKnowledge?.sources.map((source) => ({
-      title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
-      snippet: `城市资料整理于 ${evidence.cityKnowledge?.queriedAt}；营业、收费与预约信息请在出发前通过官方渠道确认。`,
-      category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
-      confidence: source.confidence, priceType: "非价格信息" as const,
-    })) ?? [];
+    const publicSources = evidence.sources.filter(isSpecificEvidenceSource);
     const plan = {
       ...generatedPlan,
       liveData: {
@@ -172,7 +169,7 @@ export async function POST(request: Request) {
         searchProvider: evidence.searchProvider,
         cacheStatus: evidence.cacheStatus,
         queryCount: evidence.queryCount,
-        sources: [...baselineSources, ...evidence.sources],
+        sources: publicSources,
         warnings,
       },
     };

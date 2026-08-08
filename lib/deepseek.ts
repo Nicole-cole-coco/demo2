@@ -29,7 +29,22 @@ export type TravelDay = {
   area: string;
   transportAdvice: string;
   dailyBudget: string;
+  costItems?: Array<{ label: string; amount: string }>;
+  arrangementReason?: string;
+  optionalToDrop?: string;
   stops: TravelStop[];
+};
+
+export type TravelRestaurant = {
+  name: string;
+  why: string;
+  signatureDishes: string[];
+  budget: string;
+  area: string;
+  plannedFor: string;
+  classicStatus: string;
+  checkedAt?: string;
+  source?: TravelSource;
 };
 
 export type TravelPlan = {
@@ -42,12 +57,15 @@ export type TravelPlan = {
   estimatedTotalBudget: string;
   transportSummary: string;
   matchReason: string;
+  lodgingAdvice?: string;
   highlights: Array<{
     name: string;
     type: string;
     why: string;
     duration: string;
     area?: string;
+    bestTime?: string;
+    pitfall?: string;
     ticketReference?: string;
     ticketSource?: TravelSource;
     ticketCheckedAt?: string;
@@ -60,10 +78,12 @@ export type TravelPlan = {
     priceType?: "官方公开价" | "联网搜索参考价" | "AI预算估算" | "出发前待核验";
   }>;
   foods: Array<{ name: string; category: string; suggestion: string; budget: string; note: string }>;
+  restaurants?: TravelRestaurant[];
   staySuggestions: Array<{ area: string; why: string }>;
   transportPlan: Array<{ scene: string; choice: string; detail: string }>;
   budgetBreakdown: Array<{ category: string; amount: string; percent: number }>;
   days: TravelDay[];
+  preDepartureChecklist?: string[];
   verificationNote: string;
   liveData?: {
     searchedAt: string;
@@ -126,19 +146,22 @@ function systemPrompt() {
   "estimatedTotalBudget":"人民币每人全程区间，不含往返大交通时需说明",
   "transportSummary":"一句话城市交通总策略",
   "matchReason":"为什么这个方案最符合用户偏好、预算和节奏",
-  "highlights":[{"name":"特色景点或体验","type":"分类","area":"所属片区","why":"为什么值得去以及如何避免同质化","duration":"建议时长","ticketReference":"仅在联网资料包含明确价格时填写","openingHours":"仅在联网资料包含明确开放时间时填写","bookingNote":"仅在联网资料包含明确预约规定时填写","priceType":"官方公开价或联网搜索参考价"}],
+  "lodgingAdvice":"仅在能解释为什么适合本行程时，用一句话给出具体住宿建议；否则省略",
+  "highlights":[{"name":"特色景点或体验","type":"分类","area":"所属片区","why":"为什么值得去以及如何避免同质化","duration":"建议时长","bestTime":"最佳安排时段","pitfall":"一个具体且有用的避坑提示","ticketReference":"仅在联网资料包含明确价格时填写","openingHours":"仅在联网资料包含明确开放时间时填写","bookingNote":"仅在联网资料包含明确预约规定时填写","priceType":"官方公开价或联网搜索参考价"}],
   "foods":[{"name":"特色食物","category":"分类","suggestion":"适合哪一餐或怎么点","budget":"人均区间","note":"在地吃法与避坑提示"}],
+  "restaurants":[{"name":"仅推荐有具体来源支持的地方经典餐厅；无法核验具体店时不要输出","why":"它为什么具有城市代表性","signatureDishes":["招牌菜"],"budget":"人均参考区间","area":"所在片区","plannedFor":"适合第几天哪一餐","classicStatus":"中华老字号、地方经典或在地代表"}],
   "staySuggestions":[{"area":"推荐住宿区域","why":"适合什么路线、交通与预算；不推荐具体酒店库存"}],
   "transportPlan":[{"scene":"使用场景","choice":"推荐方式","detail":"具体策略"}],
   "budgetBreakdown":[{"category":"住宿/餐饮/市内交通/门票与体验/机动预算","amount":"金额区间","percent":40}],
-  "days":[{"label":"DAY 01","date":"10月23日 · 周五","theme":"当日主题 · 区域动线","note":"安排原则与留白","area":"当日唯一主要片区，最多连接一个相邻片区","transportAdvice":"只使用步行可达、短程公交或地铁、建议打车、约半小时、约一小时或建议预留半天等模糊表达","dailyBudget":"人民币每人当日区间","stops":[{"time":"上午","title":"地点、活动或用餐","meta":"类型 · 建议时长或预算","detail":"可执行建议","tone":"sage","source":"出发前核验"}]}],
+  "days":[{"label":"DAY 01","date":"10月23日 · 周五","theme":"当日主题 · 区域动线","note":"安排原则与留白","area":"当日唯一主要片区，最多连接一个相邻片区","transportAdvice":"只使用步行可达、短程公交或地铁、建议打车、约半小时、约一小时或建议预留半天等模糊表达","dailyBudget":"人民币每人当日区间","costItems":[{"label":"早餐/午餐/晚餐/市内交通/门票与体验/当日合计之一","amount":"人民币区间；门票无可靠资料时不输出该项"}],"arrangementReason":"为什么这一天这样安排","optionalToDrop":"当天疲劳时可以取消的一项次要内容","stops":[{"time":"上午","title":"地点、活动或用餐","meta":"类型 · 建议时长或预算","detail":"可执行建议","tone":"sage"}]}],
+  "preDepartureChecklist":["只列真正需要用户行动的事项"],
   "verificationNote":"需要出发前核验的动态信息"
 }
 
 硬性要求：
 1. days 数量与用户要求一致；每天 3–5 个顺路节点，完整覆盖上午主要景点、午餐、下午景点或街区、晚餐，可选夜景；至少包含一项当地饮食安排。同一天只安排一个主要片区，最多连接一个相邻片区，远郊景点单列半天或一天。
-2. highlights 至少 4 项、foods 至少 4 项、staySuggestions 至少 2 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。每项景点都要写所属片区和建议游览时间。门票、开放时间与预约提示是可选字段：只有本次联网资料能明确支持时才填写，否则省略字段，不写占位文字。
-3. budgetBreakdown 百分比合计约 100，金额与用户预算等级一致；不要假装精确报价。
+2. highlights 至少 4 项、foods 至少 4 项、staySuggestions 至少 2 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。每项景点都要写所属片区、建议游览时间、最佳时段和具体避坑提示。门票、开放时间与预约提示是可选字段：只有本次联网资料能明确支持时才填写，否则省略字段，不写占位文字。
+3. 每天必须输出 costItems、arrangementReason 与 optionalToDrop。costItems 以真实可执行的人民币区间表达；没有可靠门票资料时不得输出门票金额。budgetBreakdown 仅为向后兼容的内部字段，不得用虚构百分比表达金额。
 4. tone 只能是 sage、clay、lavender、blue。
 5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容没有联网证据时标记“出发前待核验”。
 6. 第一版没有地图算路。不得输出精确公里数、精确分钟数、实时导航、实时拥堵、公交编号、地铁线路号或站名，除非这些内容在本次联网资料中有明确可信证据。片区衔接只可使用“步行可达”“短程公交或地铁”“建议打车”“约半小时”“约一小时”“建议预留半天”等模糊表述。

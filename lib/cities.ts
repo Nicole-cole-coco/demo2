@@ -1,5 +1,6 @@
 import type { TravelPlan, TravelRequest } from "./deepseek";
 import { assertCityKnowledgeCoverage, getCityKnowledge } from "./city-knowledge";
+import type { TravelSource } from "./travel-data";
 
 export type CityProfile = {
   city: string;
@@ -286,27 +287,66 @@ export function findCityProfile(value: string) {
     .some((term) => normalizeCityName(term) === query || normalizeCityName(term).includes(query) || query.includes(normalizeCityName(term))));
 }
 
-const LEGACY_HANGZHOU_PLAN: TravelPlan = {
+const DEMO_DATA_QUERIED_AT = "2026-08-08T00:00:00+08:00";
+
+const HANGZHOU_SOURCES: Record<"lingyin" | "louwailou" | "zhiweiguan" | "kuiyuanguan", TravelSource> = {
+  lingyin: {
+    title: "杭州灵隐飞来峰景区预约游览须知",
+    url: "https://travel.hangzhou.com.cn/lyzx/content/2025-11/19/content_9127067.html",
+    siteName: "杭州网旅行频道",
+    snippet: "自2025年12月1日起，灵隐飞来峰景区实行免票、实名预约、分时游览。",
+    category: "预约与通知", queriedAt: DEMO_DATA_QUERIED_AT, official: false, confidence: "高", priceType: "联网搜索参考价",
+  },
+  louwailou: {
+    title: "楼外楼｜中华老字号品牌详情",
+    url: "https://lzhbwg.mofcom.gov.cn/edi_ecms_web_front/thb/detail/ad535822bfbf41cfaa6c35d4a7b66bf3",
+    siteName: "商务部老字号数字博物馆",
+    snippet: "楼外楼创立于1848年，传统菜肴包括西湖醋鱼、东坡肉、叫化童鸡与龙井虾仁。",
+    category: "餐厅与美食", queriedAt: DEMO_DATA_QUERIED_AT, official: true, confidence: "高", priceType: "非价格信息",
+  },
+  zhiweiguan: {
+    title: "知味观·味庄（西湖）餐厅条目",
+    url: "https://guide.michelin.com/sg/zh_CN/zhe-jiang/hangzhou_1027184/restaurant/zhi-wei-guan-%E2%80%A2-wei-zhuang",
+    siteName: "米其林指南",
+    snippet: "位于西湖区杨公堤，菜单包含杭州经典名菜与创新菜式。",
+    category: "餐厅与美食", queriedAt: DEMO_DATA_QUERIED_AT, official: false, confidence: "中", priceType: "非价格信息",
+  },
+  kuiyuanguan: {
+    title: "奎元馆（解放路）餐厅条目",
+    url: "https://guide.michelin.com/en/zhe-jiang/hangzhou_1027184/restaurant/kui-yuan-guan-jiefang-road",
+    siteName: "米其林指南",
+    snippet: "解放路店以杭州面食著称，片儿川、虾爆鳝面等适合安排为市区简餐。",
+    category: "餐厅与美食", queriedAt: DEMO_DATA_QUERIED_AT, official: false, confidence: "中", priceType: "非价格信息",
+  },
+};
+
+const HANGZHOU_DEMO_PLAN: TravelPlan = {
   title: "杭州｜湖山、茶香与城市日常",
   subtitle: "4 天 · 舒展节奏 · 美食与人文优先",
   destination: "杭州",
   heroSummary: "把西湖、灵隐、运河和茶村分成四条顺路动线，每天只保留一个主区域，用片儿川、杭帮菜和茶点把城市味道嵌进路线，而不是另列一张网红清单。",
   bestFor: ["第一次到杭州", "喜欢人文与慢行", "希望控制折返"],
-  estimatedDailyBudget: "¥560–760 / 人",
-  estimatedTotalBudget: "¥2,240–3,040 / 人",
-  transportSummary: "地铁 + 公交 + 步行，山间段短途打车",
-  matchReason: "西湖放在第一天建立城市印象；灵隐与茶村合并减少跨区；运河安排为低强度日；最后一天用九溪收尾并给返程留缓冲。",
+  estimatedDailyBudget: "人均每日参考 ¥450–650",
+  estimatedTotalBudget: "四日参考 ¥1,800–2,600",
+  transportSummary: "地铁与公交进出片区，片区内步行，灵隐段短程打车",
+  matchReason: "第一天先用北山街与孤山建立西湖印象；第二天只走灵隐—梅灵山线；第三天转到运河看城市日常；第四天把南宋遗迹、老街与面馆放在同一片区，不为打卡反复横穿杭州。",
+  lodgingAdvice: "住宿建议：这份四日方案以凤起路—龙翔桥一带为据点，第一天步行接入西湖北线，第二天便于进出灵隐，第三、四天可用公共交通衔接运河和吴山；全程不需要换酒店。",
   highlights: [
-    { name: "西湖西线慢行", type: "山水", why: "避开只逛湖滨的单一视角，从孤山、曲院风荷到杨公堤看更完整的湖山层次。", duration: "半日", ticketReference: "开放景区；游船等项目另计，待核验", openingHours: "开放时段待出发前核验", bookingNote: "节假日客流和游船班次需核验", priceType: "出发前待核验" },
-    { name: "灵隐飞来峰", type: "人文", why: "石刻、寺院与山林密度高，适合与梅灵路茶村组成同方向路线。", duration: "3–4 小时", ticketReference: "门票与寺院香花券待核验", openingHours: "开放时间待核验", bookingNote: "以景区官方预约页面为准", priceType: "出发前待核验" },
-    { name: "京杭大运河", type: "城市", why: "补足杭州不止西湖的一面，从小河直街看到运河生活与工业遗存。", duration: "半日", ticketReference: "街区开放；展馆及游船价格待核验", openingHours: "街区全天可达，展馆时段待核验", bookingNote: "博物馆预约政策出发前核验", priceType: "出发前待核验" },
-    { name: "九溪与龙井村", type: "自然", why: "以低难度山林步行收尾，路线可根据天气与体力随时缩短。", duration: "半日", ticketReference: "公共步道通常无需门票，具体以现场为准", openingHours: "天气与步道路况待核验", bookingNote: "雨天缩短路线，不购买来源不明体验", priceType: "出发前待核验" },
+    { name: "北山街—孤山", type: "西湖人文", why: "这里把湖面、白堤、近代建筑与孤山文脉连在同一条步行线上，比匆忙绕完整个西湖更能看清杭州的层次。", duration: "3—4小时", area: "西湖北线", bestTime: "工作日上午", pitfall: "不要把断桥当成终点；过桥后继续走白堤与孤山，才是这段路线的主体。" },
+    { name: "灵隐飞来峰", type: "佛教造像", why: "杭州最具代表性的佛教文化与石窟造像体验，不只是单纯进寺烧香；山林、造像与寺院适合一次完成。", duration: "3—4小时", area: "西湖西侧", bestTime: "工作日开园后", pitfall: "节假日上午入口排队明显，法喜寺与其他寺院不必全部连刷，留出梅灵路茶村时间。", ticketReference: "免费", ticketSource: HANGZHOU_SOURCES.lingyin, ticketCheckedAt: DEMO_DATA_QUERIED_AT, bookingNote: "实名预约、分时游览", bookingSource: HANGZHOU_SOURCES.lingyin, bookingCheckedAt: DEMO_DATA_QUERIED_AT, priceType: "联网搜索参考价" },
+    { name: "小河直街—拱宸桥", type: "运河街区", why: "能看到杭州不靠西湖的一面：临水民居、桥西工业遗存与运河生活在一条缓慢的城市步行线上。", duration: "3—4小时", area: "运河—桥西", bestTime: "下午到傍晚", pitfall: "不要把河坊街式商业期待套在这里；重点是街巷尺度和运河沿岸，而不是密集购物。" },
+    { name: "德寿宫—南宋御街", type: "南宋城市史", why: "从遗址展示到御街与鼓楼，适合用半天理解南宋临安的城市轴线，也能自然接上解放路的杭州面馆。", duration: "3—4小时", area: "上城—吴山", bestTime: "工作日上午", pitfall: "先确认德寿宫当日预约；约不到时直接把时间留给胡雪岩故居周边与南宋御街，不必跨区补景点。" },
   ],
   foods: [
-    { name: "片儿川", category: "面食", suggestion: "早餐或简餐", budget: "¥18–35", note: "先尝笋片、雪菜与肉片的本地组合，不必追逐单一名店。" },
-    { name: "龙井虾仁", category: "杭帮菜", suggestion: "正餐共享", budget: "¥80–160", note: "适合两人以上点餐，与时蔬、东坡肉等分食更合理。" },
-    { name: "葱包桧", category: "街头小吃", suggestion: "下午加餐", budget: "¥8–18", note: "在老街区作为轻食体验，不替代正餐。" },
-    { name: "定胜糕", category: "传统糕点", suggestion: "伴手礼", budget: "¥10–30", note: "现吃少量即可，留意保质期和糖度。" },
+    { name: "片儿川", category: "杭州面食", suggestion: "第四天午餐或早餐", budget: "¥25–45", note: "雪菜、笋片和肉片是核心；想更有层次可加虾爆鳝，但不必把一碗面排成跨区打卡。" },
+    { name: "龙井虾仁", category: "杭帮菜", suggestion: "第一或第二天正餐共享", budget: "单菜约¥90–160", note: "更适合两人以上分食，配一份时蔬和家常菜比单点多道名菜更稳妥。" },
+    { name: "葱包桧", category: "街头小吃", suggestion: "第三天运河街区加餐", budget: "¥8–18", note: "把它当作小份加餐，不代替正餐；现压现烤的口感更好。" },
+    { name: "定胜糕与猫耳朵", category: "传统点心", suggestion: "第一天湖滨或第四天吴山", budget: "¥15–35", note: "少量尝味即可，伴手礼注意保质期；猫耳朵是面点，不是零食。" },
+  ],
+  restaurants: [
+    { name: "楼外楼（孤山路）", why: "餐厅本身就是西湖饮食史的一部分，位置与第一天孤山路线完全重合，适合把经典杭帮菜安排进景点动线，而不是另跑一趟。", signatureDishes: ["东坡肉", "龙井虾仁", "西湖莼菜汤"], budget: "约¥160–260 / 人", area: "孤山", plannedFor: "DAY 01 午餐", classicStatus: "中华老字号", checkedAt: DEMO_DATA_QUERIED_AT, source: HANGZHOU_SOURCES.louwailou },
+    { name: "知味观·味庄（杨公堤）", why: "在西湖西侧集中呈现杭州经典菜，适合作为灵隐返程后的正式晚餐；比从山里回城后再横穿市区更顺路。", signatureDishes: ["杭帮点心", "龙井虾仁", "东坡肉"], budget: "约¥100–180 / 人", area: "杨公堤", plannedFor: "DAY 02 晚餐", classicStatus: "地方经典品牌", checkedAt: DEMO_DATA_QUERIED_AT, source: HANGZHOU_SOURCES.zhiweiguan },
+    { name: "奎元馆（解放路）", why: "杭州面食最清晰的一站，解放路店又与第四天南宋御街片区相邻，用一碗面完成在地午餐，不会为老字号单独绕路。", signatureDishes: ["虾爆鳝面", "片儿川", "猪肝面"], budget: "约¥35–70 / 人", area: "解放路", plannedFor: "DAY 04 午餐", classicStatus: "中华老字号", checkedAt: DEMO_DATA_QUERIED_AT, source: HANGZHOU_SOURCES.kuiyuanguan },
   ],
   staySuggestions: [
     { area: "湖滨—武林", why: "适合第一次到访和地铁出行，前往西湖、运河与火车站较方便。" },
@@ -327,43 +367,68 @@ const LEGACY_HANGZHOU_PLAN: TravelPlan = {
   verificationNote: "门票、预约、开放时间、交通管制与天气均可能变化；示例仅展示规划方法，出发前需通过官方渠道复核。",
   days: [
     {
-      label: "DAY 01", date: "10月23日 · 周五", theme: "西湖初见 · 湖岸与人文", note: "从北山街进入西湖，沿同一岸线移动，傍晚保留自由时间。", area: "西湖沿线", transportAdvice: "湖岸节点多为步行可达，较远段使用短程公交或打车。", dailyBudget: "¥520–720 / 人",
+      label: "DAY 01", date: "10月23日 · 周五", theme: "北山街与湖滨，不急着环完整个西湖", note: "从西湖北线开始，沿白堤进入孤山，傍晚回到湖滨；一天只走同一片湖岸。", area: "北山街—孤山—湖滨", transportAdvice: "上午以步行为主；孤山到湖滨可选短程公交或打车，不安排跨城移动。", dailyBudget: "约¥220–360 / 人，不含住宿",
+      costItems: [{ label: "早餐", amount: "¥15–25" }, { label: "午餐", amount: "¥160–260" }, { label: "晚餐", amount: "¥50–90" }, { label: "市内交通", amount: "¥10–25" }, { label: "当日合计", amount: "约¥220–360，不含住宿" }],
+      arrangementReason: "北山街、白堤、孤山和湖滨在一条连续湖岸上；把楼外楼放在孤山午餐，既有代表性，也不需要为名店折返。",
+      optionalToDrop: "如果当天较累，取消湖滨夜间散步，直接回酒店休息。",
       stops: [
-        { time: "08:00", title: "断桥与白堤", meta: "湖畔 · 1小时20分", detail: "清晨沿白堤步行，先建立西湖空间感。", tone: "blue" },
-        { time: "10:00", title: "孤山与浙江省博物馆", meta: "人文 · 1小时40分", detail: "园林与室内参观组合，具体展馆开放安排需出发前核验。", tone: "lavender", source: "出发前核验" },
-        { time: "12:20", title: "片儿川与杭帮小菜", meta: "午餐 · ¥45–80", detail: "选择顺路餐馆，不为单一热门店跨区。", tone: "clay" },
-        { time: "15:00", title: "曲院风荷至杨公堤", meta: "散步 · 1小时30分", detail: "根据体力决定步行长度，保留坐船或喝茶的弹性。", tone: "sage" },
+        { time: "09:00", title: "断桥—白堤—孤山", meta: "湖岸步行 · 约2.5小时", detail: "从北山街进入西湖，过断桥后继续走白堤与孤山；上午光线和步行体验更好。", tone: "blue" },
+        { time: "12:00", title: "楼外楼午餐", meta: "中华老字号 · 约¥160–260/人", detail: "两人以上共享东坡肉、龙井虾仁与时蔬即可，不必为了“名菜全套”点得过量。", tone: "clay" },
+        { time: "14:00", title: "浙江省博物馆孤山馆区", meta: "博物馆 · 约1.5小时", detail: "与上午路线处于同一区域；出发前只需确认当天展厅与开放安排。", tone: "lavender" },
+        { time: "17:30", title: "湖滨步行街与晚餐", meta: "城市散步 · 约¥50–90/人", detail: "短程返回湖滨，晚餐可选片儿川、猫耳朵或简洁杭帮小吃，不再安排另一家远距离名店。", tone: "sage" },
+        { time: "晚上", title: "西湖夜间散步", meta: "可选 · 30—60分钟", detail: "只走湖滨一小段；如果白天步行量已足够，直接取消。", tone: "blue" },
       ],
     },
     {
-      label: "DAY 02", date: "10月24日 · 周六", theme: "灵隐山色 · 石刻与茶村", note: "上午集中灵隐片区，下午沿梅灵路移动，不返回市区后再次进山。", area: "灵隐—梅灵片区", transportAdvice: "进山建议公交或打车，片区内按体力步行，预留半天。", dailyBudget: "¥560–780 / 人",
+      label: "DAY 02", date: "10月24日 · 周六", theme: "灵隐与梅灵，山线一天只进出一次", note: "早到灵隐看飞来峰造像，午后沿梅灵方向体验茶村，傍晚从西湖西侧返程。", area: "灵隐—梅灵—杨公堤", transportAdvice: "进山建议公交或打车；灵隐到梅灵为同方向衔接，返程后不再进入湖滨核心区。", dailyBudget: "约¥230–380 / 人，不含住宿",
+      costItems: [{ label: "早餐", amount: "¥15–25" }, { label: "午餐", amount: "¥60–100" }, { label: "晚餐", amount: "¥100–180" }, { label: "市内交通", amount: "¥35–70" }, { label: "当日合计", amount: "约¥230–380，不含住宿" }],
+      arrangementReason: "灵隐、梅灵路和杨公堤都在西湖西侧，按山线顺序向外移动，避免上午进山、午后回城、傍晚再次折返。",
+      optionalToDrop: "如果遇到大客流或下雨，取消茶村散步，只保留灵隐与西湖西侧晚餐。",
       stops: [
-        { time: "07:40", title: "灵隐飞来峰", meta: "石刻 · 1小时40分", detail: "早点进入片区，把山林步道安排在客流高峰前。", tone: "sage", source: "出发前核验" },
-        { time: "10:00", title: "灵隐寺", meta: "寺院 · 1小时20分", detail: "预约、票务与开放时间以出发前官方信息为准。", tone: "lavender", source: "出发前核验" },
-        { time: "12:30", title: "梅灵路午餐", meta: "午餐 · ¥60–100", detail: "以茶香简餐衔接下午动线。", tone: "clay" },
-        { time: "14:30", title: "梅家坞茶村", meta: "茶村 · 1小时30分", detail: "重点体验茶园环境，不设置强制购物。", tone: "sage" },
+        { time: "08:00", title: "灵隐飞来峰", meta: "石刻与山林 · 约2小时", detail: "先看飞来峰造像，再决定是否进入寺院；预约名额和分时时段应在出发前确认。", tone: "sage" },
+        { time: "10:15", title: "灵隐寺或永福寺二选一", meta: "寺院 · 约1.5小时", detail: "不连续安排多座寺院；选一处慢看，把体力留给下午茶村。", tone: "lavender" },
+        { time: "12:30", title: "梅灵路茶香午餐", meta: "山线午餐 · 约¥60–100/人", detail: "以清淡杭帮菜、时蔬或茶香菜为主；具体店铺当天看营业情况，不推荐未经核验的网红店。", tone: "clay" },
+        { time: "14:30", title: "梅家坞茶村", meta: "茶村散步 · 约1.5小时", detail: "重点看茶园与村落，不接受强制购物；雨天缩短户外停留。", tone: "sage" },
+        { time: "18:00", title: "知味观·味庄晚餐", meta: "地方经典 · 约¥100–180/人", detail: "从山线返回后在西湖西侧吃正式杭帮菜，避免再跨到城东；热门时段提前电话确认。", tone: "clay" },
       ],
     },
     {
-      label: "DAY 03", date: "10月25日 · 周日", theme: "运河日常 · 街巷与博物馆", note: "安排为低强度日，从小河直街一路走向拱宸桥。", area: "运河—拱宸桥片区", transportAdvice: "街区节点步行可达，进出片区使用地铁或短程公交。", dailyBudget: "¥480–680 / 人",
+      label: "DAY 03", date: "10月25日 · 周日", theme: "运河日常，给双脚一个低强度日", note: "从小河直街向桥西、拱宸桥缓慢移动，街区、博物馆与晚餐都留在运河沿线。", area: "小河直街—桥西—拱宸桥", transportAdvice: "到达片区后主要步行；傍晚从拱宸桥一带直接返程，不回头走完整条河岸。", dailyBudget: "约¥150–260 / 人，不含住宿",
+      costItems: [{ label: "早餐", amount: "¥15–25" }, { label: "午餐", amount: "¥45–75" }, { label: "晚餐", amount: "¥70–120" }, { label: "市内交通", amount: "¥15–35" }, { label: "当日合计", amount: "约¥150–260，不含住宿" }],
+      arrangementReason: "连续两天西湖后把第三天放到运河，空间和内容都有变化；路线由南向北推进，全天强度较低。",
+      optionalToDrop: "如果博物馆停留较久，取消傍晚运河夜景，不压缩晚餐。",
       stops: [
         { time: "09:00", title: "小河直街", meta: "历史街区 · 1小时20分", detail: "观察临水民居与当代小店共存的城市尺度。", tone: "blue" },
         { time: "11:00", title: "桥西历史文化街区", meta: "街区 · 1小时", detail: "把手工艺展馆与街区散步合并。", tone: "clay" },
-        { time: "12:10", title: "运河边杭味午餐", meta: "午餐 · ¥45–90", detail: "尝试葱包桧或杭帮小菜，不为热门店跨区。", tone: "clay" },
-        { time: "13:30", title: "中国京杭大运河博物馆", meta: "博物馆 · 1小时30分", detail: "预约与展厅开放信息需提前核验。", tone: "lavender", source: "出发前核验" },
-        { time: "16:00", title: "拱宸桥与运河畔", meta: "散步 · 1小时", detail: "是否继续乘船或看夜景根据体力决定。", tone: "blue" },
+        { time: "12:15", title: "运河边杭味午餐", meta: "午餐 · 约¥45–75/人", detail: "选择同片区杭帮小菜，葱包桧可作为加餐；不为单一热门店离开运河。", tone: "clay" },
+        { time: "14:00", title: "杭州京杭大运河博物馆", meta: "博物馆 · 约1.5小时", detail: "出发前确认当天展厅与开放安排；如临时闭馆，把时间留给桥西街区。", tone: "lavender" },
+        { time: "17:00", title: "拱宸桥与运河晚餐", meta: "傍晚散步 · 约¥70–120/人", detail: "在拱宸桥附近完成晚餐；夜景只作为可选，不另外乘车追打卡点。", tone: "blue" },
       ],
     },
     {
-      label: "DAY 04", date: "10月26日 · 周一", theme: "九溪收尾 · 龙井山色", note: "最后一天只走一条山间路线，为取行李和返程保留缓冲。", area: "九溪—龙井片区", transportAdvice: "山间段建议打车或公交，步行量按天气与体力缩短。", dailyBudget: "¥480–700 / 人",
+      label: "DAY 04", date: "10月26日 · 周一", theme: "南宋临安与杭州面，收在同一座老城里", note: "最后一天留在上城老城，从德寿宫到南宋御街，再到解放路吃面，为取行李和返程保留缓冲。", area: "德寿宫—南宋御街—解放路", transportAdvice: "片区内步行可达；午餐后直接回酒店取行李，不再加入远郊或跨江景点。", dailyBudget: "约¥120–210 / 人，不含住宿",
+      costItems: [{ label: "早餐", amount: "¥15–25" }, { label: "午餐", amount: "¥35–70" }, { label: "晚餐/返程简餐", amount: "¥40–70" }, { label: "市内交通", amount: "¥15–35" }, { label: "当日合计", amount: "约¥120–210，不含住宿" }],
+      arrangementReason: "返程日不安排九溪或远郊；南宋遗迹、老街与解放路面馆相邻，既补足杭州历史，也能随时结束行程。",
+      optionalToDrop: "如果返程较早，取消胡雪岩故居周边散步，午餐后直接取行李。",
       stops: [
-        { time: "09:00", title: "九溪烟树", meta: "轻徒步 · 1小时30分", detail: "按天气与路况决定步行长度，湿滑时缩短路线。", tone: "sage" },
-        { time: "11:10", title: "龙井村", meta: "茶村 · 1小时10分", detail: "短暂停留看茶园与村落，不安排强制消费。", tone: "clay" },
-        { time: "12:30", title: "茶村午餐", meta: "午餐 · ¥55–100", detail: "安排一顿清淡杭帮菜，为返程留出消化和休息时间。", tone: "clay" },
-        { time: "14:20", title: "返回酒店取行李", meta: "交通 · 预留缓冲", detail: "不再临时加入跨区景点。", tone: "blue" },
+        { time: "09:00", title: "南宋德寿宫遗址博物馆", meta: "遗址博物馆 · 约1.5小时", detail: "预约成功再进入；如果没有名额，不在现场久等，直接转南宋御街。", tone: "lavender" },
+        { time: "10:45", title: "南宋御街—鼓楼", meta: "老城步行 · 约1.5小时", detail: "沿城市轴线向南走，重点看街巷关系，不把河坊街购物当成核心任务。", tone: "blue" },
+        { time: "12:30", title: "奎元馆午餐", meta: "中华老字号 · 约¥35–70/人", detail: "片儿川适合清爽收尾，想吃更丰盛可选虾爆鳝面；高峰排队时改吃同片区杭州面。", tone: "clay" },
+        { time: "14:00", title: "胡雪岩故居周边或咖啡休息", meta: "可选 · 约1小时", detail: "只在返程时间充足时加入，不购买新的跨区门票。", tone: "sage" },
+        { time: "15:30", title: "返回酒店取行李与返程简餐", meta: "晚餐或返程简餐 · ¥40–70", detail: "按车次在酒店或车站附近吃一顿简餐，给交通和安检留足余量，不再临时增加景点。", tone: "blue" },
       ],
     },
   ],
+  preDepartureChecklist: ["完成灵隐飞来峰实名预约并确认分时时段", "核对德寿宫与计划内博物馆的预约、闭馆安排", "节假日提前购买往返车票，铁路行程以12306为准", "出发前一天查看杭州天气，雨天缩短茶村与湖岸步行", "对楼外楼、知味观等热门正餐准备同片区替代方案"],
+  liveData: {
+    searchedAt: DEMO_DATA_QUERIED_AT,
+    searchStatus: "partial",
+    searchProvider: "curated",
+    cacheStatus: "cache",
+    queryCount: 0,
+    sources: Object.values(HANGZHOU_SOURCES),
+    warnings: [],
+  },
 };
 
 function chineseDate(iso: string, offset: number) {
@@ -372,8 +437,6 @@ function chineseDate(iso: string, offset: number) {
   const weekdays = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
   return `${date.getUTCMonth() + 1}月${date.getUTCDate()}日 · ${weekdays[date.getUTCDay()]}`;
 }
-
-const DEMO_DATA_QUERIED_AT = "2026-08-08T00:00:00+08:00";
 
 /**
  * 无密钥时也按所选城市生成可浏览的基础方案；所有动态事实均明确标记为待核验。
@@ -384,6 +447,14 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
   if (!profile) return null;
   const knowledge = getCityKnowledge(profile);
   const requestedDays = Math.min(Math.max(input.days, 2), 8);
+  if (profile.city === "杭州" && requestedDays === 4) {
+    return {
+      ...HANGZHOU_DEMO_PLAN,
+      subtitle: `4 天 · ${input.pace}节奏 · ${input.interests.slice(0, 2).join("与") || "湖山与人文"}`,
+      days: HANGZHOU_DEMO_PLAN.days.map((day, index) => ({ ...day, date: chineseDate(input.startDate, index) })),
+    };
+  }
+  const dailySpend = input.budget === "经济" ? "约¥150–260 / 人，不含住宿" : input.budget === "舒适" ? "约¥320–520 / 人，不含住宿" : "约¥220–380 / 人，不含住宿";
   const tones = ["sage", "clay", "lavender", "blue"] as const;
   const days = Array.from({ length: requestedDays }, (_, index) => {
     const poi = knowledge.pois[index % knowledge.pois.length];
@@ -407,7 +478,16 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
       note: `当天只安排${poi.area}一个主要片区；营业与收费信息请在出发前通过官方渠道确认。`,
       area: poi.area,
       transportAdvice: "同片区优先步行；较远节点使用短程公交、地铁或打车。没有可信来源时不显示精确距离、分钟数、线路号或站名。",
-      dailyBudget: profile.dailyBudget,
+      dailyBudget: dailySpend,
+      costItems: [
+        { label: "早餐", amount: "¥15–30" },
+        { label: "午餐", amount: lunch.budget },
+        { label: "晚餐", amount: dinner.budget },
+        { label: "市内交通", amount: "¥15–45" },
+        { label: "当日合计", amount: dailySpend },
+      ],
+      arrangementReason: `${poi.name}、午晚餐与下午漫游都围绕${poi.area}安排，避免为了单一打卡点跨区折返。`,
+      optionalToDrop: `如果体力或天气不理想，取消晚间散步，保留${poi.name}与两顿正餐。`,
       stops,
     };
   });
@@ -418,19 +498,16 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
     area: poi.area,
     why: `${poi.name}是${profile.city}${profile.hook}的重要切面，适合与${poi.area}体验顺路组合。`,
     duration: poi.suggestedDuration,
+    bestTime: "工作日上午或客流较低时段",
+    pitfall: `当天只安排${poi.area}及相邻区域，不为额外打卡点跨区往返。`,
   }));
   highlights.push({
     name: `${profile.city}在地饮食体验`, type: "美食",
     why: `${profile.foods.join("、")}能补足景点之外的地域味道，并可自然嵌入每日路线。`,
     duration: "建议预留一餐", area: knowledge.stayAreas[0],
+    bestTime: "午餐或晚餐正餐时段",
+    pitfall: "优先选当日主片区内的正规餐馆，不为短期网红店改变整天动线。",
   });
-
-  const maintainedSources = knowledge.sources.map((source) => ({
-    title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
-    snippet: `城市资料整理于 ${knowledge.queriedAt}；营业、收费与预约信息请在出发前通过官方渠道确认。`,
-    category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
-    confidence: source.confidence, priceType: "非价格信息" as const,
-  }));
 
   return {
     title: `${profile.city}｜${profile.hook}`,
@@ -460,22 +537,14 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
       { category: "机动预算", amount: "约占全程预算 11%", percent: 11 },
     ],
     days,
+    preDepartureChecklist: ["核对计划内博物馆或场馆的预约安排", "出发前一天查看天气并调整户外活动", "节假日提前购买往返车票", "为热门餐厅准备同片区替代方案"],
     verificationNote: "营业时间和收费信息可能调整，出发前建议通过景区官方渠道确认。",
     liveData: {
       searchedAt: DEMO_DATA_QUERIED_AT, searchStatus: "off", searchProvider: "未配置",
-      cacheStatus: "off", queryCount: 0, sources: maintainedSources,
+      cacheStatus: "off", queryCount: 0, sources: [],
       warnings: ["联网搜索 API 尚未配置", "动态信息均为出发前待核验状态"],
     },
   };
 }
 
-export const DEMO_PLAN = createCityDemoPlan({
-  destination: "杭州",
-  originCity: "上海",
-  startDate: "2026-10-23",
-  days: 4,
-  pace: "舒展",
-  budget: "适中",
-  interests: ["地道美食", "历史古迹", "街区漫游"],
-  transport: "公共交通优先",
-}) ?? LEGACY_HANGZHOU_PLAN;
+export const DEMO_PLAN = HANGZHOU_DEMO_PLAN;
