@@ -45,6 +45,25 @@ test("renders an anonymous China planner with 40 regional cities", async () => {
   assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数/);
 });
 
+test("keeps consecutive static homepage renders deterministic", async () => {
+  const worker = await getWorker();
+  const request = () => new Request("http://localhost/", { headers: { accept: "text/html" } });
+  const firstHtml = await (await worker.fetch(request(), env, ctx)).text();
+  await new Promise((resolve) => setTimeout(resolve, 25));
+  const secondHtml = await (await worker.fetch(request(), env, ctx)).text();
+
+  assert.equal(secondHtml, firstHtml);
+  assert.match(firstHtml, /演示资料 · 动态信息待核验/);
+
+  const [citiesSource, pageSource] = await Promise.all([
+    readFile(new URL("../lib/cities.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.doesNotMatch(citiesSource, /searchedAt:\s*new Date\s*\(/);
+  assert.doesNotMatch(pageSource, /toLocale(?:String|DateString|TimeString)\s*\(/);
+  assert.match(pageSource, /isRenderableTravelPlan\(value\)/);
+});
+
 test("keeps all 40 city covers unique and records image licenses", async () => {
   const citiesSource = await readFile(new URL("../lib/cities.ts", import.meta.url), "utf8");
   const images = [...citiesSource.matchAll(/image:\s*"(\/cities\/[^"]+)"/g)].map((match) => match[1]);

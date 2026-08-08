@@ -367,11 +367,13 @@ const LEGACY_HANGZHOU_PLAN: TravelPlan = {
 };
 
 function chineseDate(iso: string, offset: number) {
-  const date = new Date(`${iso}T12:00:00+08:00`);
-  date.setDate(date.getDate() + offset);
+  const [year, month, day] = iso.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day + offset));
   const weekdays = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-  return `${date.getMonth() + 1}月${date.getDate()}日 · ${weekdays[date.getDay()]}`;
+  return `${date.getUTCMonth() + 1}月${date.getUTCDate()}日 · ${weekdays[date.getUTCDay()]}`;
 }
+
+const DEMO_DATA_QUERIED_AT = "2026-08-08T00:00:00+08:00";
 
 /**
  * 无密钥时也按所选城市生成可浏览的基础方案；所有动态事实均明确标记为待核验。
@@ -465,7 +467,7 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
     days,
     verificationNote: "当前为预置城市资料生成的基础版本。门票、开放时间、预约、临时闭馆、节假日政策与大交通价格均未联网刷新；首版不提供余票、库存、下单、支付、精确距离或实时导航。公开参考价，余票、优惠政策和最终支付金额请以官方页面为准。",
     liveData: {
-      searchedAt: new Date().toISOString(), searchStatus: "off", searchProvider: "未配置",
+      searchedAt: DEMO_DATA_QUERIED_AT, searchStatus: "off", searchProvider: "未配置",
       cacheStatus: "off", queryCount: 0, sources: maintainedSources,
       warnings: ["联网搜索 API 尚未配置", "动态信息均为出发前待核验状态"],
     },

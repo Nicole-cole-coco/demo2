@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { CITY_PROFILES, DEMO_PLAN, citySearchTerms, findCityProfile, type CityProfile } from "@/lib/cities";
+import { formatChinaDate, formatChinaDateTime } from "@/lib/date-format";
 import type { TravelPlan } from "@/lib/deepseek";
 
 const REGIONS = ["全部", "华北", "东北", "华东", "华中", "华南", "西南", "西北", "港澳台"] as const;
@@ -13,6 +14,26 @@ type DataStatus = {
   searchConfigured: boolean;
   searchProvider: string;
 };
+
+function isRenderableTravelPlan(value: unknown): value is TravelPlan {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as Partial<TravelPlan>;
+
+  return typeof candidate.destination === "string"
+    && Boolean(findCityProfile(candidate.destination))
+    && typeof candidate.title === "string"
+    && typeof candidate.heroSummary === "string"
+    && Array.isArray(candidate.bestFor)
+    && Array.isArray(candidate.highlights)
+    && Array.isArray(candidate.foods)
+    && Array.isArray(candidate.staySuggestions)
+    && Array.isArray(candidate.transportPlan)
+    && Array.isArray(candidate.budgetBreakdown)
+    && Array.isArray(candidate.days)
+    && candidate.days.length > 0
+    && candidate.days.every((day) => Array.isArray(day?.stops))
+    && (!candidate.liveData || Array.isArray(candidate.liveData.sources));
+}
 
 function externalMapUrl(city: string, keyword: string) {
   return `https://map.baidu.com/search/${encodeURIComponent(`${city} ${keyword}`)}`;
@@ -45,6 +66,7 @@ export default function Home() {
   const resultProfile = findCityProfile(plan.destination);
   const resultImage = resultProfile?.image ?? "/og-v2.png";
   const activePlanDay = plan.days[activeDay] ?? plan.days[0];
+  const searchedAtLabel = formatChinaDateTime(plan.liveData?.searchedAt);
   const filteredCities = useMemo(() => CITY_PROFILES.filter((city) => {
     const matchesRegion = region === "全部" || city.region === region;
     const keyword = cityQuery.trim().toLowerCase();
@@ -86,8 +108,8 @@ export default function Home() {
           if (typeof value.constraints === "string") setConstraints(value.constraints);
         }
         if (savedPlan) {
-          const value = JSON.parse(savedPlan) as TravelPlan;
-          if (value?.destination && findCityProfile(value.destination) && Array.isArray(value.days)) setPlan(value);
+          const value: unknown = JSON.parse(savedPlan);
+          if (isRenderableTravelPlan(value)) setPlan(value);
         }
       } catch { /* 损坏的本地草稿不应阻止匿名访问 */ }
       setStorageReady(true);
@@ -274,7 +296,7 @@ export default function Home() {
         <div className="live-data-strip">
           <div><span className={plan.liveData?.searchStatus === "live" ? "status-dot live" : "status-dot"} /><p>联网资料 · {plan.liveData?.searchProvider ?? "未配置"}</p><b>{plan.liveData?.searchStatus === "live" ? `${plan.liveData.sources.length} 条来源` : plan.liveData?.searchStatus === "partial" ? "部分资料不可用" : "等待搜索 API"}</b></div>
           <div><p>数据状态</p><b>{plan.liveData?.cacheStatus === "cache" ? "使用 24 小时缓存" : plan.liveData?.searchStatus === "live" ? "本次动态检索" : "预置资料 · 动态待核验"}</b><small>本次最多 {plan.liveData?.queryCount ?? 0} 次搜索</small></div>
-          <div><p>价格口径</p><b>{plan.liveData?.searchStatus === "live" ? "官方公开价 / 联网搜索参考价" : "AI预算估算 / 出发前待核验"}</b><small>{plan.liveData?.searchedAt ? `${plan.liveData.searchStatus === "live" ? "查询" : "方案生成"}于 ${new Date(plan.liveData.searchedAt).toLocaleString("zh-CN", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}` : "动态信息出发前复核"}</small></div>
+          <div><p>价格口径</p><b>{plan.liveData?.searchStatus === "live" ? "官方公开价 / 联网搜索参考价" : "AI预算估算 / 出发前待核验"}</b><small>{plan.liveData?.searchStatus === "live" && searchedAtLabel ? `查询于 ${searchedAtLabel}` : "演示资料 · 动态信息待核验"}</small></div>
           <div><p>成本控制</p><b>城市资料预置 · 缓存 24 小时</b><small>每份攻略最多 4 次动态搜索</small></div>
         </div>
 
@@ -295,7 +317,7 @@ export default function Home() {
 
         {plan.liveData?.sources && plan.liveData.sources.length > 0 && <>
           <div className="content-heading source-heading"><div><span>06 · LIVE SOURCES</span><h2>本次方案参考了哪些联网资料</h2></div><p>来源经过整理后展示，不堆砌原始网址；点击可前往原页面核验。</p></div>
-          <div className="source-grid">{plan.liveData.sources.slice(0, 12).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><div><span>{source.category}</span>{source.official && <em>官方来源</em>}<em>{source.confidence ? `${source.confidence}可信` : "可信度待确认"}</em></div><h3>{source.title}</h3><p>{source.snippet || "打开来源查看详细信息"}</p><footer><b>{source.siteName} · {source.priceType || "非价格信息"}</b><span>{source.queriedAt ? `${new Date(source.queriedAt).toLocaleDateString("zh-CN")} ` : ""}核验 ↗</span></footer></a>)}</div>
+          <div className="source-grid">{plan.liveData.sources.slice(0, 12).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><div><span>{source.category}</span>{source.official && <em>官方来源</em>}<em>{source.confidence ? `${source.confidence}可信` : "可信度待确认"}</em></div><h3>{source.title}</h3><p>{source.snippet || "打开来源查看详细信息"}</p><footer><b>{source.siteName} · {source.priceType || "非价格信息"}</b><span>{formatChinaDate(source.queriedAt) ? `${formatChinaDate(source.queriedAt)} ` : ""}核验 ↗</span></footer></a>)}</div>
         </>}
 
         <div className="verification"><span>信息边界</span><p>{plan.verificationNote}</p><b>公开参考价，余票、优惠政策和最终支付金额请以官方页面为准。</b><div className="verification-actions"><a href="https://www.12306.cn/" target="_blank" rel="noreferrer">前往铁路12306核验 ↗</a><small>本站不处理余票、库存、下单、支付或退改签。</small></div></div>
