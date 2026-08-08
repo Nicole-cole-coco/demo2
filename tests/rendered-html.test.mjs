@@ -41,8 +41,9 @@ test("renders an anonymous China planner with 40 regional cities", async () => {
   }
   assert.match(html, /CITY COLLECTION[\s\S]{0,80}40[\s\S]{0,80}CITIES/);
   assert.match(html, /区域动线建议/);
-  assert.match(html, /预置城市资料/);
-  assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数/);
+  assert.match(html, /营业时间和收费信息可能调整，出发前建议通过景区官方渠道确认/);
+  assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数|DeepSeek 待接入|搜索待接入|等待搜索 API|0 次搜索|缓存 24 小时|成本控制|DEMO MODE|AI预算估算|待配置/);
+  assert.doesNotMatch(html, /<dt>门票参考<\/dt>/);
 });
 
 test("keeps consecutive static homepage renders deterministic", async () => {
@@ -53,7 +54,7 @@ test("keeps consecutive static homepage renders deterministic", async () => {
   const secondHtml = await (await worker.fetch(request(), env, ctx)).text();
 
   assert.equal(secondHtml, firstHtml);
-  assert.match(firstHtml, /演示资料 · 动态信息待核验/);
+  assert.match(firstHtml, /营业时间和收费信息可能调整/);
 
   const [citiesSource, pageSource] = await Promise.all([
     readFile(new URL("../lib/cities.ts", import.meta.url), "utf8"),
@@ -62,6 +63,47 @@ test("keeps consecutive static homepage renders deterministic", async () => {
   assert.doesNotMatch(citiesSource, /searchedAt:\s*new Date\s*\(/);
   assert.doesNotMatch(pageSource, /toLocale(?:String|DateString|TimeString)\s*\(/);
   assert.match(pageSource, /isRenderableTravelPlan\(value\)/);
+  assert.doesNotMatch(pageSource, /api-stack|live-data-strip|\/api\/ai\/status|\/api\/data\/status/);
+});
+
+test("shows ticket and dynamic facts only with a reliable source and checked date", async () => {
+  const { canShowBookingInfo, canShowOpeningInfo, canShowTicketPrice, publicFacingText, visibleBudgetItems } = await import(new URL("../lib/public-trip.ts", import.meta.url));
+  const source = { title: "示例景区官方网站", url: "https://example.gov.cn/tickets", queriedAt: "2026-08-08T00:00:00+08:00" };
+  const reliable = {
+    ticketReference: "¥40—60",
+    ticketSource: source,
+    ticketCheckedAt: source.queriedAt,
+    priceType: "官方公开价",
+    openingHours: "08:30—17:00",
+    openingSource: source,
+    openingCheckedAt: source.queriedAt,
+    bookingNote: "实名预约",
+    bookingSource: source,
+    bookingCheckedAt: source.queriedAt,
+  };
+  assert.equal(canShowTicketPrice(reliable), true);
+  assert.equal(canShowOpeningInfo(reliable), true);
+  assert.equal(canShowBookingInfo(reliable), true);
+  assert.equal(canShowTicketPrice({ ...reliable, ticketSource: undefined }), false);
+  assert.equal(canShowTicketPrice({ ...reliable, ticketCheckedAt: undefined }), false);
+  assert.equal(canShowTicketPrice({ ...reliable, ticketReference: "出发前待核验" }), false);
+  assert.equal(canShowTicketPrice({ ...reliable, ticketReference: "0元", priceType: "联网搜索参考价" }), false);
+  assert.equal(canShowTicketPrice({ ...reliable, priceType: "AI预算估算" }), false);
+  assert.equal(canShowOpeningInfo({ ...reliable, openingHours: "暂无" }), false);
+  assert.equal(canShowBookingInfo({ ...reliable, bookingNote: "待搜索" }), false);
+
+  const budget = [
+    { category: "住宿", amount: "¥800", percent: 42 },
+    { category: "餐饮", amount: "¥400", percent: 24 },
+    { category: "门票与体验", amount: "¥200", percent: 12 },
+    { category: "机动预算", amount: "¥180", percent: 10 },
+  ];
+  const budgetWithoutTickets = visibleBudgetItems(budget, false);
+  assert.deepEqual(budgetWithoutTickets.map((item) => item.category), ["住宿", "餐饮", "机动预算"]);
+  assert.equal(budgetWithoutTickets.reduce((sum, item) => sum + item.percent, 0), 100);
+  assert.equal(visibleBudgetItems(budget, true).length, 4);
+  assert.equal(publicFacingText("预置城市资料 · AI预算估算"), "城市资料 · 参考预算");
+  assert.doesNotMatch(publicFacingText("当前未使用实时接口，所有动态信息均待核验。"), /接口|未联网/);
 });
 
 test("keeps all 40 city covers unique and records image licenses", async () => {
@@ -132,6 +174,9 @@ test("generates destination-specific area plans from pre-curated data without ke
     assert.equal(payload.plan.liveData.searchStatus, "off");
     assert.equal(payload.plan.liveData.queryCount, 0);
     assert.ok(payload.plan.liveData.sources.every((source) => source.queriedAt && source.url));
+    assert.ok(payload.plan.highlights.every((item) => !item.ticketReference && !item.openingHours && !item.bookingNote));
+    assert.ok(payload.plan.budgetBreakdown.every((item) => !/门票|体验/.test(item.category)));
+    assert.equal(payload.plan.budgetBreakdown.reduce((sum, item) => sum + item.percent, 0), 100);
     assert.doesNotMatch(JSON.stringify(payload.plan), /京都|日元|高德地图参考|routeToNext/);
     assert.doesNotMatch(JSON.stringify(payload.plan.days), /\d+(?:\.\d+)?\s*(?:公里|千米|米)(?:\D|$)/);
   }

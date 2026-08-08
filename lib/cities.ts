@@ -390,10 +390,10 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
     const lunch = knowledge.foods[index % knowledge.foods.length];
     const dinner = knowledge.foods[(index + 1) % knowledge.foods.length];
     const stops = [
-      { time: "上午", title: poi.name, meta: `${profile.tags[index % profile.tags.length]} · ${poi.suggestedDuration}`, detail: `从${poi.name}理解${profile.city}的城市气质；门票、开放和预约均需出发前核验。`, tone: tones[0], source: `预置资料 · 查询于 ${knowledge.queriedAt}` },
-      { time: "午餐", title: `${lunch.name}午餐`, meta: `当地美食 · ${lunch.budget}`, detail: `在${poi.area}附近安排${lunch.name}，不为单一热门店跨区。`, tone: tones[1], source: "预置城市资料 · 具体店铺待核验" },
+      { time: "上午", title: poi.name, meta: `${profile.tags[index % profile.tags.length]} · ${poi.suggestedDuration}`, detail: `从${poi.name}理解${profile.city}的城市气质；营业与预约信息请在出发前通过官方渠道确认。`, tone: tones[0], source: `城市资料 · 整理于 ${knowledge.queriedAt}` },
+      { time: "午餐", title: `${lunch.name}午餐`, meta: `当地美食 · ${lunch.budget}`, detail: `在${poi.area}附近安排${lunch.name}，不为单一热门店跨区。`, tone: tones[1], source: "城市资料 · 具体店铺请按当日营业情况选择" },
       { time: "下午", title: `${poi.area}在地漫游`, meta: "街区或自然体验 · 建议预留半天", detail: `下午继续停留在${poi.area}，按体力选择街区、公共空间或同片区展馆，避免跨区折返。`, tone: tones[2], source: "区域动线建议 · 非精确导航" },
-      { time: "晚餐", title: `${dinner.name}晚餐`, meta: `当地美食 · ${dinner.budget}`, detail: `用${dinner.name}结束当日主线，餐馆营业与排队情况当天确认。`, tone: tones[3], source: "AI预算估算 · 出发前核验" },
+      { time: "晚餐", title: `${dinner.name}晚餐`, meta: `当地美食 · ${dinner.budget}`, detail: `用${dinner.name}结束当日主线，餐馆营业与排队情况当天确认。`, tone: tones[3], source: "餐饮参考预算 · 以实际菜单为准" },
     ];
     if (input.pace !== "松弛") stops.push({
       time: "晚上", title: `${poi.area}可选夜间散步`, meta: "可选体验 · 不增加跨区移动",
@@ -404,7 +404,7 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
       label: `DAY ${String(index + 1).padStart(2, "0")}`,
       date: chineseDate(input.startDate, index),
       theme: `${poi.area} · ${profile.tags[index % profile.tags.length]}体验`,
-      note: `当天只安排${poi.area}一个主要片区；动态事实未联网时统一标记出发前待核验。`,
+      note: `当天只安排${poi.area}一个主要片区；营业与收费信息请在出发前通过官方渠道确认。`,
       area: poi.area,
       transportAdvice: "同片区优先步行；较远节点使用短程公交、地铁或打车。没有可信来源时不显示精确距离、分钟数、线路号或站名。",
       dailyBudget: profile.dailyBudget,
@@ -415,23 +415,19 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
   const highlights: TravelPlan["highlights"] = knowledge.pois.map((poi, index) => ({
     name: poi.name,
     type: profile.tags[index % profile.tags.length],
+    area: poi.area,
     why: `${poi.name}是${profile.city}${profile.hook}的重要切面，适合与${poi.area}体验顺路组合。`,
     duration: poi.suggestedDuration,
-    ticketReference: poi.ticketReference,
-    openingHours: poi.openingHours,
-    bookingNote: poi.reservation,
-    priceType: "出发前待核验" as const,
   }));
   highlights.push({
     name: `${profile.city}在地饮食体验`, type: "美食",
     why: `${profile.foods.join("、")}能补足景点之外的地域味道，并可自然嵌入每日路线。`,
-    duration: "建议预留一餐", ticketReference: "AI预算估算；具体菜单价格待核验", openingHours: "按具体餐馆核验",
-    bookingNote: "热门时段是否排队或预约需当天确认", priceType: "AI预算估算",
+    duration: "建议预留一餐", area: knowledge.stayAreas[0],
   });
 
   const maintainedSources = knowledge.sources.map((source) => ({
     title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
-    snippet: `预置资料查询于 ${knowledge.queriedAt}；动态门票、开放、预约与临时通知不沿用旧值。`,
+    snippet: `城市资料整理于 ${knowledge.queriedAt}；营业、收费与预约信息请在出发前通过官方渠道确认。`,
     category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
     confidence: source.confidence, priceType: "非价格信息" as const,
   }));
@@ -440,32 +436,31 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
     title: `${profile.city}｜${profile.hook}`,
     subtitle: `${requestedDays} 天 · ${input.pace}节奏 · ${input.interests.slice(0, 2).join("与") || "城市精华"}`,
     destination: profile.city,
-    heroSummary: `这是一份随${profile.city}动态生成的基础方案：围绕${profile.sights.join("、")}组织片区路线，并把${profile.foods.join("、")}安排进正餐。当前未使用实时接口，所有动态信息均待核验。`,
+    heroSummary: `这是一份随${profile.city}动态生成的基础方案：围绕${profile.sights.join("、")}组织片区路线，并把${profile.foods.join("、")}安排进正餐。营业、收费与预约信息请在出发前通过官方渠道确认。`,
     bestFor: [`第一次到${profile.city}`, ...profile.tags.slice(0, 2)],
     estimatedDailyBudget: profile.dailyBudget,
-    estimatedTotalBudget: `${profile.dailyBudget} × ${requestedDays} 天（不含往返大交通）`,
+    estimatedTotalBudget: `${profile.dailyBudget} × ${requestedDays} 天（不含动态门票及往返大交通）`,
     transportSummary: profile.transit,
     matchReason: `根据${input.pace}节奏、${input.budget}预算与${input.transport}偏好，按代表景点片区分日，避免明显跨区折返。`,
     highlights,
-    foods: knowledge.foods.map((food) => ({ name: food.name, category: "城市代表美食", suggestion: food.meal, budget: food.budget, note: `优先选择当天主片区内的正规餐馆体验${food.name}，不为单一店铺跨区；这是AI预算估算。` })),
+    foods: knowledge.foods.map((food) => ({ name: food.name, category: "城市代表美食", suggestion: food.meal, budget: food.budget, note: `优先选择当天主片区内的正规餐馆体验${food.name}，不为单一店铺跨区；预算为常规用餐参考。` })),
     staySuggestions: knowledge.stayAreas.map((area, index) => ({
       area,
       why: index === 0 ? `适合第一次到${profile.city}，便于衔接主要片区。` : index === 1 ? "适合公共交通和餐饮选择，兼顾晚间返程。" : "适合希望降低跨区频率或衔接车站的行程。",
     })),
     transportPlan: [
       { scene: "市区主线路", choice: input.transport, detail: profile.transit },
-      { scene: "相邻景点", choice: "区域动线建议", detail: "按片区分组，同片区步行或短程公交；首版不计算精确公里数、分钟数或实时导航。" },
+      { scene: "相邻景点", choice: "区域动线建议", detail: "按片区分组，同片区优先步行或短程公交；页面动线用于行程取舍，实际路线请以出发时的地图导航为准。" },
       { scene: "机场与火车站", choice: "以官方交通渠道复核", detail: knowledge.arrivalAccess },
     ],
     budgetBreakdown: [
-      { category: "住宿", amount: "约占全程预算 42%", percent: 42 },
-      { category: "餐饮", amount: "约占全程预算 24%", percent: 24 },
-      { category: "市内交通", amount: "约占全程预算 12%", percent: 12 },
-      { category: "门票与体验", amount: "约占全程预算 12%", percent: 12 },
-      { category: "机动预算", amount: "约占全程预算 10%", percent: 10 },
+      { category: "住宿", amount: "约占全程预算 48%", percent: 48 },
+      { category: "餐饮", amount: "约占全程预算 27%", percent: 27 },
+      { category: "市内交通", amount: "约占全程预算 14%", percent: 14 },
+      { category: "机动预算", amount: "约占全程预算 11%", percent: 11 },
     ],
     days,
-    verificationNote: "当前为预置城市资料生成的基础版本。门票、开放时间、预约、临时闭馆、节假日政策与大交通价格均未联网刷新；首版不提供余票、库存、下单、支付、精确距离或实时导航。公开参考价，余票、优惠政策和最终支付金额请以官方页面为准。",
+    verificationNote: "营业时间和收费信息可能调整，出发前建议通过景区官方渠道确认。",
     liveData: {
       searchedAt: DEMO_DATA_QUERIED_AT, searchStatus: "off", searchProvider: "未配置",
       cacheStatus: "off", queryCount: 0, sources: maintainedSources,

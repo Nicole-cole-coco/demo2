@@ -2,15 +2,78 @@ import {
   DeepSeekError,
   generateTravelPlan,
   isDeepSeekConfigured,
+  type TravelPlan,
   type TravelRequest,
 } from "@/lib/deepseek";
 import { createCityDemoPlan, findCityProfile } from "@/lib/cities";
-import { collectTravelEvidence } from "@/lib/travel-data";
+import { canShowTicketPrice, visibleBudgetItems } from "@/lib/public-trip";
+import { collectTravelEvidence, type TravelEvidence, type TravelSource } from "@/lib/travel-data";
 import { guardJsonRequest } from "@/lib/request-guard";
 
 const allowedPaces = new Set(["松弛", "舒展", "充实"]);
 const allowedBudgets = new Set(["经济", "适中", "舒适"]);
 const allowedTransport = new Set(["公共交通优先", "打车节省时间", "自驾周边"]);
+const UNRELIABLE_DYNAMIC_VALUE = /待配置|待搜索|待核验|未知|暂无|不确定|AI预算估算|AI估算/i;
+
+function usableDynamicValue(value?: string) {
+  return Boolean(value?.trim()) && !UNRELIABLE_DYNAMIC_VALUE.test(value ?? "");
+}
+
+function sourceMatches(source: TravelSource, placeName: string) {
+  const normalize = (value: string) => value.replace(/[^\p{L}\p{N}]/gu, "").toLowerCase();
+  const needle = normalize(placeName);
+  const haystack = normalize(`${source.title}${source.snippet}`);
+  return needle.length >= 2 && haystack.includes(needle);
+}
+
+function matchingSource(evidence: TravelEvidence, placeName: string, categories: TravelSource["category"][]) {
+  return evidence.sources.find((source) => categories.includes(source.category) && sourceMatches(source, placeName));
+}
+
+function attachReliableDynamicFacts(plan: TravelPlan, evidence: TravelEvidence, days: number): TravelPlan {
+  const highlights = plan.highlights.map((item) => {
+    const knowledgePoi = evidence.cityKnowledge?.pois.find((poi) => poi.name === item.name);
+    const ticketSource = matchingSource(evidence, item.name, ["门票与开放"]);
+    const bookingSource = matchingSource(evidence, item.name, ["预约与通知"])
+      ?? (ticketSource && /预约/.test(ticketSource.snippet) ? ticketSource : undefined);
+    const enriched: TravelPlan["highlights"][number] = {
+      name: item.name,
+      type: item.type,
+      why: item.why,
+      duration: item.duration,
+      area: item.area || knowledgePoi?.area,
+    };
+
+    if (ticketSource && usableDynamicValue(item.ticketReference)
+      && (ticketSource.priceType === "官方公开价" || ticketSource.priceType === "联网搜索参考价")) {
+      enriched.ticketReference = item.ticketReference;
+      enriched.ticketSource = ticketSource;
+      enriched.ticketCheckedAt = ticketSource.queriedAt;
+      enriched.priceType = ticketSource.priceType;
+    }
+    if (ticketSource && usableDynamicValue(item.openingHours)) {
+      enriched.openingHours = item.openingHours;
+      enriched.openingSource = ticketSource;
+      enriched.openingCheckedAt = ticketSource.queriedAt;
+    }
+    if (bookingSource && usableDynamicValue(item.bookingNote)) {
+      enriched.bookingNote = item.bookingNote;
+      enriched.bookingSource = bookingSource;
+      enriched.bookingCheckedAt = bookingSource.queriedAt;
+    }
+    return enriched;
+  });
+  const hasReliableTicketData = highlights.some(canShowTicketPrice);
+
+  return {
+    ...plan,
+    highlights,
+    estimatedTotalBudget: hasReliableTicketData
+      ? plan.estimatedTotalBudget
+      : `${plan.estimatedDailyBudget} × ${days} 天（不含动态门票及往返大交通）`,
+    budgetBreakdown: visibleBudgetItems(plan.budgetBreakdown, hasReliableTicketData),
+  };
+}
 
 function parseRequest(value: unknown): TravelRequest | null {
   if (!value || typeof value !== "object") return null;
@@ -86,18 +149,18 @@ export async function POST(request: Request) {
         plan,
         provider: "demo",
         mode: "demo",
-        message: "DeepSeek 或联网搜索尚未配置，已使用 Codex 预置城市资料生成待核验版本。",
+        message: "已使用城市基础资料生成攻略，营业与收费信息请在出发前确认。",
         dataProviders: { search: "demo" },
       });
     }
 
     const evidence = await collectTravelEvidence(input, profile);
-    const generatedPlan = await generateTravelPlan(input, evidence);
+    const generatedPlan = attachReliableDynamicFacts(await generateTravelPlan(input, evidence), evidence, input.days);
     const warnings = [...evidence.warnings];
     const searchStatus = !evidence.searchConfigured ? "off" : evidence.sources.length ? "live" : "partial";
     const baselineSources = evidence.cityKnowledge?.sources.map((source) => ({
       title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
-      snippet: `Codex 预置城市资料查询于 ${evidence.cityKnowledge?.queriedAt}；动态字段仍以本次搜索或出发前核验为准。`,
+      snippet: `城市资料整理于 ${evidence.cityKnowledge?.queriedAt}；营业、收费与预约信息请在出发前通过官方渠道确认。`,
       category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
       confidence: source.confidence, priceType: "非价格信息" as const,
     })) ?? [];
