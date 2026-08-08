@@ -7,14 +7,16 @@ import type { TravelPlan } from "@/lib/deepseek";
 
 const REGIONS = ["全部", "华北", "东北", "华东", "华中", "华南", "西南", "西北", "港澳台"] as const;
 const INTERESTS = ["地道美食", "历史古迹", "山水自然", "城市夜景", "博物馆", "轻徒步", "摄影", "街区漫游"];
-const PROGRESS = ["联网检索城市资料", "核对门票与开放时间", "计算景点间路线", "生成预算与日程"];
+const PROGRESS = ["读取预置城市资料", "联网核对动态信息", "按片区组织少折返动线", "生成预算与日程"];
 
 type DataStatus = {
   searchConfigured: boolean;
-  mapConfigured: boolean;
   searchProvider: string;
-  mapProvider: string;
 };
+
+function externalMapUrl(city: string, keyword: string) {
+  return `https://map.baidu.com/search/${encodeURIComponent(`${city} ${keyword}`)}`;
+}
 
 export default function Home() {
   const [region, setRegion] = useState<(typeof REGIONS)[number]>("全部");
@@ -62,7 +64,7 @@ export default function Home() {
       })
       .catch(() => {
         setAiConfigured(false);
-        setDataStatus({ searchConfigured: false, mapConfigured: false, searchProvider: "demo", mapProvider: "demo" });
+        setDataStatus({ searchConfigured: false, searchProvider: "demo" });
       });
   }, []);
 
@@ -176,9 +178,8 @@ export default function Home() {
         <a className="brand" href="#top" aria-label="旅策首页"><span>旅</span><div><b>旅策</b><small>ROUTE &amp; TASTE</small></div></a>
         <nav aria-label="主导航"><a href="#cities">选城市</a><a href="#planner">定偏好</a><a href="#result">看方案</a></nav>
         <div className="api-stack" aria-label="数据服务状态">
-          <div className={`api-badge ${aiConfigured ? "connected" : ""}`}><i />{aiConfigured === null ? "检查接口" : aiConfigured ? "AI 已连接" : "演示模式"}</div>
+          <div className={`api-badge ${aiConfigured ? "connected" : ""}`}><i />{aiConfigured === null ? "检查 DeepSeek" : aiConfigured ? "DeepSeek 已连接" : "DeepSeek 待接入"}</div>
           <div className={`api-badge ${dataStatus?.searchConfigured ? "connected" : ""}`} title={`搜索服务：${dataStatus?.searchProvider ?? "检查中"}`}><i />{dataStatus?.searchConfigured ? "联网搜索" : "搜索待接入"}</div>
-          <div className={`api-badge ${dataStatus?.mapConfigured ? "connected" : ""}`} title={`地图服务：${dataStatus?.mapProvider ?? "检查中"}`}><i />{dataStatus?.mapConfigured ? "路线已连接" : "路线待接入"}</div>
         </div>
       </header>
 
@@ -188,7 +189,7 @@ export default function Home() {
         <div className="hero-content">
           <p className="eyebrow">CHINA CITY TRAVEL PLANNER</p>
           <h1>不是列景点，<br /><em>是选出最适合你的走法。</em></h1>
-          <p>只做中国城市。从城市特色出发，把必吃、必看、交通和预算排进同一条顺路行程；联网检索门票、开放时间与官方提示，再用地图接口计算顺路动线。</p>
+          <p>只做中国城市。从城市特色出发，把必吃、必看、交通和预算排进同一条顺路行程；预置城市资料减少重复查询，联网刷新门票、开放时间与官方提示，再按片区组织少折返动线。</p>
           <div className="hero-actions"><a href="#planner" className="primary">生成最佳方案 <span>↗</span></a><a href="#cities" className="ghost">先找灵感</a></div>
         </div>
         <div className="hero-insight">
@@ -230,7 +231,7 @@ export default function Home() {
           <p className="eyebrow dark">BUILD YOUR BEST ROUTE</p>
           <h2>只问真正影响方案的事</h2>
           <p>不再统计无意义的人数。城市、天数、预算、节奏、交通方式与兴趣，才决定景点取舍和每天怎么走。联网结果保留来源与查询时间，未核验的信息会明确标注。</p>
-          <div className="planning-principles"><span><b>01</b> 联网查门票与开放时间</span><span><b>02</b> 地图计算相邻路线</span><span><b>03</b> DeepSeek 做方案取舍</span><span><b>04</b> 只展示参考价，不冒充成交价</span></div>
+          <div className="planning-principles"><span><b>01</b> 联网查门票与开放时间</span><span><b>02</b> 按片区组织区域动线</span><span><b>03</b> DeepSeek 做方案取舍</span><span><b>04</b> 只展示参考价，不冒充成交价</span></div>
         </div>
         <form className="planner" onSubmit={generatePlan}>
           <div className="form-row two">
@@ -272,32 +273,32 @@ export default function Home() {
 
         <div className="live-data-strip">
           <div><span className={plan.liveData?.searchStatus === "live" ? "status-dot live" : "status-dot"} /><p>联网资料 · {plan.liveData?.searchProvider ?? "未配置"}</p><b>{plan.liveData?.searchStatus === "live" ? `${plan.liveData.sources.length} 条来源` : plan.liveData?.searchStatus === "partial" ? "部分资料不可用" : "等待搜索 API"}</b></div>
-          <div><span className={plan.liveData?.mapStatus === "live" ? "status-dot live" : "status-dot"} /><p>路线计算 · {plan.liveData?.mapProvider ?? "未配置"}</p><b>{plan.liveData?.mapStatus === "live" ? `${plan.liveData.routeCount} 段已计算` : plan.liveData?.mapStatus === "partial" ? "部分路线未匹配" : "路线 API 待接入"}</b></div>
-          <div><p>价格口径</p><b>{plan.liveData?.searchStatus === "live" ? "联网参考价 · 非成交价" : "待核验 · 非实时价"}</b><small>{plan.liveData?.searchedAt ? `${plan.liveData.searchStatus === "live" ? "查询" : "方案生成"}于 ${new Date(plan.liveData.searchedAt).toLocaleString("zh-CN", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}` : "动态信息出发前复核"}</small></div>
-          <div><p>成本控制</p><b>缓存 24 小时 · 限制调用量</b><small>优先使用免费配额</small></div>
+          <div><p>数据状态</p><b>{plan.liveData?.cacheStatus === "cache" ? "使用 24 小时缓存" : plan.liveData?.searchStatus === "live" ? "本次动态检索" : "预置资料 · 动态待核验"}</b><small>本次最多 {plan.liveData?.queryCount ?? 0} 次搜索</small></div>
+          <div><p>价格口径</p><b>{plan.liveData?.searchStatus === "live" ? "官方公开价 / 联网搜索参考价" : "AI预算估算 / 出发前待核验"}</b><small>{plan.liveData?.searchedAt ? `${plan.liveData.searchStatus === "live" ? "查询" : "方案生成"}于 ${new Date(plan.liveData.searchedAt).toLocaleString("zh-CN", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}` : "动态信息出发前复核"}</small></div>
+          <div><p>成本控制</p><b>城市资料预置 · 缓存 24 小时</b><small>每份攻略最多 4 次动态搜索</small></div>
         </div>
 
         <div className="content-heading"><div><span>01 · CITY ESSENTIALS</span><h2>最值得放进行程的城市精华</h2></div><p>每一项都说明“为什么值得”，而不是只给名字。</p></div>
-        <div className="highlight-grid">{plan.highlights.map((item,index) => <article key={item.name}><div><span>{String(index + 1).padStart(2,"0")}</span><em>{item.type}</em></div><h3>{item.name}</h3><p>{item.why}</p><dl className="highlight-facts"><div><dt>门票</dt><dd>{item.ticketReference || "待核验"}</dd></div><div><dt>开放</dt><dd>{item.openingHours || "待核验"}</dd></div><div><dt>预约</dt><dd>{item.bookingNote || "出发前核验"}</dd></div></dl><small>建议安排 {item.duration} · {item.priceType || "待核验"}</small></article>)}</div>
+        <div className="highlight-grid">{plan.highlights.map((item,index) => <article key={item.name}><div><span>{String(index + 1).padStart(2,"0")}</span><em>{item.type}</em></div><h3>{item.name}</h3><p>{item.why}</p><dl className="highlight-facts"><div><dt>门票</dt><dd>{item.ticketReference || "出发前待核验"}</dd></div><div><dt>开放</dt><dd>{item.openingHours || "出发前待核验"}</dd></div><div><dt>预约</dt><dd>{item.bookingNote || "出发前待核验"}</dd></div></dl><small>建议安排 {item.duration} · {item.priceType || "出发前待核验"}</small><a className="map-verify-link" href={externalMapUrl(plan.destination, item.name)} target="_blank" rel="noreferrer">在地图中查看景点 ↗</a></article>)}</div>
 
         <div className="content-heading food-heading"><div><span>02 · LOCAL FLAVOURS</span><h2>把特色美食安排到正确的一餐</h2></div><p>不单列网红店，重点告诉你吃什么、何时吃、预算多少。</p></div>
         <div className="food-grid">{plan.foods.map((item,index) => <article key={item.name}><div className="food-number">{String(index + 1).padStart(2,"0")}</div><span>{item.category}</span><h3>{item.name}</h3><b>{item.suggestion} · {item.budget}</b><p>{item.note}</p></article>)}</div>
 
         <div className="logistics-grid">
-          <article className="transport-card"><div className="block-kicker"><span>03 · GETTING AROUND</span><h2>交通不是备注，是路线骨架</h2></div>{plan.transportPlan.map((item,index) => <div className="transport-row" key={item.scene}><span>{index + 1}</span><div><small>{item.scene}</small><h3>{item.choice}</h3><p>{item.detail}</p></div></div>)}</article>
+          <article className="transport-card"><div className="block-kicker"><span>03 · GETTING AROUND</span><h2>交通不是备注，是路线骨架</h2></div>{plan.transportPlan.map((item,index) => <div className="transport-row" key={item.scene}><span>{index + 1}</span><div><small>{item.scene}</small><h3>{item.choice}</h3><p>{item.detail}</p></div></div>)}<div className="stay-block"><span>STAY · 推荐住宿区域</span>{plan.staySuggestions.map((item) => <div key={item.area}><b>{item.area}</b><p>{item.why}</p></div>)}</div></article>
           <article className="budget-card"><div className="block-kicker"><span>04 · BUDGET</span><h2>钱主要花在哪里</h2></div><div className="budget-total"><span>人均全程参考</span><b>{plan.estimatedTotalBudget}</b><small>动态价格出发前复核</small></div><div className="budget-list">{plan.budgetBreakdown.map((item) => <div key={item.category}><p><span>{item.category}</span><b>{item.amount}</b></p><div><i style={{width:`${Math.min(item.percent,100)}%`}} /></div><small>{item.percent}%</small></div>)}</div></article>
         </div>
 
         <div className="content-heading itinerary-heading"><div><span>05 · DAY BY DAY</span><h2>每天一条主线，吃与玩一起排</h2></div><p>行程按区域组织，保留休息和临场调整空间。</p></div>
         <div className="day-tabs" role="tablist" aria-label="选择行程日期">{plan.days.map((day,index) => <button type="button" role="tab" aria-selected={activeDay === index} className={activeDay === index ? "active" : ""} key={day.label} onClick={() => setActiveDay(index)}><span>{day.label}</span><b>{day.date.split(" · ")[0]}</b><small>{day.theme.split(" · ")[0]}</small></button>)}</div>
-        {activePlanDay && <article className="day-plan"><div className="day-plan-head"><div><span>{activePlanDay.label} · {activePlanDay.date}</span><h2>{activePlanDay.theme}</h2><p>{activePlanDay.note}</p></div><button type="button" onClick={() => setToast("修改偏好后，可重新联网生成完整方案")}>调整方案</button></div><div className="timeline">{activePlanDay.stops.map((stop,index) => <div className="timeline-row" key={`${stop.time}-${stop.title}`}><time>{stop.time}</time><div className={`dot ${stop.tone}`}>{index + 1}</div><div className="stop"><div><h3>{stop.title}</h3><span>{stop.meta}</span></div><p>{stop.detail}</p>{stop.source && <small>◇ {stop.source}</small>}{stop.routeToNext && <div className="route-to-next"><span>下一程 · {stop.routeToNext.mode}</span><b>{stop.routeToNext.duration}</b><em>{stop.routeToNext.distance}{stop.routeToNext.cost ? ` · ${stop.routeToNext.cost}` : ""}</em><small>高德地图参考</small></div>}</div></div>)}</div></article>}
+        {activePlanDay && <article className="day-plan"><div className="day-plan-head"><div><span>{activePlanDay.label} · {activePlanDay.date}</span><h2>{activePlanDay.theme}</h2><p>{activePlanDay.note}</p></div><button type="button" onClick={() => setToast("修改偏好后，可重新联网生成完整方案")}>调整方案</button></div><div className="day-overview"><div><span>主要活动片区</span><b>{activePlanDay.area}</b></div><div><span>区域动线建议</span><b>{activePlanDay.transportAdvice}</b></div><div><span>当日预算</span><b>{activePlanDay.dailyBudget}</b></div><a href={externalMapUrl(plan.destination, activePlanDay.area)} target="_blank" rel="noreferrer">打开地图核验路线 ↗</a></div><div className="timeline">{activePlanDay.stops.map((stop,index) => <div className="timeline-row" key={`${stop.time}-${stop.title}`}><time>{stop.time}</time><div className={`dot ${stop.tone}`}>{index + 1}</div><div className="stop"><div><h3>{stop.title}</h3><span>{stop.meta}</span></div><p>{stop.detail}</p>{stop.source && <small>◇ {stop.source}</small>}</div></div>)}</div></article>}
 
         {plan.liveData?.sources && plan.liveData.sources.length > 0 && <>
           <div className="content-heading source-heading"><div><span>06 · LIVE SOURCES</span><h2>本次方案参考了哪些联网资料</h2></div><p>来源经过整理后展示，不堆砌原始网址；点击可前往原页面核验。</p></div>
           <div className="source-grid">{plan.liveData.sources.slice(0, 12).map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.url}><div><span>{source.category}</span>{source.official && <em>官方来源</em>}<em>{source.confidence ? `${source.confidence}可信` : "可信度待确认"}</em></div><h3>{source.title}</h3><p>{source.snippet || "打开来源查看详细信息"}</p><footer><b>{source.siteName} · {source.priceType || "非价格信息"}</b><span>{source.queriedAt ? `${new Date(source.queriedAt).toLocaleDateString("zh-CN")} ` : ""}核验 ↗</span></footer></a>)}</div>
         </>}
 
-        <div className="verification"><span>信息边界</span><p>{plan.verificationNote}</p><b>{plan.liveData?.searchStatus === "live" ? "已联网检索公开资料，但搜索价格仍是参考价；余票、库存、临时闭馆和最终支付金额以官方页面为准。" : "当前未接入搜索 API，AI 不会把知识库内容冒充实时信息。接入后将自动展示来源和查询时间。"}</b></div>
+        <div className="verification"><span>信息边界</span><p>{plan.verificationNote}</p><b>公开参考价，余票、优惠政策和最终支付金额请以官方页面为准。</b><div className="verification-actions"><a href="https://www.12306.cn/" target="_blank" rel="noreferrer">前往铁路12306核验 ↗</a><small>本站不处理余票、库存、下单、支付或退改签。</small></div></div>
       </section>
 
       <section className="final-cta"><div><span>YOUR CITY, YOUR WAY</span><h2>不把城市塞满，<br />只留下真正值得的部分。</h2></div><a href="#planner">重新设置偏好 <span>↗</span></a></section>

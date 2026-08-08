@@ -1,7 +1,7 @@
 ﻿{
-    "generated_at":  "2026-08-08T08:03:18.6139156Z",
+    "generated_at":  "2026-08-08T09:13:43.5424620Z",
     "policy":  "中文维基百科城市条目主图；图片文件来自 Wikimedia Commons，作者与许可保存在本清单，页面仅展示整洁来源入口。",
-    "count":  21,
+    "count":  26,
     "items":  [
                   {
                       "city":  "天津",
@@ -308,6 +308,86 @@
                       "retrieved_at":  "2026-08-08T07:56:27.9403600Z"
                   },
                   {
+                      "city":  "宁波",
+                      "slug":  "ningbo",
+                      "page_title":  "天一阁",
+                      "file_name":  "20240827_Tianyige_Bowuyuan_(145324).jpg",
+                      "local_path":  "/cities/ningbo.webp",
+                      "caption":  "Tianyige (Pavilion) Museum",
+                      "author":  "Yumeto",
+                      "source_page":  "https://commons.wikimedia.org/wiki/File:20240827_Tianyige_Bowuyuan_(145324).jpg",
+                      "original_url":  "https://upload.wikimedia.org/wikipedia/commons/2/2d/20240827_Tianyige_Bowuyuan_%28145324%29.jpg",
+                      "license":  "CC BY-SA 4.0",
+                      "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
+                      "width":  1800,
+                      "height":  1350,
+                      "retrieved_at":  "2026-08-08T08:58:56.5626683Z"
+                  },
+                  {
+                      "city":  "绍兴",
+                      "slug":  "shaoxing",
+                      "page_title":  "鲁迅故里",
+                      "file_name":  "绍兴鲁迅故居国保碑,_2020-09-26_04.jpg",
+                      "local_path":  "/cities/shaoxing.webp",
+                      "caption":  "​绍兴鲁迅故居国保碑",
+                      "author":  "Siyuwj",
+                      "source_page":  "https://commons.wikimedia.org/wiki/File:%E7%BB%8D%E5%85%B4%E9%B2%81%E8%BF%85%E6%95%85%E5%B1%85%E5%9B%BD%E4%BF%9D%E7%A2%91,_2020-09-26_04.jpg",
+                      "original_url":  "https://upload.wikimedia.org/wikipedia/commons/b/b5/%E7%BB%8D%E5%85%B4%E9%B2%81%E8%BF%85%E6%95%85%E5%B1%85%E5%9B%BD%E4%BF%9D%E7%A2%91%2C_2020-09-26_04.jpg",
+                      "license":  "CC BY-SA 4.0",
+                      "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
+                      "width":  1800,
+                      "height":  1202,
+                      "retrieved_at":  "2026-08-08T08:59:03.3780790Z"
+                  },
+                  {
+                      "city":  "福州",
+                      "slug":  "fuzhou",
+                      "page_title":  "三坊七巷",
+                      "file_name":  "东百中心A馆10楼瞭望台西三坊七巷.jpg",
+                      "local_path":  "/cities/fuzhou.webp",
+                      "caption":  "​福州三坊七巷",
+                      "author":  "董辰兴",
+                      "source_page":  "https://commons.wikimedia.org/wiki/File:%E4%B8%9C%E7%99%BE%E4%B8%AD%E5%BF%83A%E9%A6%8610%E6%A5%BC%E7%9E%AD%E6%9C%9B%E5%8F%B0%E8%A5%BF%E4%B8%89%E5%9D%8A%E4%B8%83%E5%B7%B7.jpg",
+                      "original_url":  "https://upload.wikimedia.org/wikipedia/commons/4/45/%E4%B8%9C%E7%99%BE%E4%B8%AD%E5%BF%83A%E9%A6%8610%E6%A5%BC%E7%9E%AD%E6%9C%9B%E5%8F%B0%E8%A5%BF%E4%B8%89%E5%9D%8A%E4%B8%83%E5%B7%B7.jpg",
+                      "license":  "CC BY-SA 4.0",
+                      "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
+                      "width":  1800,
+                      "height":  1346,
+                      "retrieved_at":  "2026-08-08T08:59:08.5377685Z"
+                  },
+                  {
+                      "city":  "济南",
+                      "slug":  "jinan",
+                      "page_title":  "趵突泉",
+                      "file_name":  "Baotu_Spring,_Jinan_in_Oct_2013.jpg",
+                      "local_path":  "/cities/jinan.webp",
+                      "caption":  "Baotu Spring in Jinan",
+                      "author":  "Windmemories",
+                      "source_page":  "https://commons.wikimedia.org/wiki/File:Baotu_Spring,_Jinan_in_Oct_2013.jpg",
+                      "original_url":  "https://upload.wikimedia.org/wikipedia/commons/b/b2/Baotu_Spring%2C_Jinan_in_Oct_2013.jpg",
+                      "license":  "CC BY-SA 4.0",
+                      "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
+                      "width":  1800,
+                      "height":  1200,
+                      "retrieved_at":  "2026-08-08T09:00:04.8038471Z"
+                  },
+                  {
+                      "city":  "贵阳",
+                      "slug":  "guiyang",
+                      "page_title":  "贵阳市",
+                      "file_name":  "Jiaxiu building and Nanming river in Guiyang.jpg",
+                      "local_path":  "/cities/guiyang.webp",
+                      "caption":  "A view of Guiyang from the banks of Nanming river. At the left, the Jiaxiu Pavilion.",
+                      "author":  "DWojtowicz",
+                      "source_page":  "https://commons.wikimedia.org/wiki/File:Jiaxiu_building_and_Nanming_river_in_Guiyang.jpg",
+                      "original_url":  "https://upload.wikimedia.org/wikipedia/commons/8/88/Jiaxiu_building_and_Nanming_river_in_Guiyang.jpg",
+                      "license":  "CC BY-SA 4.0",
+                      "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
+                      "width":  1800,
+                      "height":  1350,
+                      "retrieved_at":  "2026-08-08T09:13:32.9127092Z"
+                  },
+                  {
                       "city":  "香港",
                       "slug":  "hongkong",
                       "page_title":  "維多利亞港",
@@ -321,7 +401,7 @@
                       "license_url":  "https://unsplash.com/license",
                       "width":  1600,
                       "height":  900,
-                      "retrieved_at":  "2026-08-08T08:03:09.0833367Z"
+                      "retrieved_at":  "2026-08-08T09:13:35.8992595Z"
                   },
                   {
                       "city":  "澳门",
@@ -337,7 +417,7 @@
                       "license_url":  "https://creativecommons.org/licenses/by-sa/4.0",
                       "width":  1800,
                       "height":  1350,
-                      "retrieved_at":  "2026-08-08T08:03:18.6097046Z"
+                      "retrieved_at":  "2026-08-08T09:13:43.5100069Z"
                   }
               ]
 }

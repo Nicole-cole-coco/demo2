@@ -1,4 +1,4 @@
-import { evidenceForPrompt, type RouteEstimate, type TravelEvidence, type TravelSource } from "./travel-data";
+import { evidenceForPrompt, type TravelEvidence, type TravelSource } from "./travel-data";
 
 export type TravelRequest = {
   destination: string;
@@ -19,7 +19,6 @@ export type TravelStop = {
   detail: string;
   tone: "sage" | "clay" | "lavender" | "blue";
   source?: string;
-  routeToNext?: RouteEstimate;
 };
 
 export type TravelDay = {
@@ -27,6 +26,9 @@ export type TravelDay = {
   date: string;
   theme: string;
   note: string;
+  area: string;
+  transportAdvice: string;
+  dailyBudget: string;
   stops: TravelStop[];
 };
 
@@ -48,9 +50,10 @@ export type TravelPlan = {
     ticketReference: string;
     openingHours: string;
     bookingNote: string;
-    priceType: "官方公开价" | "公开参考价" | "待核验";
+    priceType: "官方公开价" | "联网搜索参考价" | "AI预算估算" | "出发前待核验";
   }>;
   foods: Array<{ name: string; category: string; suggestion: string; budget: string; note: string }>;
+  staySuggestions: Array<{ area: string; why: string }>;
   transportPlan: Array<{ scene: string; choice: string; detail: string }>;
   budgetBreakdown: Array<{ category: string; amount: string; percent: number }>;
   days: TravelDay[];
@@ -58,10 +61,9 @@ export type TravelPlan = {
   liveData?: {
     searchedAt: string;
     searchStatus: "live" | "partial" | "off";
-    mapStatus: "live" | "partial" | "off";
-    routeCount: number;
     searchProvider: string;
-    mapProvider: string;
+    cacheStatus: "live" | "cache" | "mixed" | "off" | "quota";
+    queryCount: number;
     sources: TravelSource[];
     warnings: string[];
   };
@@ -117,21 +119,25 @@ function systemPrompt() {
   "estimatedTotalBudget":"人民币每人全程区间，不含往返大交通时需说明",
   "transportSummary":"一句话城市交通总策略",
   "matchReason":"为什么这个方案最符合用户偏好、预算和节奏",
-  "highlights":[{"name":"特色景点或体验","type":"分类","why":"为什么值得去以及如何避免同质化","duration":"建议时长","ticketReference":"官方公开价、公开参考价或待核验","openingHours":"联网资料中的开放时间；无法确认写待核验","bookingNote":"预约入口或出发前核验提示","priceType":"官方公开价/公开参考价/待核验"}],
+  "highlights":[{"name":"特色景点或体验","type":"分类","why":"为什么值得去以及如何避免同质化","duration":"建议时长","ticketReference":"官方公开价、联网搜索参考价或出发前待核验","openingHours":"联网资料中的开放时间；无法确认写出发前待核验","bookingNote":"预约入口或出发前核验提示","priceType":"官方公开价/联网搜索参考价/AI预算估算/出发前待核验"}],
   "foods":[{"name":"特色食物","category":"分类","suggestion":"适合哪一餐或怎么点","budget":"人均区间","note":"在地吃法与避坑提示"}],
+  "staySuggestions":[{"area":"推荐住宿区域","why":"适合什么路线、交通与预算；不推荐具体酒店库存"}],
   "transportPlan":[{"scene":"使用场景","choice":"推荐方式","detail":"具体策略"}],
   "budgetBreakdown":[{"category":"住宿/餐饮/市内交通/门票与体验/机动预算","amount":"金额区间","percent":40}],
-  "days":[{"label":"DAY 01","date":"10月23日 · 周五","theme":"当日主题 · 区域动线","note":"安排原则与留白","stops":[{"time":"09:00","title":"地点、活动或用餐","meta":"类型 · 时长或预算","detail":"可执行建议","tone":"sage","source":"出发前核验"}]}],
+  "days":[{"label":"DAY 01","date":"10月23日 · 周五","theme":"当日主题 · 区域动线","note":"安排原则与留白","area":"当日唯一主要片区，最多连接一个相邻片区","transportAdvice":"只使用步行可达、短程公交或地铁、建议打车、约半小时、约一小时或建议预留半天等模糊表达","dailyBudget":"人民币每人当日区间","stops":[{"time":"上午","title":"地点、活动或用餐","meta":"类型 · 建议时长或预算","detail":"可执行建议","tone":"sage","source":"出发前核验"}]}],
   "verificationNote":"需要出发前核验的动态信息"
 }
 
 硬性要求：
-1. days 数量与用户要求一致；每天 3–5 个顺路节点，至少包含一项当地饮食安排，不跨区域来回折返。
-2. highlights 至少 4 项、foods 至少 4 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。每项景点都要写建议游览时间、门票参考、开放时间与预约提示；没有结构化或可追溯证据时一律写“待核验”。
+1. days 数量与用户要求一致；每天 3–5 个顺路节点，完整覆盖上午主要景点、午餐、下午景点或街区、晚餐，可选夜景；至少包含一项当地饮食安排。同一天只安排一个主要片区，最多连接一个相邻片区，远郊景点单列半天或一天。
+2. highlights 至少 4 项、foods 至少 4 项、staySuggestions 至少 2 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。每项景点都要写建议游览时间、门票参考、开放时间与预约提示；没有结构化或可追溯证据时一律写“出发前待核验”。
 3. budgetBreakdown 百分比合计约 100，金额与用户预算等级一致；不要假装精确报价。
 4. tone 只能是 sage、clay、lavender、blue。
-5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容没有联网证据时标记“待核验”或“出发前核验”。
-6. 使用简体中文，避免网红清单式文案和泛化景点描述。`;
+5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容没有联网证据时标记“出发前待核验”。
+6. 第一版没有地图算路。不得输出精确公里数、精确分钟数、实时导航、实时拥堵、公交编号、地铁线路号或站名，除非这些内容在本次联网资料中有明确可信证据。片区衔接只可使用“步行可达”“短程公交或地铁”“建议打车”“约半小时”“约一小时”“建议预留半天”等模糊表述。
+7. 票价只允许“官方公开价”“联网搜索参考价”“AI预算估算”“出发前待核验”，不得声称余票、库存、可下单、最终成交或退改签能力。
+8. 景点、美食、住宿区域与进出城方式只能从“Codex 预置城市基础资料”中选择；只有本次联网资料明确支持时才可补充新项目，并标注来源。不得用模型记忆补充未经资料支持的事实。
+9. 使用简体中文，避免网红清单式文案和泛化景点描述。`;
 }
 
 function userPrompt(input: TravelRequest, evidence: TravelEvidence) {
@@ -163,20 +169,23 @@ function isTravelPlan(value: unknown): value is TravelPlan {
   if (!headerValid || !Array.isArray(plan.bestFor) || !plan.bestFor.every(isString)) return false;
   if (!Array.isArray(plan.highlights) || plan.highlights.length < 4) return false;
   if (!Array.isArray(plan.foods) || plan.foods.length < 4) return false;
+  if (!Array.isArray(plan.staySuggestions) || plan.staySuggestions.length < 2) return false;
   if (!Array.isArray(plan.transportPlan) || plan.transportPlan.length < 3) return false;
   if (!Array.isArray(plan.budgetBreakdown) || plan.budgetBreakdown.length < 4) return false;
   if (!Array.isArray(plan.days)) return false;
 
   const detailValid = plan.highlights.every((item) => isString(item?.name) && isString(item?.type) && isString(item?.why)
       && isString(item?.duration) && isString(item?.ticketReference) && isString(item?.openingHours)
-      && isString(item?.bookingNote) && ["官方公开价", "公开参考价", "待核验"].includes(item?.priceType))
+      && isString(item?.bookingNote) && ["官方公开价", "联网搜索参考价", "AI预算估算", "出发前待核验"].includes(item?.priceType))
     && plan.foods.every((item) => isString(item?.name) && isString(item?.category) && isString(item?.suggestion) && isString(item?.budget) && isString(item?.note))
+    && plan.staySuggestions.every((item) => isString(item?.area) && isString(item?.why))
     && plan.transportPlan.every((item) => isString(item?.scene) && isString(item?.choice) && isString(item?.detail))
     && plan.budgetBreakdown.every((item) => isString(item?.category) && isString(item?.amount) && typeof item?.percent === "number");
   if (!detailValid) return false;
 
   return plan.days.every((day) => isString(day?.label) && isString(day?.date) && isString(day?.theme) && isString(day?.note)
-    && Array.isArray(day.stops) && day.stops.length >= 3 && day.stops.length <= 5 && day.stops.every((stop) => isString(stop?.time)
+      && isString(day?.area) && isString(day?.transportAdvice) && isString(day?.dailyBudget)
+      && Array.isArray(day.stops) && day.stops.length >= 3 && day.stops.length <= 5 && day.stops.every((stop) => isString(stop?.time)
       && isString(stop?.title) && isString(stop?.meta) && isString(stop?.detail)
       && ["sage", "clay", "lavender", "blue"].includes(stop?.tone)));
 }
@@ -201,6 +210,7 @@ export async function generateTravelPlan(input: TravelRequest, evidence?: Travel
           }) },
         ],
         response_format: { type: "json_object" },
+        thinking: { type: "disabled" },
         temperature: 0.4,
         max_tokens: 8000,
         stream: false,

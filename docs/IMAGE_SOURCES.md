@@ -10,7 +10,7 @@
 
 ## 已完整记录
 
-`public/cities/attribution.json` 记录 21 张新增城市图片。大部分来自 Wikimedia Commons 的开放许可素材；香港使用 Unsplash License。澳门图片为大三巴牌坊，敦煌图片为莫高窟，张家界为石英砂岩峰林，避免与黄山、桂林混用。
+`public/cities/attribution.json` 记录 26 张新增城市图片。大部分来自 Wikimedia Commons 的开放许可素材；香港使用 Unsplash License。澳门使用大三巴牌坊、敦煌使用莫高窟、张家界使用石英砂岩峰林；本轮新增宁波天一阁、绍兴鲁迅故里、福州三坊七巷、济南趵突泉、贵阳甲秀楼，避免城市和山体图片互相混用。
 
 ## 历史素材待办
 

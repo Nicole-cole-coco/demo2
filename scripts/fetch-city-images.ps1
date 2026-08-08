@@ -22,6 +22,11 @@ $targets = @(
   @{ slug='lanzhou'; city='兰州'; title='兰州市' },
   @{ slug='dunhuang'; city='敦煌'; title='莫高窟' },
   @{ slug='urumqi'; city='乌鲁木齐'; title='乌鲁木齐市' },
+  @{ slug='ningbo'; city='宁波'; title='天一阁' },
+  @{ slug='shaoxing'; city='绍兴'; title='鲁迅故里' },
+  @{ slug='fuzhou'; city='福州'; title='三坊七巷' },
+  @{ slug='jinan'; city='济南'; title='趵突泉' },
+  @{ slug='guiyang'; city='贵阳'; title='贵阳市'; file='Jiaxiu building and Nanming river in Guiyang.jpg' },
   @{ slug='hongkong'; city='香港'; title='維多利亞港' },
   @{ slug='macau'; city='澳门'; title='大三巴牌坊' },
   @{ slug='taipei'; city='台北'; title='臺北市' },
@@ -57,7 +62,7 @@ function Save-Manifest($records) {
 
 New-Item -ItemType Directory -Path $outputDirectory -Force | Out-Null
 $items = @()
-$forceCities = @('香港', '澳门')
+$forceCities = @('香港', '澳门', '贵阳')
 if (Test-Path -LiteralPath $manifestPath) {
   $existingManifest = Get-Content -LiteralPath $manifestPath -Raw -Encoding UTF8 | ConvertFrom-Json
   $items = @($existingManifest.items | Where-Object { $forceCities -notcontains $_.city })
@@ -80,9 +85,12 @@ foreach ($target in $targets) {
     Save-Manifest $items
     continue
   }
-  $pageQuery = 'https://zh.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&redirects=1&prop=pageimages&piprop=name%7Cthumbnail&pithumbsize=1800&titles=' + [uri]::EscapeDataString($target.title)
-  $pagePayload = Invoke-JsonWithRetry $pageQuery
-  $fileName = $pagePayload.query.pages[0].pageimage
+  $fileName = $target.file
+  if (-not $fileName) {
+    $pageQuery = 'https://zh.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&redirects=1&prop=pageimages&piprop=name%7Cthumbnail&pithumbsize=1800&titles=' + [uri]::EscapeDataString($target.title)
+    $pagePayload = Invoke-JsonWithRetry $pageQuery
+    $fileName = $pagePayload.query.pages[0].pageimage
+  }
   if (-not $fileName) { throw "$($target.city) 没有页面主图" }
 
   $commonsQuery = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=url%7Cextmetadata%7Cmime%7Csize&iiurlwidth=1800&titles=' + [uri]::EscapeDataString("File:$fileName")

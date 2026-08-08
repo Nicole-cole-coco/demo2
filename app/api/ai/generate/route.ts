@@ -5,7 +5,7 @@ import {
   type TravelRequest,
 } from "@/lib/deepseek";
 import { createCityDemoPlan, findCityProfile } from "@/lib/cities";
-import { collectTravelEvidence, enrichPlanWithRoutes } from "@/lib/travel-data";
+import { collectTravelEvidence } from "@/lib/travel-data";
 import { guardJsonRequest } from "@/lib/request-guard";
 
 const allowedPaces = new Set(["松弛", "舒展", "充实"]);
@@ -86,31 +86,34 @@ export async function POST(request: Request) {
         plan,
         provider: "demo",
         mode: "demo",
-        message: "DeepSeek、联网搜索或地图服务未完整配置，已使用城市基础数据生成待核验版本。",
-        dataProviders: { search: "demo", map: "demo" },
+        message: "DeepSeek 或联网搜索尚未配置，已使用 Codex 预置城市资料生成待核验版本。",
+        dataProviders: { search: "demo" },
       });
     }
 
     const evidence = await collectTravelEvidence(input, profile);
     const generatedPlan = await generateTravelPlan(input, evidence);
-    const routeResult = await enrichPlanWithRoutes(generatedPlan, input);
-    const warnings = [...evidence.warnings, ...(routeResult.warning ? [routeResult.warning] : [])];
+    const warnings = [...evidence.warnings];
     const searchStatus = !evidence.searchConfigured ? "off" : evidence.sources.length ? "live" : "partial";
-    const mapStatus = !routeResult.mapConfigured ? "off" : routeResult.routeCount ? "live" : "partial";
+    const baselineSources = evidence.cityKnowledge?.sources.map((source) => ({
+      title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
+      snippet: `Codex 预置城市资料查询于 ${evidence.cityKnowledge?.queriedAt}；动态字段仍以本次搜索或出发前核验为准。`,
+      category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
+      confidence: source.confidence, priceType: "非价格信息" as const,
+    })) ?? [];
     const plan = {
-      ...routeResult.plan,
+      ...generatedPlan,
       liveData: {
         searchedAt: evidence.searchedAt,
         searchStatus,
-        mapStatus,
-        routeCount: routeResult.routeCount,
         searchProvider: evidence.searchProvider,
-        mapProvider: routeResult.mapProvider,
-        sources: evidence.sources,
+        cacheStatus: evidence.cacheStatus,
+        queryCount: evidence.queryCount,
+        sources: [...baselineSources, ...evidence.sources],
         warnings,
       },
     };
-    return Response.json({ plan, provider: "deepseek", mode: "live", dataProviders: { search: evidence.searchProvider, map: routeResult.mapProvider } });
+    return Response.json({ plan, provider: "deepseek", mode: "live", dataProviders: { search: evidence.searchProvider } });
   } catch (error) {
     if (error instanceof SyntaxError) {
       return Response.json(

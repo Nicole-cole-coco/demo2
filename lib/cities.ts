@@ -1,4 +1,5 @@
 import type { TravelPlan, TravelRequest } from "./deepseek";
+import { assertCityKnowledgeCoverage, getCityKnowledge } from "./city-knowledge";
 
 export type CityProfile = {
   city: string;
@@ -203,6 +204,36 @@ export const CITY_PROFILES: CityProfile[] = [
     sights: ["新疆维吾尔自治区博物馆", "红山公园", "天山天池"], transit: "城区公交地铁为主，天池为独立一日线并关注天气和道路信息",
   },
   {
+    city: "宁波", province: "浙江", region: "华东", image: "/cities/ningbo.webp", aliases: ["宁波市", "ningbo", "甬城", "甬"],
+    hook: "港城、藏书楼与海鲜风味", idealDays: "2–3 天", dailyBudget: "¥420–720 / 人",
+    tags: ["港城", "人文", "海鲜"], foods: ["宁波汤圆", "雪菜大黄鱼", "红膏炝蟹"],
+    sights: ["天一阁·月湖", "宁波博物院", "老外滩"], transit: "城区以地铁和公交串联，古城人文片区适合步行，远郊古镇另留半天",
+  },
+  {
+    city: "绍兴", province: "浙江", region: "华东", image: "/cities/shaoxing.webp", aliases: ["绍兴市", "shaoxing", "会稽", "越城"],
+    hook: "古越水城、名士故里与黄酒", idealDays: "2–3 天", dailyBudget: "¥380–650 / 人",
+    tags: ["古城", "水乡", "人文"], foods: ["绍兴醉鸡", "霉干菜焖肉", "黄酒奶茶"],
+    sights: ["鲁迅故里", "沈园", "东湖"], transit: "古城核心适合步行与公交，东湖和柯岩等外围景点分开安排",
+  },
+  {
+    city: "福州", province: "福建", region: "华东", image: "/cities/fuzhou.webp", aliases: ["福州市", "fuzhou", "榕城", "三山"],
+    hook: "坊巷古厝、闽都文化与温泉", idealDays: "3–4 天", dailyBudget: "¥420–720 / 人",
+    tags: ["古厝", "非遗", "美食"], foods: ["佛跳墙", "鱼丸", "肉燕"],
+    sights: ["三坊七巷", "烟台山", "福建博物院"], transit: "地铁和公交覆盖主城区，三坊七巷与烟台山分片漫步，山海远郊单列一日",
+  },
+  {
+    city: "济南", province: "山东", region: "华东", image: "/cities/jinan.webp", aliases: ["济南市", "jinan", "泉城"],
+    hook: "泉水街巷与齐鲁人文", idealDays: "2–3 天", dailyBudget: "¥380–680 / 人",
+    tags: ["泉水", "古城", "人文"], foods: ["把子肉", "甜沫", "油旋"],
+    sights: ["趵突泉", "大明湖", "山东博物馆"], transit: "泉城核心景点集中，适合公交与步行；省博所在东部新城另安排半日",
+  },
+  {
+    city: "贵阳", province: "贵州", region: "西南", image: "/cities/guiyang.webp", aliases: ["贵阳市", "guiyang", "筑城", "林城"],
+    hook: "清凉山城、黔味与喀斯特", idealDays: "3–4 天", dailyBudget: "¥380–680 / 人",
+    tags: ["避暑", "山城", "美食"], foods: ["肠旺面", "丝娃娃", "酸汤鱼"],
+    sights: ["甲秀楼", "贵州省博物馆", "青岩古镇"], transit: "地铁与公交连接城区，青岩等外围目的地独立安排半天或一天",
+  },
+  {
     city: "香港", province: "香港", region: "港澳台", image: "/cities/hongkong.webp", aliases: ["香港特别行政区", "hong kong", "hongkong", "hk"],
     hook: "维港天际线与山海街巷", idealDays: "3–5 天", dailyBudget: "HK$750–1,500 / 人",
     tags: ["天际线", "街区", "山海"], foods: ["港式点心", "云吞面", "菠萝油"],
@@ -227,6 +258,8 @@ export const CITY_PROFILES: CityProfile[] = [
     sights: ["驳二艺术特区", "旗津", "莲池潭"], transit: "捷运与轻轨串联港区，旗津轮渡受天气影响需当天确认",
   },
 ];
+
+assertCityKnowledgeCoverage(CITY_PROFILES);
 
 const LEGACY_ALIASES: Record<string, string[]> = {
   杭州: ["杭州市", "hangzhou", "临安"], 北京: ["北京市", "beijing", "北平"],
@@ -253,7 +286,7 @@ export function findCityProfile(value: string) {
     .some((term) => normalizeCityName(term) === query || normalizeCityName(term).includes(query) || query.includes(normalizeCityName(term))));
 }
 
-export const DEMO_PLAN: TravelPlan = {
+const LEGACY_HANGZHOU_PLAN: TravelPlan = {
   title: "杭州｜湖山、茶香与城市日常",
   subtitle: "4 天 · 舒展节奏 · 美食与人文优先",
   destination: "杭州",
@@ -264,16 +297,20 @@ export const DEMO_PLAN: TravelPlan = {
   transportSummary: "地铁 + 公交 + 步行，山间段短途打车",
   matchReason: "西湖放在第一天建立城市印象；灵隐与茶村合并减少跨区；运河安排为低强度日；最后一天用九溪收尾并给返程留缓冲。",
   highlights: [
-    { name: "西湖西线慢行", type: "山水", why: "避开只逛湖滨的单一视角，从孤山、曲院风荷到杨公堤看更完整的湖山层次。", duration: "半日", ticketReference: "开放景区；游船等项目另计，待核验", openingHours: "开放时段待出发前核验", bookingNote: "节假日客流和游船班次需核验", priceType: "待核验" },
-    { name: "灵隐飞来峰", type: "人文", why: "石刻、寺院与山林密度高，适合与梅灵路茶村组成同方向路线。", duration: "3–4 小时", ticketReference: "门票与寺院香花券待核验", openingHours: "开放时间待核验", bookingNote: "以景区官方预约页面为准", priceType: "待核验" },
-    { name: "京杭大运河", type: "城市", why: "补足杭州不止西湖的一面，从小河直街看到运河生活与工业遗存。", duration: "半日", ticketReference: "街区开放；展馆及游船价格待核验", openingHours: "街区全天可达，展馆时段待核验", bookingNote: "博物馆预约政策出发前核验", priceType: "待核验" },
-    { name: "九溪与龙井村", type: "自然", why: "以低难度山林步行收尾，路线可根据天气与体力随时缩短。", duration: "半日", ticketReference: "公共步道通常无需门票，具体以现场为准", openingHours: "天气与步道路况待核验", bookingNote: "雨天缩短路线，不购买来源不明体验", priceType: "待核验" },
+    { name: "西湖西线慢行", type: "山水", why: "避开只逛湖滨的单一视角，从孤山、曲院风荷到杨公堤看更完整的湖山层次。", duration: "半日", ticketReference: "开放景区；游船等项目另计，待核验", openingHours: "开放时段待出发前核验", bookingNote: "节假日客流和游船班次需核验", priceType: "出发前待核验" },
+    { name: "灵隐飞来峰", type: "人文", why: "石刻、寺院与山林密度高，适合与梅灵路茶村组成同方向路线。", duration: "3–4 小时", ticketReference: "门票与寺院香花券待核验", openingHours: "开放时间待核验", bookingNote: "以景区官方预约页面为准", priceType: "出发前待核验" },
+    { name: "京杭大运河", type: "城市", why: "补足杭州不止西湖的一面，从小河直街看到运河生活与工业遗存。", duration: "半日", ticketReference: "街区开放；展馆及游船价格待核验", openingHours: "街区全天可达，展馆时段待核验", bookingNote: "博物馆预约政策出发前核验", priceType: "出发前待核验" },
+    { name: "九溪与龙井村", type: "自然", why: "以低难度山林步行收尾，路线可根据天气与体力随时缩短。", duration: "半日", ticketReference: "公共步道通常无需门票，具体以现场为准", openingHours: "天气与步道路况待核验", bookingNote: "雨天缩短路线，不购买来源不明体验", priceType: "出发前待核验" },
   ],
   foods: [
     { name: "片儿川", category: "面食", suggestion: "早餐或简餐", budget: "¥18–35", note: "先尝笋片、雪菜与肉片的本地组合，不必追逐单一名店。" },
     { name: "龙井虾仁", category: "杭帮菜", suggestion: "正餐共享", budget: "¥80–160", note: "适合两人以上点餐，与时蔬、东坡肉等分食更合理。" },
     { name: "葱包桧", category: "街头小吃", suggestion: "下午加餐", budget: "¥8–18", note: "在老街区作为轻食体验，不替代正餐。" },
     { name: "定胜糕", category: "传统糕点", suggestion: "伴手礼", budget: "¥10–30", note: "现吃少量即可，留意保质期和糖度。" },
+  ],
+  staySuggestions: [
+    { area: "湖滨—武林", why: "适合第一次到访和地铁出行，前往西湖、运河与火车站较方便。" },
+    { area: "运河沿线", why: "更安静，适合慢旅行；前往西湖需预留跨片区交通。" },
   ],
   transportPlan: [
     { scene: "城区跨区", choice: "地铁优先", detail: "湖滨、运河与火车站之间用地铁，时间更稳定。" },
@@ -290,7 +327,7 @@ export const DEMO_PLAN: TravelPlan = {
   verificationNote: "门票、预约、开放时间、交通管制与天气均可能变化；示例仅展示规划方法，出发前需通过官方渠道复核。",
   days: [
     {
-      label: "DAY 01", date: "10月23日 · 周五", theme: "西湖初见 · 湖岸与人文", note: "从北山街进入西湖，沿同一岸线移动，傍晚保留自由时间。",
+      label: "DAY 01", date: "10月23日 · 周五", theme: "西湖初见 · 湖岸与人文", note: "从北山街进入西湖，沿同一岸线移动，傍晚保留自由时间。", area: "西湖沿线", transportAdvice: "湖岸节点多为步行可达，较远段使用短程公交或打车。", dailyBudget: "¥520–720 / 人",
       stops: [
         { time: "08:00", title: "断桥与白堤", meta: "湖畔 · 1小时20分", detail: "清晨沿白堤步行，先建立西湖空间感。", tone: "blue" },
         { time: "10:00", title: "孤山与浙江省博物馆", meta: "人文 · 1小时40分", detail: "园林与室内参观组合，具体展馆开放安排需出发前核验。", tone: "lavender", source: "出发前核验" },
@@ -299,7 +336,7 @@ export const DEMO_PLAN: TravelPlan = {
       ],
     },
     {
-      label: "DAY 02", date: "10月24日 · 周六", theme: "灵隐山色 · 石刻与茶村", note: "上午集中灵隐片区，下午沿梅灵路移动，不返回市区后再次进山。",
+      label: "DAY 02", date: "10月24日 · 周六", theme: "灵隐山色 · 石刻与茶村", note: "上午集中灵隐片区，下午沿梅灵路移动，不返回市区后再次进山。", area: "灵隐—梅灵片区", transportAdvice: "进山建议公交或打车，片区内按体力步行，预留半天。", dailyBudget: "¥560–780 / 人",
       stops: [
         { time: "07:40", title: "灵隐飞来峰", meta: "石刻 · 1小时40分", detail: "早点进入片区，把山林步道安排在客流高峰前。", tone: "sage", source: "出发前核验" },
         { time: "10:00", title: "灵隐寺", meta: "寺院 · 1小时20分", detail: "预约、票务与开放时间以出发前官方信息为准。", tone: "lavender", source: "出发前核验" },
@@ -308,7 +345,7 @@ export const DEMO_PLAN: TravelPlan = {
       ],
     },
     {
-      label: "DAY 03", date: "10月25日 · 周日", theme: "运河日常 · 街巷与博物馆", note: "安排为低强度日，从小河直街一路走向拱宸桥。",
+      label: "DAY 03", date: "10月25日 · 周日", theme: "运河日常 · 街巷与博物馆", note: "安排为低强度日，从小河直街一路走向拱宸桥。", area: "运河—拱宸桥片区", transportAdvice: "街区节点步行可达，进出片区使用地铁或短程公交。", dailyBudget: "¥480–680 / 人",
       stops: [
         { time: "09:00", title: "小河直街", meta: "历史街区 · 1小时20分", detail: "观察临水民居与当代小店共存的城市尺度。", tone: "blue" },
         { time: "11:00", title: "桥西历史文化街区", meta: "街区 · 1小时", detail: "把手工艺展馆与街区散步合并。", tone: "clay" },
@@ -318,7 +355,7 @@ export const DEMO_PLAN: TravelPlan = {
       ],
     },
     {
-      label: "DAY 04", date: "10月26日 · 周一", theme: "九溪收尾 · 龙井山色", note: "最后一天只走一条山间路线，为取行李和返程保留缓冲。",
+      label: "DAY 04", date: "10月26日 · 周一", theme: "九溪收尾 · 龙井山色", note: "最后一天只走一条山间路线，为取行李和返程保留缓冲。", area: "九溪—龙井片区", transportAdvice: "山间段建议打车或公交，步行量按天气与体力缩短。", dailyBudget: "¥480–700 / 人",
       stops: [
         { time: "09:00", title: "九溪烟树", meta: "轻徒步 · 1小时30分", detail: "按天气与路况决定步行长度，湿滑时缩短路线。", tone: "sage" },
         { time: "11:10", title: "龙井村", meta: "茶村 · 1小时10分", detail: "短暂停留看茶园与村落，不安排强制消费。", tone: "clay" },
@@ -343,43 +380,59 @@ function chineseDate(iso: string, offset: number) {
 export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
   const profile = findCityProfile(input.destination);
   if (!profile) return null;
+  const knowledge = getCityKnowledge(profile);
   const requestedDays = Math.min(Math.max(input.days, 2), 8);
   const tones = ["sage", "clay", "lavender", "blue"] as const;
   const days = Array.from({ length: requestedDays }, (_, index) => {
-    const sightA = profile.sights[index % profile.sights.length];
-    const sightB = profile.sights[(index + 1) % profile.sights.length];
-    const foodA = profile.foods[index % profile.foods.length];
-    const foodB = profile.foods[(index + 1) % profile.foods.length];
+    const poi = knowledge.pois[index % knowledge.pois.length];
+    const lunch = knowledge.foods[index % knowledge.foods.length];
+    const dinner = knowledge.foods[(index + 1) % knowledge.foods.length];
+    const stops = [
+      { time: "上午", title: poi.name, meta: `${profile.tags[index % profile.tags.length]} · ${poi.suggestedDuration}`, detail: `从${poi.name}理解${profile.city}的城市气质；门票、开放和预约均需出发前核验。`, tone: tones[0], source: `预置资料 · 查询于 ${knowledge.queriedAt}` },
+      { time: "午餐", title: `${lunch.name}午餐`, meta: `当地美食 · ${lunch.budget}`, detail: `在${poi.area}附近安排${lunch.name}，不为单一热门店跨区。`, tone: tones[1], source: "预置城市资料 · 具体店铺待核验" },
+      { time: "下午", title: `${poi.area}在地漫游`, meta: "街区或自然体验 · 建议预留半天", detail: `下午继续停留在${poi.area}，按体力选择街区、公共空间或同片区展馆，避免跨区折返。`, tone: tones[2], source: "区域动线建议 · 非精确导航" },
+      { time: "晚餐", title: `${dinner.name}晚餐`, meta: `当地美食 · ${dinner.budget}`, detail: `用${dinner.name}结束当日主线，餐馆营业与排队情况当天确认。`, tone: tones[3], source: "AI预算估算 · 出发前核验" },
+    ];
+    if (input.pace !== "松弛") stops.push({
+      time: "晚上", title: `${poi.area}可选夜间散步`, meta: "可选体验 · 不增加跨区移动",
+      detail: "只在体力、天气与返程条件允许时加入；夜间公共交通与场所开放状态出发前核验。",
+      tone: tones[0], source: "可选安排 · 出发前核验",
+    });
     return {
       label: `DAY ${String(index + 1).padStart(2, "0")}`,
       date: chineseDate(input.startDate, index),
-      theme: `${sightA}片区 · ${profile.tags[index % profile.tags.length]}体验`,
-      note: "基础版按同一片区组织；具体营业、预约和路线耗时需接入联网搜索与高德后刷新。",
-      stops: [
-        { time: "09:00", title: sightA, meta: "代表景点 · 2小时", detail: `从${sightA}建立${profile.city}的城市印象，开放时间与预约政策待核验。`, tone: tones[0], source: "演示数据 · 出发前核验" },
-        { time: "12:00", title: `${foodA}午餐`, meta: `当地美食 · ${profile.dailyBudget}`, detail: `把${foodA}安排在当天主线路附近，不为单一热门店跨区。`, tone: tones[1], source: "城市内容库 · 店铺信息待核验" },
-        { time: "14:30", title: sightB, meta: "在地体验 · 2小时", detail: `${sightB}与上午线路按城市片区组合，真实距离与换乘待地图 API 计算。`, tone: tones[2], source: "演示数据 · 路线 API 待接入" },
-        { time: "18:00", title: `${foodB}晚餐`, meta: "当地美食 · 人均价格待核验", detail: `用${foodB}结束当日路线，并为晚间返程留出弹性。`, tone: tones[3], source: "城市内容库 · 价格待核验" },
-      ],
+      theme: `${poi.area} · ${profile.tags[index % profile.tags.length]}体验`,
+      note: `当天只安排${poi.area}一个主要片区；动态事实未联网时统一标记出发前待核验。`,
+      area: poi.area,
+      transportAdvice: "同片区优先步行；较远节点使用短程公交、地铁或打车。没有可信来源时不显示精确距离、分钟数、线路号或站名。",
+      dailyBudget: profile.dailyBudget,
+      stops,
     };
   });
 
-  const highlights = profile.sights.map((name, index) => ({
-    name,
+  const highlights: TravelPlan["highlights"] = knowledge.pois.map((poi, index) => ({
+    name: poi.name,
     type: profile.tags[index % profile.tags.length],
-    why: `${name}是${profile.city}${profile.hook}的重要切面，适合与同片区体验顺路组合。`,
-    duration: index === 0 ? "2–3 小时" : "1.5–2.5 小时",
-    ticketReference: "待联网核验",
-    openingHours: "待联网核验",
-    bookingNote: "出发前前往官方页面核验预约政策",
-    priceType: "待核验" as const,
+    why: `${poi.name}是${profile.city}${profile.hook}的重要切面，适合与${poi.area}体验顺路组合。`,
+    duration: poi.suggestedDuration,
+    ticketReference: poi.ticketReference,
+    openingHours: poi.openingHours,
+    bookingNote: poi.reservation,
+    priceType: "出发前待核验" as const,
   }));
   highlights.push({
     name: `${profile.city}在地饮食体验`, type: "美食",
     why: `${profile.foods.join("、")}能补足景点之外的地域味道，并可自然嵌入每日路线。`,
-    duration: "1–1.5 小时", ticketReference: "人均消费待核验", openingHours: "按具体餐馆核验",
-    bookingNote: "热门时段是否排队或预约需当天确认", priceType: "待核验",
+    duration: "建议预留一餐", ticketReference: "AI预算估算；具体菜单价格待核验", openingHours: "按具体餐馆核验",
+    bookingNote: "热门时段是否排队或预约需当天确认", priceType: "AI预算估算",
   });
+
+  const maintainedSources = knowledge.sources.map((source) => ({
+    title: `${profile.city}城市概况与文旅资源`, url: source.url, siteName: source.name,
+    snippet: `预置资料查询于 ${knowledge.queriedAt}；动态门票、开放、预约与临时通知不沿用旧值。`,
+    category: "城市基础资料" as const, queriedAt: source.queriedAt, official: source.official,
+    confidence: source.confidence, priceType: "非价格信息" as const,
+  }));
 
   return {
     title: `${profile.city}｜${profile.hook}`,
@@ -392,11 +445,15 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
     transportSummary: profile.transit,
     matchReason: `根据${input.pace}节奏、${input.budget}预算与${input.transport}偏好，按代表景点片区分日，避免明显跨区折返。`,
     highlights,
-    foods: profile.foods.map((name, index) => ({ name, category: "城市代表美食", suggestion: index === 0 ? "早餐或午餐" : index === 1 ? "午餐或晚餐" : "下午加餐或晚餐", budget: "人均价格待核验", note: `优先选择当天景点片区内的正规餐馆体验${name}，不为单一店铺跨区。` })),
+    foods: knowledge.foods.map((food) => ({ name: food.name, category: "城市代表美食", suggestion: food.meal, budget: food.budget, note: `优先选择当天主片区内的正规餐馆体验${food.name}，不为单一店铺跨区；这是AI预算估算。` })),
+    staySuggestions: knowledge.stayAreas.map((area, index) => ({
+      area,
+      why: index === 0 ? `适合第一次到${profile.city}，便于衔接主要片区。` : index === 1 ? "适合公共交通和餐饮选择，兼顾晚间返程。" : "适合希望降低跨区频率或衔接车站的行程。",
+    })),
     transportPlan: [
       { scene: "市区主线路", choice: input.transport, detail: profile.transit },
-      { scene: "相邻景点", choice: "步行与公共交通组合", detail: "地图 API 未配置时不展示虚假距离或实时耗时。" },
-      { scene: "机场与火车站", choice: "以官方交通渠道复核", detail: input.originCity ? `${input.originCity}往返${profile.city}的大交通价格与班次不在演示数据中。` : "填写出发城市后，可联网补充大交通参考信息。" },
+      { scene: "相邻景点", choice: "区域动线建议", detail: "按片区分组，同片区步行或短程公交；首版不计算精确公里数、分钟数或实时导航。" },
+      { scene: "机场与火车站", choice: "以官方交通渠道复核", detail: knowledge.arrivalAccess },
     ],
     budgetBreakdown: [
       { category: "住宿", amount: "约占全程预算 42%", percent: 42 },
@@ -406,11 +463,22 @@ export function createCityDemoPlan(input: TravelRequest): TravelPlan | null {
       { category: "机动预算", amount: "约占全程预算 10%", percent: 10 },
     ],
     days,
-    verificationNote: "当前为城市内容库生成的基础演示方案。门票、开放时间、预约、交通、天气、票价和临时公告均未联网核验；配置服务端搜索与地图密钥后请重新生成。",
+    verificationNote: "当前为预置城市资料生成的基础版本。门票、开放时间、预约、临时闭馆、节假日政策与大交通价格均未联网刷新；首版不提供余票、库存、下单、支付、精确距离或实时导航。公开参考价，余票、优惠政策和最终支付金额请以官方页面为准。",
     liveData: {
-      searchedAt: new Date().toISOString(), searchStatus: "off", mapStatus: "off", routeCount: 0,
-      searchProvider: "未配置", mapProvider: "未配置", sources: [],
-      warnings: ["联网搜索 API 尚未配置", "路线 API 待接入", "动态信息均为待核验状态"],
+      searchedAt: new Date().toISOString(), searchStatus: "off", searchProvider: "未配置",
+      cacheStatus: "off", queryCount: 0, sources: maintainedSources,
+      warnings: ["联网搜索 API 尚未配置", "动态信息均为出发前待核验状态"],
     },
   };
 }
+
+export const DEMO_PLAN = createCityDemoPlan({
+  destination: "杭州",
+  originCity: "上海",
+  startDate: "2026-10-23",
+  days: 4,
+  pace: "舒展",
+  budget: "适中",
+  interests: ["地道美食", "历史古迹", "街区漫游"],
+  transport: "公共交通优先",
+}) ?? LEGACY_HANGZHOU_PLAN;
