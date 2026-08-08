@@ -40,7 +40,16 @@ export type TravelPlan = {
   estimatedTotalBudget: string;
   transportSummary: string;
   matchReason: string;
-  highlights: Array<{ name: string; type: string; why: string; duration: string }>;
+  highlights: Array<{
+    name: string;
+    type: string;
+    why: string;
+    duration: string;
+    ticketReference: string;
+    openingHours: string;
+    bookingNote: string;
+    priceType: "官方公开价" | "公开参考价" | "待核验";
+  }>;
   foods: Array<{ name: string; category: string; suggestion: string; budget: string; note: string }>;
   transportPlan: Array<{ scene: string; choice: string; detail: string }>;
   budgetBreakdown: Array<{ category: string; amount: string; percent: number }>;
@@ -51,6 +60,8 @@ export type TravelPlan = {
     searchStatus: "live" | "partial" | "off";
     mapStatus: "live" | "partial" | "off";
     routeCount: number;
+    searchProvider: string;
+    mapProvider: string;
     sources: TravelSource[];
     warnings: string[];
   };
@@ -106,7 +117,7 @@ function systemPrompt() {
   "estimatedTotalBudget":"人民币每人全程区间，不含往返大交通时需说明",
   "transportSummary":"一句话城市交通总策略",
   "matchReason":"为什么这个方案最符合用户偏好、预算和节奏",
-  "highlights":[{"name":"特色景点或体验","type":"分类","why":"为什么值得去以及如何避免同质化","duration":"建议时长"}],
+  "highlights":[{"name":"特色景点或体验","type":"分类","why":"为什么值得去以及如何避免同质化","duration":"建议时长","ticketReference":"官方公开价、公开参考价或待核验","openingHours":"联网资料中的开放时间；无法确认写待核验","bookingNote":"预约入口或出发前核验提示","priceType":"官方公开价/公开参考价/待核验"}],
   "foods":[{"name":"特色食物","category":"分类","suggestion":"适合哪一餐或怎么点","budget":"人均区间","note":"在地吃法与避坑提示"}],
   "transportPlan":[{"scene":"使用场景","choice":"推荐方式","detail":"具体策略"}],
   "budgetBreakdown":[{"category":"住宿/餐饮/市内交通/门票与体验/机动预算","amount":"金额区间","percent":40}],
@@ -116,10 +127,10 @@ function systemPrompt() {
 
 硬性要求：
 1. days 数量与用户要求一致；每天 3–5 个顺路节点，至少包含一项当地饮食安排，不跨区域来回折返。
-2. highlights 至少 4 项、foods 至少 4 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。
+2. highlights 至少 4 项、foods 至少 4 项、transportPlan 至少 3 项，内容必须体现该城市独有特色。每项景点都要写建议游览时间、门票参考、开放时间与预约提示；没有结构化或可追溯证据时一律写“待核验”。
 3. budgetBreakdown 百分比合计约 100，金额与用户预算等级一致；不要假装精确报价。
 4. tone 只能是 sage、clay、lavender、blue。
-5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容标记“出发前核验”。
+5. 不虚构实时天气、营业时间、票价、拥堵或“已经核验”的结论；动态内容没有联网证据时标记“待核验”或“出发前核验”。
 6. 使用简体中文，避免网红清单式文案和泛化景点描述。`;
 }
 
@@ -156,14 +167,16 @@ function isTravelPlan(value: unknown): value is TravelPlan {
   if (!Array.isArray(plan.budgetBreakdown) || plan.budgetBreakdown.length < 4) return false;
   if (!Array.isArray(plan.days)) return false;
 
-  const detailValid = plan.highlights.every((item) => isString(item?.name) && isString(item?.type) && isString(item?.why) && isString(item?.duration))
+  const detailValid = plan.highlights.every((item) => isString(item?.name) && isString(item?.type) && isString(item?.why)
+      && isString(item?.duration) && isString(item?.ticketReference) && isString(item?.openingHours)
+      && isString(item?.bookingNote) && ["官方公开价", "公开参考价", "待核验"].includes(item?.priceType))
     && plan.foods.every((item) => isString(item?.name) && isString(item?.category) && isString(item?.suggestion) && isString(item?.budget) && isString(item?.note))
     && plan.transportPlan.every((item) => isString(item?.scene) && isString(item?.choice) && isString(item?.detail))
     && plan.budgetBreakdown.every((item) => isString(item?.category) && isString(item?.amount) && typeof item?.percent === "number");
   if (!detailValid) return false;
 
   return plan.days.every((day) => isString(day?.label) && isString(day?.date) && isString(day?.theme) && isString(day?.note)
-    && Array.isArray(day.stops) && day.stops.length >= 1 && day.stops.every((stop) => isString(stop?.time)
+    && Array.isArray(day.stops) && day.stops.length >= 3 && day.stops.length <= 5 && day.stops.every((stop) => isString(stop?.time)
       && isString(stop?.title) && isString(stop?.meta) && isString(stop?.detail)
       && ["sage", "clay", "lavender", "blue"].includes(stop?.tone)));
 }
@@ -182,7 +195,10 @@ export async function generateTravelPlan(input: TravelRequest, evidence?: Travel
         model,
         messages: [
           { role: "system", content: systemPrompt() },
-          { role: "user", content: userPrompt(input, evidence ?? { searchedAt: new Date().toISOString(), searchConfigured: false, sources: [], warnings: [] }) },
+          { role: "user", content: userPrompt(input, evidence ?? {
+            searchedAt: new Date().toISOString(), searchConfigured: false, searchProvider: "demo",
+            cacheStatus: "off", queryCount: 0, sources: [], warnings: ["联网搜索 API 尚未配置"],
+          }) },
         ],
         response_format: { type: "json_object" },
         temperature: 0.4,

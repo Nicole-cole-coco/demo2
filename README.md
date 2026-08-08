@@ -1,163 +1,90 @@
 # 旅策｜中国城市旅行攻略生成网站
 
-“旅策”是一个可在普通浏览器直接访问的旅行攻略网站。页面不依赖 ChatGPT 登录；AI 能力通过网站自己的服务端接口调用 DeepSeek，浏览器永远接触不到 API Key。
+“旅策”可在普通浏览器匿名访问，不依赖 ChatGPT、DeepSeek 或其他模型平台账号。AI、联网搜索和地图能力均由本站服务端调用；浏览器与构建产物不包含 API Key。
 
-## 当前能力
+## 已实现
 
-- 公开网页：普通浏览器可直接浏览，未接入 AI 时自动展示杭州示例
-- 中国城市限定：生成提示词只接受中国境内（含港澳台）城市
-- 14 座城市灵感库：每座城市都有本地实景图、代表美食、特色景点、交通逻辑和预算带
-- 完整方案结构：推荐理由、城市精华、必吃清单、交通策略、预算拆分和逐日路线
-- DeepSeek 适配：`POST /api/ai/generate`
-- 接入状态：`GET /api/ai/status`
-- 联网检索：可选接入博查 Search API，覆盖门票与开放、特色美食、城市交通、预约和季节提示
-- 路线核算：可选接入高德 Web 服务，自动计算每日相邻节点的距离、时长和可用费用信息
-- 来源透明：结果页展示来源名称、资料类别、查询时间和原文核验按钮
-- 成本保护：搜索缓存 24 小时，并限制单次搜索类别和路线段数
-- 安全边界：密钥只读取服务端环境变量，不写进客户端或仓库
-- 结构化输出：DeepSeek JSON 输出经服务端解析和结构检查后再返回页面
+- 35 座中国境内代表城市，覆盖华北、东北、华东、华中、华南、西南、西北及港澳台；支持中文、拼音、简称与常见古称搜索。
+- 每座城市有独立地域图片、3 项代表景点、3 项美食、建议天数、预算带与交通策略。
+- 攻略包含推荐理由、景点价值、游览时间、门票/开放/预约状态、美食餐次、住宿预算、交通策略、逐日 3–5 个节点与来源卡片。
+- 未配置密钥时按所选城市生成基础版，所有动态字段标记“待核验”；不会回退成杭州或其他城市。
+- DeepSeek、Web Search 与高德地图均为服务端适配器；搜索缓存 24 小时，单次默认最多 4 次搜索、12 段路线。
+- 匿名会话可把表单和最近攻略保存在当前浏览器；接口带同源校验、请求大小限制与基础频率限制。
+- 票价仅区分“官方公开价 / 公开参考价 / 待核验”，不宣称余票、库存、实时可购或最终成交价。
 
-## 本地启动
+## 同源 API
+
+- `POST /api/ai/generate`：生成完整攻略；未配置 AI 时返回透明标记的城市基础版。
+- `GET /api/ai/status`：DeepSeek 配置状态，不返回密钥。
+- `POST /api/search/travel`：检索门票、开放、交通、美食和季节资料。
+- `GET /api/data/status`：搜索、地图、缓存与调用上限状态。
+- `POST /api/map/poi`：城市内 POI 坐标匹配。
+- `POST /api/map/route`：公交、步行或驾车路线参考。
+- `POST /api/ticket/estimate`：公开网页票价估算及冲突提示。
+
+## 本地运行
 
 要求 Node.js `>=22.13.0`。
 
-```bash
+```powershell
 npm install
 Copy-Item .env.example .env.local
 npm run dev
 ```
 
-未填写 DeepSeek Key 也能启动，此时页面会显示“演示模式”。
+`.env.local` 已被 Git 忽略。没有任何密钥也可以浏览和生成基础版。
 
-## 接入 DeepSeek
+## 环境变量
 
-### 1. 创建 API Key
-
-登录 DeepSeek 开放平台，在 API Keys 页面创建密钥。不要把密钥发到聊天、写进前端代码或提交到 Git。
-
-### 2. 填写本地环境变量
-
-复制 `.env.example` 为 `.env.local`，只替换第一项：
+在本地填写项目根目录的 `.env.local`；在公开站点填写托管项目的 **Settings → Environment Variables / Secrets**。不要把密钥发送到聊天，不要写入前端变量、`.openai/hosting.json` 或仓库。
 
 ```dotenv
-DEEPSEEK_API_KEY=你的真实密钥
+DEEPSEEK_API_KEY=
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=deepseek-v4-flash
 DEEPSEEK_TIMEOUT_MS=45000
-```
 
-保存后重启开发服务。页面右侧状态会从“演示模式”变为“DeepSeek 已连接”。
+WEB_SEARCH_PROVIDER=bocha
+WEB_SEARCH_API_KEY=
+AMAP_WEB_SERVICE_KEY=
 
-### 4. 接入联网搜索和路线（可选）
-
-如果希望生成时核验公开资料，再配置两个服务端 Secret：
-
-```dotenv
-BOCHA_API_KEY=你的博查搜索密钥
-AMAP_WEB_SERVICE_KEY=你的高德Web服务密钥
 WEB_SEARCH_MAX_QUERIES=4
 AMAP_MAX_ROUTE_LEGS=12
+REQUEST_LIMIT_WINDOW_MS=900000
+REQUEST_LIMIT_MAX=10
 ```
 
-网站会在一次生成中最多检索四类资料，并最多计算十二段相邻路线。相同搜索和地点匹配会缓存 24 小时，优先使用服务商免费配额。若不配置其中某项，页面会明确显示“待接入”，不会把 AI 知识冒充成实时结果。
+变量用途：
 
-联网搜索得到的是公开参考价，不代表余票、库存或最终支付价格。景点、酒店和机票的实时可购价格仍需单独申请官方或票务合作接口。
+- `DEEPSEEK_API_KEY`：DeepSeek 开放平台创建的服务端 Key。
+- `WEB_SEARCH_API_KEY`：当前 Bocha 搜索适配器的 Key；旧部署中的 `BOCHA_API_KEY` 仍兼容。
+- `AMAP_WEB_SERVICE_KEY`：高德开放平台创建的 **Web 服务** Key，不是 JS API Key。
+- 其余变量控制模型、超时、免费配额和匿名频率限制。
 
-### 3. 在正式网站配置密钥
+当前 DeepSeek 使用官方 `chat/completions` 与 JSON Output；高德使用 Web Service POI 搜索和路径规划 2.0。业务层只依赖适配器接口，后续可以替换供应商。
 
-在网站托管平台的项目设置中新增服务端 Secret：
+## 数据与安全边界
 
-- 名称：`DEEPSEEK_API_KEY`
-- 值：你的真实 DeepSeek Key
+- 模型只理解偏好、筛选城市内容和组织方案；坐标、距离、耗时、票价、开放时间、预约和临时公告必须来自结构化 API 或可追溯网页来源。
+- 搜索来源记录类别、站点、原文入口、查询时间、官方属性、可信度和价格口径；原始 URL 只藏在整洁的“核验原文”按钮中。
+- 高德未配置时显示“路线 API 待接入”，不生成虚假距离或实时路线。
+- 12306 是铁路班次与票价的最终核验渠道；本站不支付、不售票、不保证库存。
+- 港澳台已纳入独立区域，预算保留当地币种，并提示证件、支付和交通政策需出发前核验。
 
-可选再添加 `DEEPSEEK_MODEL`、`DEEPSEEK_BASE_URL` 和 `DEEPSEEK_TIMEOUT_MS`。保存后重新部署。不要把 `.env.local` 上传到服务器，也不要把 Key 写入 `.openai/hosting.json`。
+## 图片资产
 
-## API 使用方式
+- 图片位于 `public/cities/`，均有固定宽高容器、响应式加载、非首屏懒加载和城市文字占位背景。
+- 新增 21 座城市的作者、来源页、许可、尺寸和获取时间保存在 `public/cities/attribution.json`，页面不堆放授权网址。
+- 素材维护规则见 `docs/IMAGE_SOURCES.md`；历史 14 张素材的来源页仍需按清单补录，未补录前不得对外宣称为“官方图片”。
 
-网页调用本站同源接口：
+## 检查
 
-```http
-POST /api/ai/generate
-Content-Type: application/json
+```powershell
+npm run lint
+npx tsc --noEmit
+npm test
 ```
 
-请求示例：
+`npm test` 会重新构建站点，并验证匿名首页、30+ 城市、无密钥动态基础版、境外目的地拦截、新 API 降级响应和密钥不出现在客户端响应中。
 
-```json
-{
-  "originCity": "上海",
-  "destination": "泉州",
-  "startDate": "2026-10-23",
-  "days": 4,
-  "pace": "舒展",
-  "budget": "适中",
-  "transport": "公共交通优先",
-  "interests": ["地道美食", "历史古迹", "街区漫游"],
-  "constraints": "每天午后留一小时休息"
-}
-```
-
-成功响应：
-
-```json
-{
-  "provider": "deepseek",
-  "plan": {
-    "title": "泉州，海丝旧城的四日",
-    "subtitle": "10.23 — 10.26 · 两人同行 · 舒展节奏",
-    "destination": "泉州",
-    "heroSummary": "围绕海丝古城与闽南味道组织路线",
-    "estimatedDailyBudget": "¥420–650 / 人",
-    "estimatedTotalBudget": "¥1,680–2,600 / 人",
-    "transportSummary": "古城步行与公交为主",
-    "verificationNote": "开放、预约和交通信息请在出发前复核",
-    "highlights": [],
-    "foods": [],
-    "transportPlan": [],
-    "budgetBreakdown": [],
-    "days": []
-  }
-}
-```
-
-状态接口：
-
-```http
-GET /api/ai/status
-```
-
-它只返回是否已配置、服务商和模型名，不会返回 API Key。
-
-外部数据状态接口：
-
-```http
-GET /api/data/status
-```
-
-它只返回搜索和地图是否已配置，不会返回任何密钥。
-
-## 代码位置
-
-- `app/api/ai/generate/route.ts`：网站对外的 AI 生成接口
-- `app/api/ai/status/route.ts`：配置状态接口
-- `lib/deepseek.ts`：DeepSeek 调用、提示词、超时和 JSON 校验
-- `lib/travel-data.ts`：联网搜索、高德路线、缓存和调用数量限制
-- `app/api/data/status/route.ts`：搜索与地图配置状态
-- `.env.example`：环境变量模板
-- `app/page.tsx`：页面表单和结果展示
-
-## 上线前安全建议
-
-公开网站的服务端接口会消耗你的 DeepSeek 额度。正式推广前建议在托管层增加限流、异常用量告警和人机验证；同时限制单次天数、输入长度与输出长度。当前代码已经做了基础参数限制、45 秒超时和 6000 token 上限，但托管层限流仍然必要。
-
-## 验证
-
-```bash
-npm run build
-```
-
-构建成功后再部署。DeepSeek 官方接口为 `POST https://api.deepseek.com/chat/completions`，通过 Bearer Token 鉴权，并使用 JSON Output 模式返回结构化攻略。
-
-## 城市图片
-
-页面中的城市照片已保存为 `public/cities/` 下的本地资源，浏览页面时不会跳转到图片来源网站。素材来自 Unsplash 免费许可图片，分别对应杭州、北京、上海、成都、重庆、西安、桂林、苏州、广州、大理、泉州、拉萨、青岛和南京；原始页面与作者信息保留在项目提交记录和制作过程记录中。
+公开发布必须在本地检查完成后另行确认；本仓库不会因构建或测试自动部署。

@@ -4,7 +4,9 @@ import {
   isDeepSeekConfigured,
   type TravelRequest,
 } from "@/lib/deepseek";
+import { createCityDemoPlan, findCityProfile } from "@/lib/cities";
 import { collectTravelEvidence, enrichPlanWithRoutes } from "@/lib/travel-data";
+import { guardJsonRequest } from "@/lib/request-guard";
 
 const allowedPaces = new Set(["松弛", "舒展", "充实"]);
 const allowedBudgets = new Set(["经济", "适中", "舒适"]);
@@ -59,6 +61,8 @@ function parseRequest(value: unknown): TravelRequest | null {
 
 export async function POST(request: Request) {
   try {
+    const denied = guardJsonRequest(request, "ai-generate");
+    if (denied) return denied;
     const input = parseRequest(await request.json());
     if (!input) {
       return Response.json(
@@ -67,11 +71,27 @@ export async function POST(request: Request) {
       );
     }
 
+    const profile = findCityProfile(input.destination);
+    if (!profile) {
+      return Response.json(
+        { error: "UNSUPPORTED_DESTINATION", message: "旅策目前只服务中国境内城市；该目的地不在已核验城市库中，暂不生成攻略。" },
+        { status: 422 },
+      );
+    }
+    input.destination = profile.city;
+
     if (!isDeepSeekConfigured()) {
-      throw new DeepSeekError("DeepSeek API 尚未配置", 503, "DEEPSEEK_NOT_CONFIGURED");
+      const plan = createCityDemoPlan(input);
+      return Response.json({
+        plan,
+        provider: "demo",
+        mode: "demo",
+        message: "DeepSeek、联网搜索或地图服务未完整配置，已使用城市基础数据生成待核验版本。",
+        dataProviders: { search: "demo", map: "demo" },
+      });
     }
 
-    const evidence = await collectTravelEvidence(input);
+    const evidence = await collectTravelEvidence(input, profile);
     const generatedPlan = await generateTravelPlan(input, evidence);
     const routeResult = await enrichPlanWithRoutes(generatedPlan, input);
     const warnings = [...evidence.warnings, ...(routeResult.warning ? [routeResult.warning] : [])];
@@ -84,11 +104,13 @@ export async function POST(request: Request) {
         searchStatus,
         mapStatus,
         routeCount: routeResult.routeCount,
+        searchProvider: evidence.searchProvider,
+        mapProvider: routeResult.mapProvider,
         sources: evidence.sources,
         warnings,
       },
     };
-    return Response.json({ plan, provider: "deepseek", dataProviders: { search: "bocha", map: "amap" } });
+    return Response.json({ plan, provider: "deepseek", mode: "live", dataProviders: { search: evidence.searchProvider, map: routeResult.mapProvider } });
   } catch (error) {
     if (error instanceof SyntaxError) {
       return Response.json(
