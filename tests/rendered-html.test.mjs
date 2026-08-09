@@ -29,26 +29,22 @@ function tripRequest(destination) {
   };
 }
 
-test("renders an anonymous China planner with 40 regional cities", async () => {
+test("renders an anonymous editorial homepage with only completed city guides", async () => {
   const worker = await getWorker();
   const response = await worker.fetch(new Request("http://localhost/", { headers: { accept: "text/html" } }), env, ctx);
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  assert.match(html, /<title>旅策｜中国城市美食、景点、交通与预算一体规划<\/title>/);
-  for (const city of ["北京", "哈尔滨", "苏州", "武汉", "深圳", "丽江", "敦煌", "香港", "宁波", "绍兴", "福州", "济南", "贵阳"]) {
-    assert.match(html, new RegExp(city));
+  assert.match(html, /<title>旅策｜把零散经验整理成可直接执行的城市攻略<\/title>/);
+  for (const [city, slug] of [["杭州", "hangzhou"], ["成都", "chengdu"], ["北京", "beijing"]]) {
+    assert.match(html, new RegExp(`href="/city/${slug}"[\\s\\S]{0,800}${city}`));
   }
-  assert.match(html, /CITY COLLECTION[\s\S]{0,80}40[\s\S]{0,80}CITIES/);
-  assert.match(html, /简易衔接/);
-  assert.match(html, /营业时间、预约和收费信息可能调整/);
-  assert.match(html, /4[\s\S]{0,24}日行程摘要/);
-  assert.match(html, /逐日行程是这份攻略的主体/);
-  assert.match(html, /DAY 01[\s\S]{0,24}参考花费/);
-  assert.match(html, /楼外楼（孤山路）/);
-  assert.match(html, /<details class="source-details">/);
+  assert.match(html, /EDITORIAL CITY GUIDES[\s\S]{0,80}3/);
+  assert.match(html, /攻略先解决真实问题/);
+  assert.match(html, /把餐厅放进路线/);
+  assert.doesNotMatch(html, /哈尔滨|苏州|武汉|深圳|丽江|敦煌|香港/);
   assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数|DeepSeek 待接入|搜索待接入|等待搜索 API|0 次搜索|缓存 24 小时|成本控制|DEMO MODE|AI预算估算|待配置/);
-  assert.doesNotMatch(html, /在地图中查看景点|打开地图核验|map\.baidu|住在哪，决定每天怎么走|钱主要花在哪里|本次方案参考了哪些资料|source-grid|budget-list/);
+  assert.doesNotMatch(html, /穷游|经济|适中|舒适|奢华|控制花费|体验均衡|时间优先|预算百分比|住宿占比|餐饮占比/);
 });
 
 test("keeps consecutive static homepage renders deterministic", async () => {
@@ -59,16 +55,48 @@ test("keeps consecutive static homepage renders deterministic", async () => {
   const secondHtml = await (await worker.fetch(request(), env, ctx)).text();
 
   assert.equal(secondHtml, firstHtml);
-  assert.match(firstHtml, /营业时间.*收费信息可能调整/);
+  assert.match(firstHtml, /把零散经验/);
 
-  const [citiesSource, pageSource] = await Promise.all([
+  const [citiesSource, pageSource, guideSource] = await Promise.all([
     readFile(new URL("../lib/cities.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../lib/editorial-city-guides.ts", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(citiesSource, /searchedAt:\s*new Date\s*\(/);
   assert.doesNotMatch(pageSource, /toLocale(?:String|DateString|TimeString)\s*\(/);
-  assert.match(pageSource, /isRenderableTravelPlan\(value\)/);
+  assert.doesNotMatch(guideSource, /Date\.now|new Date\s*\(|Math\.random/);
   assert.doesNotMatch(pageSource, /api-stack|live-data-strip|\/api\/ai\/status|\/api\/data\/status/);
+});
+
+test("serves independent shareable Hangzhou, Chengdu and Beijing pages", async () => {
+  const worker = await getWorker();
+  const pages = {};
+  for (const [slug, city] of [["hangzhou", "杭州"], ["chengdu", "成都"], ["beijing", "北京"]]) {
+    const response = await worker.fetch(new Request(`http://localhost/city/${slug}`, { headers: { accept: "text/html" } }), env, ctx);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    pages[slug] = html;
+    assert.match(html, new RegExp(`<title>${city}实用旅行攻略｜旅策<\\/title>`));
+    assert.match(html, new RegExp(`${city}[345]日`));
+    assert.match(html, /旅行者真正会遇到的问题/);
+    assert.match(html, /你想要哪一种攻略/);
+    assert.match(html, /太累时先删/);
+    assert.match(html, /餐厅必须放进具体一天/);
+    assert.match(html, /下雨、节假日和特殊情况/);
+    assert.match(html, /<details class="source-details editorial-sources">/);
+    assert.doesNotMatch(html, /穷游|经济|适中|舒适|奢华|控制花费|体验均衡|时间优先|TRIP BUDGET|预计¥\s?\d/);
+  }
+  assert.match(pages.hangzhou, /灵隐与梅灵/);
+  assert.doesNotMatch(pages.hangzhou, /成都大熊猫|故宫博物院/);
+  assert.match(pages.chengdu, /熊猫要早/);
+  assert.doesNotMatch(pages.chengdu, /灵隐飞来峰|故宫博物院/);
+  assert.match(pages.beijing, /故宫只做一件大事/);
+  assert.doesNotMatch(pages.beijing, /灵隐飞来峰|陈麻婆豆腐/);
+
+  const unknown = await worker.fetch(new Request("http://localhost/city/kyoto", { headers: { accept: "text/html" } }), env, ctx);
+  const unknownHtml = await unknown.text();
+  assert.match(unknownHtml, /完整攻略还没整理好/);
+  assert.doesNotMatch(unknownHtml, /湖山、茶香与城市日常|北山街—白堤/);
 });
 
 test("shows ticket and dynamic facts only with a reliable source and checked date", async () => {

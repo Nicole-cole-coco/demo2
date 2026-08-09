@@ -10,19 +10,19 @@ export async function generateMetadata(): Promise<Metadata> {
   const socialImage = `${baseUrl}/og-v2.png`;
 
   return {
-    title: "旅策｜中国城市美食、景点、交通与预算一体规划",
-    description: "根据旅行偏好、预算和节奏，为中国城市生成有取舍、少折返、真正走得通的最佳旅行方案。",
+    title: "旅策｜把零散经验整理成可直接执行的城市攻略",
+    description: "中国城市实用旅行攻略：每天怎么走、吃什么、删什么，以及排队、预约、雨天和替代方案。",
     openGraph: {
-      title: "旅策｜选出最适合你的城市走法",
-      description: "中国城市旅行攻略：特色美食、代表景点、城市交通和预算拆分，一次规划清楚。",
+      title: "旅策｜可以直接照着走的中国城市攻略",
+      description: "把路线、餐厅、取舍、排队与替代方案整理成一份城市专刊。",
       images: [{ url: socialImage, width: 1747, height: 917, alt: "旅策中国城市旅行规划平台" }],
       locale: "zh_CN",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "旅策｜选出最适合你的城市走法",
-      description: "美食、景点、交通和预算，一次规划清楚。",
+      title: "旅策｜可以直接照着走的中国城市攻略",
+      description: "路线、餐厅、取舍与替代方案，一次整理清楚。",
       images: [socialImage],
     },
   };
