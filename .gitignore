@@ -27,6 +27,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+*.err.log
+.vinext-dev-*.log
+.vinext-dev-*.err.log
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -34,6 +38,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+/.output/
 
 # typescript
 next-env.d.ts

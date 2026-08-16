@@ -1,4 +1,4 @@
-import type { CityProfile } from "./cities";
+import type { CityProfile, CitySeason } from "./cities";
 
 export const CITY_DATA_QUERY_DATE = "2026-08-08";
 const VERIFY_BEFORE_DEPARTURE = `出发前核验（预置资料查询于 ${CITY_DATA_QUERY_DATE}）`;
@@ -36,7 +36,7 @@ export type CityKnowledge = {
   region: CityProfile["region"];
   coverImage: string;
   recommendedDays: string;
-  recommendedSeasons: string[];
+  recommendedSeasons: CitySeason[];
   pois: CityPoiFact[];
   foods: CityFoodFact[];
   stayAreas: string[];
@@ -49,7 +49,7 @@ export type CityKnowledge = {
 };
 
 type CuratedConfig = {
-  seasons: string[];
+  seasons: CitySeason[];
   stayAreas: string[];
   arrivalAccess: string;
   poiAreas: string[];
@@ -64,7 +64,7 @@ const CONFIG: Record<string, CuratedConfig> = {
   成都: { seasons: ["春季", "秋季"], stayAreas: ["天府广场", "春熙路", "宽窄巷子周边"], arrivalAccess: "天府机场、双流机场和成都各火车站可通过地铁或正规出租车进入市区，具体班次出发前核验。", poiAreas: ["熊猫基地片区", "青羊宫—草堂片区", "武侯祠—锦里片区"], sourceName: "成都市文化广电旅游局", sourceUrl: "https://wglj.chengdu.gov.cn/" },
   重庆: { seasons: ["春季", "秋季"], stayAreas: ["解放碑", "观音桥", "沙坪坝"], arrivalAccess: "江北机场与重庆主要火车站可通过轨道交通或正规出租车进入市区，山城步行需预留坡道体力。", poiAreas: ["解放碑—洪崖洞片区", "李子坝—鹅岭片区", "渝中老城片区"], sourceName: "重庆市文化和旅游发展委员会", sourceUrl: "https://whlyw.cq.gov.cn/" },
   西安: { seasons: ["春季", "秋季"], stayAreas: ["钟楼", "大雁塔", "永宁门"], arrivalAccess: "西安北站、咸阳机场可通过地铁或正规出租车进入市区，兵马俑属于临潼远郊线。", poiAreas: ["临潼远郊", "明城墙片区", "小寨—大雁塔片区"], sourceName: "西安市文化和旅游局", sourceUrl: "https://wlj.xa.gov.cn/" },
-  桂林: { seasons: ["春季", "秋季"], stayAreas: ["两江四湖", "桂林站周边", "阳朔西街外围"], arrivalAccess: "两江机场、桂林站及桂林北站可乘机场巴士、公交或正规出租车进入市区，桂林与阳朔宜分段住宿。", poiAreas: ["漓江沿线", "阳朔遇龙河片区", "龙胜远郊"], sourceName: "桂林市文化广电和旅游局", sourceUrl: "https://wglj.guilin.gov.cn/" },
+  桂林: { seasons: ["春季", "夏季", "秋季"], stayAreas: ["两江四湖", "桂林站周边", "阳朔西街外围"], arrivalAccess: "两江机场、桂林站及桂林北站可乘机场巴士、公交或正规出租车进入市区，桂林与阳朔宜分段住宿。", poiAreas: ["漓江沿线", "阳朔遇龙河片区", "龙胜远郊"], sourceName: "桂林市文化广电和旅游局", sourceUrl: "https://wglj.guilin.gov.cn/" },
   苏州: { seasons: ["春季", "秋季"], stayAreas: ["观前街", "平江路外围", "苏州站周边"], arrivalAccess: "苏州站、苏州北站可通过轨道交通或公交进入古城，园林片区高峰期优先步行。", poiAreas: ["东北街园林片区", "平江路片区", "虎丘远郊片区"], sourceName: "苏州市文化广电和旅游局", sourceUrl: "https://wglj.suzhou.gov.cn/" },
   广州: { seasons: ["秋季", "冬季"], stayAreas: ["公园前", "珠江新城", "老西关"], arrivalAccess: "白云机场、广州南站和广州东站可通过地铁或正规出租车进入市区，末班时刻出发前核验。", poiAreas: ["西关—陈家祠片区", "越秀老城片区", "珠江新城—海心沙片区"], sourceName: "广州市文化广电旅游局", sourceUrl: "https://wglj.gz.gov.cn/" },
   大理: { seasons: ["春季", "秋季"], stayAreas: ["大理古城", "才村", "下关"], arrivalAccess: "大理站与大理机场可通过公交、机场巴士或正规出租车前往下关及古城，环洱海不建议一天赶完。", poiAreas: ["洱海生态廊道", "喜洲片区", "苍山片区"], sourceName: "大理白族自治州人民政府", sourceUrl: "https://www.dali.gov.cn/" },
@@ -84,7 +84,7 @@ const CONFIG: Record<string, CuratedConfig> = {
   张家界: { seasons: ["春季", "秋季"], stayAreas: ["武陵源", "永定城区", "张家界西站周边"], arrivalAccess: "张家界西站与荷花机场可通过公交或正规出租车前往市区及武陵源，景区之间不宜硬塞同日。", poiAreas: ["武陵源核心景区", "天门山片区", "金鞭溪片区"], sourceName: "湖南省文化和旅游厅", sourceUrl: "https://whhlyt.hunan.gov.cn/" },
   深圳: { seasons: ["秋季", "冬季"], stayAreas: ["福田中心区", "南山", "罗湖"], arrivalAccess: "宝安机场与深圳各火车站可通过地铁或正规出租车进入市区，大鹏半岛单列一日。", poiAreas: ["深圳湾片区", "大鹏远郊", "福田中心片区"], sourceName: "深圳市文化广电旅游体育局", sourceUrl: "https://wtl.sz.gov.cn/" },
   三亚: { seasons: ["秋季", "冬季", "春季"], stayAreas: ["三亚湾", "大东海", "亚龙湾"], arrivalAccess: "凤凰机场与三亚站可通过公交或正规出租车前往各海湾，海湾间距离较远宜按住宿区分日。", poiAreas: ["亚龙湾片区", "海棠湾片区", "天涯海角片区"], sourceName: "三亚市旅游和文化广电体育局", sourceUrl: "https://lwj.sanya.gov.cn/" },
-  昆明: { seasons: ["全年", "冬季"], stayAreas: ["翠湖", "东风广场", "昆明南站周边"], arrivalAccess: "长水机场、昆明站和昆明南站可通过地铁或正规出租车进入市区。", poiAreas: ["滇池—海埂片区", "官渡文博片区", "翠湖片区"], sourceName: "云南省文化和旅游厅", sourceUrl: "https://dct.yn.gov.cn/" },
+  昆明: { seasons: ["全年适合", "冬季"], stayAreas: ["翠湖", "东风广场", "昆明南站周边"], arrivalAccess: "长水机场、昆明站和昆明南站可通过地铁或正规出租车进入市区。", poiAreas: ["滇池—海埂片区", "官渡文博片区", "翠湖片区"], sourceName: "云南省文化和旅游厅", sourceUrl: "https://dct.yn.gov.cn/" },
   丽江: { seasons: ["春季", "秋季"], stayAreas: ["丽江古城外围", "束河", "白沙"], arrivalAccess: "三义机场和丽江站可通过机场巴士、公交或正规出租车进入城区；雪山行程需关注天气和海拔。", poiAreas: ["玉龙雪山远郊", "丽江古城片区", "白沙—束河片区"], sourceName: "丽江市人民政府", sourceUrl: "https://www.lijiang.gov.cn/" },
   兰州: { seasons: ["夏季", "秋季"], stayAreas: ["张掖路", "东方红广场", "兰州西站周边"], arrivalAccess: "中川机场、兰州站和兰州西站可通过城际铁路、地铁或正规出租车进入市区。", poiAreas: ["黄河中山桥片区", "七里河文博片区", "白塔山片区"], sourceName: "甘肃省文化和旅游厅·兰州主题线路", sourceUrl: "https://www.gswbj.gov.cn/a/2026/04/27/28103.html" },
   敦煌: { seasons: ["春季", "秋季"], stayAreas: ["敦煌市区", "鸣沙山外围"], arrivalAccess: "敦煌机场与敦煌站可通过接驳车或正规出租车进入市区，西线景点分散需避免疲劳驾驶。", poiAreas: ["莫高窟东线", "鸣沙山片区", "敦煌西线"], sourceName: "丝绸之路（敦煌）国际文化博览会", sourceUrl: "https://www.gswbj.gov.cn/" },
@@ -98,6 +98,16 @@ const CONFIG: Record<string, CuratedConfig> = {
   澳门: { seasons: ["秋季", "冬季"], stayAreas: ["澳门半岛", "氹仔旧城区", "路氹"], arrivalAccess: "各口岸可通过公共巴士或的士进入城区，跨境证件及口岸时段出发前核验。", poiAreas: ["历史城区", "大炮台片区", "路环片区"], sourceName: "澳门特别行政区政府旅游局", sourceUrl: "https://www.macaotourism.gov.mo/zh-hans/sightseeing/" },
   台北: { seasons: ["春季", "秋季", "冬季"], stayAreas: ["台北车站", "中山", "信义"], arrivalAccess: "桃园机场、松山机场与台北车站可通过机场捷运、捷运、巴士或计程车衔接，跨境政策出发前核验。", poiAreas: ["士林文博片区", "大稻埕—西门片区", "信义—象山片区"], sourceName: "台北旅游网", sourceUrl: "https://www.travel.taipei/zh-cn/attraction/all-regions" },
   高雄: { seasons: ["秋季", "冬季", "春季"], stayAreas: ["美丽岛", "盐埕", "左营"], arrivalAccess: "高雄机场与左营站可通过捷运、巴士或计程车进入市区，跨境政策出发前核验。", poiAreas: ["驳二—盐埕片区", "旗津片区", "莲池潭片区"], sourceName: "高雄旅游网", sourceUrl: "https://khh.travel/zh-tw/" },
+  太原: { seasons: ["春季", "秋季"], stayAreas: ["迎泽大街", "府西街", "长风商务区"], arrivalAccess: "太原站、太原南站和武宿机场可通过地铁、公交或正规出租车进入市区。", poiAreas: ["晋源南线", "汾河文博区", "城关河岸"], sourceName: "太原市文化和旅游局", sourceUrl: "https://wlj.taiyuan.gov.cn/" },
+  承德: { seasons: ["夏季", "秋季"], stayAreas: ["丽正门", "南营子大街"], arrivalAccess: "承德南站到避暑山庄老城需公交或正规出租车接驳。", poiAreas: ["避暑山庄", "狮子沟外八庙", "双桥老城"], sourceName: "承德市旅游和文化广电局", sourceUrl: "https://lywh.chengde.gov.cn/" },
+  长春: { seasons: ["夏季", "冬季"], stayAreas: ["人民广场", "重庆路", "红旗街"], arrivalAccess: "长春站、长春西站和龙嘉机场可通过轨道交通或城际铁路衔接。", poiAreas: ["宽城历史区", "朝阳电影区", "净月文博区"], sourceName: "长春市文化广播电视和旅游局", sourceUrl: "https://wgxj.changchun.gov.cn/" },
+  扬州: { seasons: ["春季", "秋季"], stayAreas: ["文昌阁", "东关街外围", "瘦西湖南门"], arrivalAccess: "扬州东站到古城可通过公交或正规出租车接驳。", poiAreas: ["瘦西湖", "东关古城", "运河三湾"], sourceName: "扬州市文化广电和旅游局", sourceUrl: "https://wglj.yangzhou.gov.cn/" },
+  无锡: { seasons: ["春季", "秋季"], stayAreas: ["三阳广场", "南长街外围"], arrivalAccess: "无锡站和无锡东站可通过地铁进入中心城区。", poiAreas: ["太湖鼋头渚", "惠山古镇", "古运河"], sourceName: "无锡市文化广电和旅游局", sourceUrl: "https://wgl.wuxi.gov.cn/" },
+  黄山: { seasons: ["春季", "秋季"], stayAreas: ["汤口", "屯溪", "宏村"], arrivalAccess: "黄山北站前往屯溪、汤口和黟县方向不同，需按住宿选择接驳。", poiAreas: ["黄山风景区", "黟县古村", "屯溪徽州"], sourceName: "黄山市文化和旅游局", sourceUrl: "https://wlj.huangshan.gov.cn/" },
+  开封: { seasons: ["春季", "秋季"], stayAreas: ["鼓楼", "龙亭外围"], arrivalAccess: "开封北站到老城可通过公交或正规出租车接驳。", poiAreas: ["新区文博区", "龙亭湖", "老城中轴"], sourceName: "开封市文化广电和旅游局", sourceUrl: "https://wgl.kaifeng.gov.cn/" },
+  景德镇: { seasons: ["春季", "秋季"], stayAreas: ["人民广场", "御窑厂外围", "陶溪川"], arrivalAccess: "景德镇北站和罗家机场可通过公交或正规出租车进入城区。", poiAreas: ["珠山御窑区", "昌南文博区", "陶溪川工业区"], sourceName: "景德镇市文化广电旅游局", sourceUrl: "https://wgxj.jdz.gov.cn/" },
+  珠海: { seasons: ["秋季", "冬季", "春季"], stayAreas: ["香洲", "吉大", "拱北"], arrivalAccess: "珠海站靠拱北，珠海机场到香洲需机场巴士或正规出租车。", poiAreas: ["情侣路", "唐家湾", "海岛线"], sourceName: "珠海市文化广电旅游体育局", sourceUrl: "https://wgltj.zhuhai.gov.cn/" },
+  南宁: { seasons: ["秋季", "冬季"], stayAreas: ["朝阳广场", "民族广场"], arrivalAccess: "南宁东站与吴圩机场可通过地铁、机场巴士或正规出租车进入市区。", poiAreas: ["青秀山文博区", "兴宁老城", "邕江沿岸"], sourceName: "南宁市文化广电和旅游局", sourceUrl: "https://wgl.nanning.gov.cn/" },
 };
 
 function foodBudget(profile: CityProfile, index: number) {

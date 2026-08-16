@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { EDITORIAL_CITY_GUIDES, getEditorialCityGuide } from "@/lib/editorial-city-guides";
+import { PUBLISHED_CITY_GUIDES, getCompleteCityGuide } from "@/content/cities";
 import CityGuideView from "./CityGuideView";
 
 type CityPageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return EDITORIAL_CITY_GUIDES.map((guide) => ({ slug: guide.slug }));
+  return PUBLISHED_CITY_GUIDES.map((guide) => ({ slug: guide.slug }));
 }
 
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const guide = getEditorialCityGuide(slug);
+  const guide = getCompleteCityGuide(slug);
   if (!guide) return { title: "城市攻略暂未开放｜旅策" };
   return {
     title: `${guide.city}实用旅行攻略｜旅策`,
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
 
 export default async function CityPage({ params }: CityPageProps) {
   const { slug } = await params;
-  const guide = getEditorialCityGuide(slug);
+  const guide = getCompleteCityGuide(slug);
 
   if (!guide) {
     return (

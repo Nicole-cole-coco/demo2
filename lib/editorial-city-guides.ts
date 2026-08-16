@@ -26,6 +26,13 @@ export type ItineraryNode = {
   meta: string;
   detail: string;
   connection: string;
+  kind?: "景点" | "街区" | "博物馆" | "自然" | "午餐" | "晚餐" | "夜间" | "体验";
+  duration?: string;
+  transportMode?: string;
+  transportTime?: string;
+  booking?: string;
+  crowd?: string;
+  imageSubject?: string;
   pitfall?: string;
   alternative?: string;
   sourceId?: string;
@@ -39,6 +46,15 @@ export type EditorialDay = {
   summary: string;
   reason: string;
   remove: string;
+  startTime?: string;
+  endTime?: string;
+  pace?: "轻松" | "正常" | "紧凑";
+  transportSummary?: string;
+  earlyStart?: string;
+  bookingItems?: string[];
+  queueAlternative?: string;
+  rainAlternative?: string;
+  lateStartAdjustment?: string;
   nodes: ItineraryNode[];
 };
 
@@ -300,7 +316,7 @@ const beijing: EditorialCityGuide = {
   slug: "beijing", city: "北京", province: "北京", image: "/cities/beijing.jpg", imageAlt: "北京故宫红墙与传统宫殿建筑",
   eyebrow: "CENTRAL AXIS · MUSEUMS · HUTONG", title: "北京不是景点越多越值，而是每一天只走一条历史轴线。",
   intro: "北京最累的不是走路，而是预约、安检、远距离换片区叠在一起。五天路线应把故宫中轴、天坛前门、什刹海胡同、海淀皇家园林和长城远郊彻底分开。",
-  fit: "适合第一次来、重视历史建筑与博物馆的人。北京需要接受‘一天只完成一个大主题’；如果只有三天，故宫、天坛前门和长城已经足够。",
+  fit: "第一次到北京且重视历史建筑与博物馆时，应接受‘一天只完成一个大主题’；如果只有三天，故宫、天坛前门和长城已经足够。",
   stayAdvice: "住宿建议：住在前门—崇文门或东单一带，前两天可接入中轴与天坛，后面去海淀和远郊也不必更换酒店；不要只因一晚胡同体验拖着行李换住处。",
   defaultDays: 5,
   routeOptions: [

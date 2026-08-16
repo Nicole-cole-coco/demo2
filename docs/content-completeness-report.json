@@ -1,0 +1,3674 @@
+{
+  "summary": {
+    "generatedAt": "2026-08-09",
+    "cityCount": 50,
+    "completeCities": 0,
+    "licensedImages": 73,
+    "imageFailures": 0,
+    "placeholders": 19,
+    "crossCityDuplicateGroups": 0,
+    "structuredRouteEditions": 800
+  },
+  "cities": [
+    {
+      "city": "杭州",
+      "slug": "hangzhou",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 2,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/hangzhou.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 247270,
+          "hash": "59f3450dc1c7b65830e64241b7922789deb967f9e48efe54e71f32eacdf00173"
+        },
+        {
+          "src": "/cities/cards/hangzhou.webp",
+          "role": "card",
+          "subject": "杭州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 213036,
+          "hash": "ce1691ca1ce7c806c94591f895f4c822b401a9e4d0754d309bbb67cc5f641f18"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "成都",
+      "slug": "chengdu",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 1,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 274,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 5,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/chengdu.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 132036,
+          "hash": "163ffc7ec3c055b0312ddbb50d91addadafa58cfedcf0595c7961c1474d45ca6"
+        },
+        {
+          "src": "/cities/media/chengdu/04-poi.webp",
+          "role": "poi",
+          "subject": "成都博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 140936,
+          "hash": "454512abd69f8379d5e3dc042160a07b703f06b7d78f1bdd2cb34b72350825d4"
+        },
+        {
+          "src": "/cities/media/chengdu/08-food.webp",
+          "role": "food",
+          "subject": "麻婆豆腐",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 61960,
+          "hash": "31e5aeed501893650bb2d0e758149a5b1c95c375ba2e64dd6be2c26ae7118dbf"
+        },
+        {
+          "src": "/cities/cards/chengdu.webp",
+          "role": "card",
+          "subject": "成都",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 113228,
+          "hash": "7cfb3934569db0d04b81dc0f6be718ce3dd809e4da5a8b21747f6e35d6c2163d"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 1/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "北京",
+      "slug": "beijing",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 1,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 5,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/beijing.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 232606,
+          "hash": "f51d8b8882986d035e1f7a6051bb6532b1c2c26400c4d89ea897faabba7d3726"
+        },
+        {
+          "src": "/cities/media/beijing/06-poi.webp",
+          "role": "poi",
+          "subject": "颐和园",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 157836,
+          "hash": "0351738633d735b052ebcb1942834471c5c879e7b65ce976104acc614aee5c9d"
+        },
+        {
+          "src": "/cities/media/beijing/16-restaurant.webp",
+          "role": "restaurant",
+          "subject": "护国寺小吃",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 65628,
+          "hash": "c1c09086d8f2a716e4111162e1bf678e6f04d696a8d00bace2c330acf86d8bd3"
+        },
+        {
+          "src": "/cities/cards/beijing.webp",
+          "role": "card",
+          "subject": "北京",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 166606,
+          "hash": "b3018266c2fb8ec16ecd010b128ce6686d373e0b55f8eac135eaa88057a481a6"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 1/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "天津",
+      "slug": "tianjin",
+      "images": 7,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 3,
+        "food": 3,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/tianjin.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 185558,
+          "hash": "aaa795304d69a899d886f40a89cc2a41f0990f0cb4041803892846f7d09448c0"
+        },
+        {
+          "src": "/cities/media/tianjin/02-poi.webp",
+          "role": "poi",
+          "subject": "五大道",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 167784,
+          "hash": "160994efc530277efe239864c52941b8bc92c2703850435b42e493d722a510f1"
+        },
+        {
+          "src": "/cities/media/tianjin/03-poi.webp",
+          "role": "poi",
+          "subject": "小白楼—音乐厅街区",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 203054,
+          "hash": "fd431f5586e671e7dc3d7ff8a56d3b707b5f4f128a423c6b997d71d159b0c0fa"
+        },
+        {
+          "src": "/cities/media/tianjin/07-poi.webp",
+          "role": "poi",
+          "subject": "天津博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 71820,
+          "hash": "05c71235ba96c8f98c86a882aa3d0e55bd227f6c537a3c9427713903de1b0cc1"
+        },
+        {
+          "src": "/cities/media/tianjin/08-food.webp",
+          "role": "food",
+          "subject": "煎饼馃子",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 47826,
+          "hash": "6bdc645f23a32978a053568ddfba70f66796b3a4a7b71f52b1f875b5b6ae4298"
+        },
+        {
+          "src": "/cities/media/tianjin/10-food.webp",
+          "role": "food",
+          "subject": "熟梨糕",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 50116,
+          "hash": "ef429426849ae52b03a8191a21c38c01080bb89320eec9c17a8f57753640ea4b"
+        },
+        {
+          "src": "/cities/media/tianjin/11-food.webp",
+          "role": "food",
+          "subject": "十八街麻花",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 75998,
+          "hash": "ed8d6e3af0bd15956ff9c59e89c28c294d035864552490abc6216a53ee3250e4"
+        },
+        {
+          "src": "/cities/cards/tianjin.webp",
+          "role": "card",
+          "subject": "天津",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 152084,
+          "hash": "11bb3e058f324752e50a53712a624b17e5dff1185ce9c2f22dc2f5bd4f0fda02"
+        }
+      ],
+      "missing": [
+        "景点图片 3/6",
+        "美食图片 3/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "大同",
+      "slug": "datong",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/datong.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 176450,
+          "hash": "76b1b0045f16f1733b87ac3a6ae2e9c18dea8336a03b6164914bc828f05ce93b"
+        },
+        {
+          "src": "/cities/media/datong/06-poi.webp",
+          "role": "poi",
+          "subject": "悬空寺",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 324058,
+          "hash": "7f70a520637484936ac58c3242bfe8e00adfad2a2bfc961a283c8bb25738bb44"
+        },
+        {
+          "src": "/cities/cards/datong.webp",
+          "role": "card",
+          "subject": "大同",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 132496,
+          "hash": "478cf82e46ee20b55ac84e8c0f9a6d1e0ddaa92549390cddd00149723496d7f5"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "沈阳",
+      "slug": "shenyang",
+      "images": 4,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 3,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/shenyang.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 149886,
+          "hash": "606acff1f7e37e5412243830308e2ef1715e6c567e379d5296e69dbe9771c650"
+        },
+        {
+          "src": "/cities/media/shenyang/02-poi.webp",
+          "role": "poi",
+          "subject": "沈阳故宫",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 77292,
+          "hash": "f2d86200a9f1b4488158c9ede7175b88888819f7149388e8319374c342094148"
+        },
+        {
+          "src": "/cities/media/shenyang/03-poi.webp",
+          "role": "poi",
+          "subject": "张学良旧居陈列馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 98540,
+          "hash": "bcaa5a323ec96d705d4583469d350b1c97e5b90b077d3db972b2c1257b3b30e0"
+        },
+        {
+          "src": "/cities/media/shenyang/05-poi.webp",
+          "role": "poi",
+          "subject": "辽宁省博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 77716,
+          "hash": "0d2296675960e2535fa38df5bc2a22d8b8774ef6733e627b592fb053b31b488d"
+        },
+        {
+          "src": "/cities/cards/shenyang.webp",
+          "role": "card",
+          "subject": "沈阳",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 126754,
+          "hash": "8554e342fb84143036f2e33cd34e38d5e4757a9585d9cf7aed5502830f2be7d5"
+        }
+      ],
+      "missing": [
+        "景点图片 3/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "大连",
+      "slug": "dalian",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/dalian.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 153712,
+          "hash": "2a9fa0a991f2d78d0fd44c40d49d4571b794375bca98575989abdc7fb2e2d4f3"
+        },
+        {
+          "src": "/cities/cards/dalian.webp",
+          "role": "card",
+          "subject": "大连",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 116866,
+          "hash": "bd757a958071b777d94b3bf2adc7de836addeb07cf076e6817942410ee31ced0"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "哈尔滨",
+      "slug": "harbin",
+      "images": 3,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/harbin.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 81090,
+          "hash": "9a1effc11b782e935d437618f06ef4350ef1acac906df1809bbfe57c2bd308b7"
+        },
+        {
+          "src": "/cities/media/harbin/05-poi.webp",
+          "role": "poi",
+          "subject": "黑龙江省博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 109792,
+          "hash": "91512496882a5082f17687f11e7f914b7cbcb80976fdfb556507dbccd851a726"
+        },
+        {
+          "src": "/cities/media/harbin/12-food.webp",
+          "role": "food",
+          "subject": "格瓦斯",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 67636,
+          "hash": "380f5b33d653df9ca8443b2dfae905f31ce67081f12ce4781275be4585e8e086"
+        },
+        {
+          "src": "/cities/cards/harbin.webp",
+          "role": "card",
+          "subject": "哈尔滨",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 67896,
+          "hash": "4f2ae2ed5429710d56bed1a3b7703503e14cda2dc0230431a304fc57ead76b3e"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "上海",
+      "slug": "shanghai",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/shanghai.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 67488,
+          "hash": "4baeef928ce664cc4db43e2c7841a4dd999af838f49ebde5249ace339d29bf29"
+        },
+        {
+          "src": "/cities/media/shanghai/13-food.webp",
+          "role": "food",
+          "subject": "葱油拌面",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 63754,
+          "hash": "2245482eacaec981bcf2cf9de62fe1e3bdff21450e249a7809854b4e51a40e0d"
+        },
+        {
+          "src": "/cities/cards/shanghai.webp",
+          "role": "card",
+          "subject": "上海",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 60768,
+          "hash": "4b1c34a296b025d9eee01b526e2741cb745f6e01f9a4910ce006207ebb44e28a"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "苏州",
+      "slug": "suzhou",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/suzhou.webp",
+          "role": "cover",
+          "subject": "苏州",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 307532,
+          "hash": "af757b527801fcc52df503f6046b6a4beb7098f0ae64b84f951ec3119991577e"
+        },
+        {
+          "src": "/cities/media/suzhou/09-food.webp",
+          "role": "food",
+          "subject": "松鼠鳜鱼",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 83914,
+          "hash": "217dfd038a95ac36553fad6111626dcee3390e290b3b9e77379309f99d99fe0b"
+        },
+        {
+          "src": "/cities/cards/suzhou.webp",
+          "role": "card",
+          "subject": "苏州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 208352,
+          "hash": "e985be2df1ca511dab3d71510d34eb6214fbd52f02a14c46ba3eed6581e67c83"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "南京",
+      "slug": "nanjing",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/nanjing.webp",
+          "role": "cover",
+          "subject": "南京",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 194522,
+          "hash": "5f9e5440698da1ba6132374b3db7f2a21e36ed3290ff6a539c856a1eca9354dd"
+        },
+        {
+          "src": "/cities/cards/nanjing.webp",
+          "role": "card",
+          "subject": "南京",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 124630,
+          "hash": "337f39178bfbe0888f8e0678c7e6ffbc0bb816c24125d0a9cd8430b35d4491c7"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "青岛",
+      "slug": "qingdao",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/qingdao.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 177758,
+          "hash": "d5b0b876796450c0b835367bbb4f6cd131278d6bd1403bfe7fe89afb91b9a023"
+        },
+        {
+          "src": "/cities/media/qingdao/04-poi.webp",
+          "role": "poi",
+          "subject": "八大关",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 190730,
+          "hash": "8a99f6b42e6e2452a7f6c2d5001213ad9bdbb38d6e44b76821465eeba9e1f5f2"
+        },
+        {
+          "src": "/cities/cards/qingdao.webp",
+          "role": "card",
+          "subject": "青岛",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 151506,
+          "hash": "5451220fb6ca006cd2c356863e534b858afb6b24f78327d34f85d4881de1aa73"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "济南",
+      "slug": "jinan",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/jinan.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 328054,
+          "hash": "54af0996e9334de37064a86d90a1b8d56c616564fe9c6231bf8d0f0a3461d1ad"
+        },
+        {
+          "src": "/cities/cards/jinan.webp",
+          "role": "card",
+          "subject": "济南",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 287596,
+          "hash": "124e9d48a01259c7a90e3033cd56387c113b6c59bd7a0a7a3b40b5238dfb5269"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "厦门",
+      "slug": "xiamen",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/xiamen.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 180310,
+          "hash": "cc8e204081d8ee60d8d8afb5dc59419d9284b0eb32b8d4976199b9a5b400f737"
+        },
+        {
+          "src": "/cities/cards/xiamen.webp",
+          "role": "card",
+          "subject": "厦门",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 134064,
+          "hash": "319f8d95ca0a45063aeafb97d3eed6944c8109adb1de0bc7c356e50db9f07ac6"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "泉州",
+      "slug": "quanzhou",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/quanzhou.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 331278,
+          "hash": "ed45c7929c5cd60142db461692c11acb0a40a89c0d96286bc7b55986c4f25282"
+        },
+        {
+          "src": "/cities/cards/quanzhou.webp",
+          "role": "card",
+          "subject": "泉州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 270346,
+          "hash": "3c501230e0692df611b88bbd559356c4a4bd79340fc5ab75d87601e516c36191"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "宁波",
+      "slug": "ningbo",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/ningbo.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 275918,
+          "hash": "2d0d020691fa29369ab4d2a088c0a46904c95bcb0aea33aa7ba3e31c89cd1cef"
+        },
+        {
+          "src": "/cities/cards/ningbo.webp",
+          "role": "card",
+          "subject": "宁波",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 229396,
+          "hash": "da9bf57aa2ada8f6d25b806b1de37d3d41b1cabc18c77aa856505eb1958609be"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "绍兴",
+      "slug": "shaoxing",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/shaoxing.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 147830,
+          "hash": "d272044fb31b718d2f925ce967c54cf8c579df01f182beb448516633a1228d5b"
+        },
+        {
+          "src": "/cities/cards/shaoxing.webp",
+          "role": "card",
+          "subject": "绍兴",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 118832,
+          "hash": "4d2d5d5ea03364485c0cacf3aaca66e59370132f6804c668d720ed9f6a87051c"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "福州",
+      "slug": "fuzhou",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/fuzhou.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 336822,
+          "hash": "6f175e6fdcc4a9b62acaa9728c7dda86cd154b12a81fac93b3c421726bea19d2"
+        },
+        {
+          "src": "/cities/cards/fuzhou.webp",
+          "role": "card",
+          "subject": "福州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 251974,
+          "hash": "9a650a8732d3d290161ffd5aea62921eb00e964d1196f5e05e93d11cd3b50373"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "武汉",
+      "slug": "wuhan",
+      "images": 3,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/wuhan.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 99494,
+          "hash": "8b5725068ed2bfa6d5e8594c3c506aae88911d8b1b12c07ff6391c97f025ca68"
+        },
+        {
+          "src": "/cities/media/wuhan/05-poi.webp",
+          "role": "poi",
+          "subject": "江汉路—黎黄陂路",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 136450,
+          "hash": "0fa60649b924d6159cd6deda05a5a97ecb9ae3468bd3624731954ba3af3ce02d"
+        },
+        {
+          "src": "/cities/media/wuhan/09-food.webp",
+          "role": "food",
+          "subject": "三鲜豆皮",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 52420,
+          "hash": "babdda67dad1dacd180ba188ee0259dc7ce123290101b62f2cd7d7ff45ea186b"
+        },
+        {
+          "src": "/cities/cards/wuhan.webp",
+          "role": "card",
+          "subject": "武汉",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 79696,
+          "hash": "3f59288b8f1c9288dcc0b0043de5e7281ab09883abdfef571a15179693314e08"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "长沙",
+      "slug": "changsha",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/changsha.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 246190,
+          "hash": "fb22176d8818339aa7cb21a5278d73804070086896c7f744f5fff39f1c72f116"
+        },
+        {
+          "src": "/cities/cards/changsha.webp",
+          "role": "card",
+          "subject": "长沙",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 227248,
+          "hash": "5675b5f0e243edc2c8b2ea9cf25c5cf989e2bc487a3c6688a1ff97277917d2cb"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "洛阳",
+      "slug": "luoyang",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/luoyang.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 201580,
+          "hash": "ff46795823e550bb8e83df07785dffa12ac167e835b888b1d7016f88063d0a96"
+        },
+        {
+          "src": "/cities/cards/luoyang.webp",
+          "role": "card",
+          "subject": "洛阳",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 178748,
+          "hash": "b3352a66d85445b941f97392f96708b958be4d47c8295266612a1cfc4f14320c"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "张家界",
+      "slug": "zhangjiajie",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/zhangjiajie.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 139856,
+          "hash": "7dffb3381838298ef038e0196dc0299b1a40b2c993c3916c9d0772d1880cb8dd"
+        },
+        {
+          "src": "/cities/cards/zhangjiajie.webp",
+          "role": "card",
+          "subject": "张家界",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 98646,
+          "hash": "f9a78b151c189077aa5fb80f9c06009145500b6f487b380fc65a21d1d7fbb76d"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "广州",
+      "slug": "guangzhou",
+      "images": 4,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 2,
+        "food": 2,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/guangzhou.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 124708,
+          "hash": "42599f0e2f7d3cc8361d2e74a8af85d5e34aac6894598faeeaaec277b4610c2b"
+        },
+        {
+          "src": "/cities/media/guangzhou/03-poi.webp",
+          "role": "poi",
+          "subject": "永庆坊—恩宁路",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 100958,
+          "hash": "5dbb5da523a4104529f4cd4d9a6d1f6453ce70f0d053091e3c9a2086dbf2763f"
+        },
+        {
+          "src": "/cities/media/guangzhou/07-poi.webp",
+          "role": "poi",
+          "subject": "沙面—白鹅潭",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 173844,
+          "hash": "1a49f639244bc34e8f4c30abbb974a502e9bef7b81c7fd2509a3221b7e86cdd7"
+        },
+        {
+          "src": "/cities/media/guangzhou/09-food.webp",
+          "role": "food",
+          "subject": "烧鹅",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 60892,
+          "hash": "c5c41dc597dd96e27471c3a66dd481d504eb71f3fed34891ac9fe9473e749d7e"
+        },
+        {
+          "src": "/cities/media/guangzhou/10-food.webp",
+          "role": "food",
+          "subject": "云吞面",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 33788,
+          "hash": "34420625e7ef888d6cd414432abeb237a5d15348fbdb229af492b15983ee1a90"
+        },
+        {
+          "src": "/cities/cards/guangzhou.webp",
+          "role": "card",
+          "subject": "广州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 110340,
+          "hash": "afe4ad7fe25fc6bd26c98eb2566d3f52f2f6700018a7847a3cdabc3c68f00341"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 2/6",
+        "美食图片 2/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "深圳",
+      "slug": "shenzhen",
+      "images": 3,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 2,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/shenzhen.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 133534,
+          "hash": "63096695650907d9b7c6e224efbab20a1e7af58c9086d0e15f8d318fc6a301f7"
+        },
+        {
+          "src": "/cities/media/shenzhen/05-poi.webp",
+          "role": "poi",
+          "subject": "南头古城",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 193100,
+          "hash": "8194ff08a3593d5b907fcf1150afe5e3d8b609254e39a6f7ef72e259f41c683d"
+        },
+        {
+          "src": "/cities/media/shenzhen/07-poi.webp",
+          "role": "poi",
+          "subject": "大鹏所城—较场尾外围",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 195054,
+          "hash": "8c519e57f115ff1f4f04e958d59d48b67df95d8b4408f9f4f3ab1f181ca68fa8"
+        },
+        {
+          "src": "/cities/cards/shenzhen.webp",
+          "role": "card",
+          "subject": "深圳",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 99640,
+          "hash": "519a4ccd202e517232d44d7f54309a07e35e113aad6f992cdf1d6c4332006d0d"
+        }
+      ],
+      "missing": [
+        "景点图片 2/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "三亚",
+      "slug": "sanya",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/sanya.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 109340,
+          "hash": "dc1572d9159c1450fc243c25bc29ca8b13590743fea024a581cfa219bde11312"
+        },
+        {
+          "src": "/cities/cards/sanya.webp",
+          "role": "card",
+          "subject": "三亚",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 94926,
+          "hash": "4e8fd1e5cff5f7ddfe46b795def9069c653da2598526a8f2fac190fc73287646"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "桂林",
+      "slug": "guilin",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/guilin.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 39778,
+          "hash": "63b9e31a053a410e7380382160f11bdf4ffe0fe5e4a42ec882ab62216b3d5f41"
+        },
+        {
+          "src": "/cities/cards/guilin.webp",
+          "role": "card",
+          "subject": "桂林",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 39588,
+          "hash": "dd54dd839c35a3f4dc39fe14ea5144e383ac1436129ea121920fab8361b9f2f5"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "重庆",
+      "slug": "chongqing",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/chongqing.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 124342,
+          "hash": "30200ad0b1db7be339be4703e24e4e5028ba6de2fdafb6ff2b2d5a2e9ffcf022"
+        },
+        {
+          "src": "/cities/cards/chongqing.webp",
+          "role": "card",
+          "subject": "重庆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 202580,
+          "hash": "2d86555ae3627bc860aabbdbca1f4b0afeeb7bfd18172439c995728dcf9aff7f"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "大理",
+      "slug": "dali",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/dali.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 71796,
+          "hash": "d135e327186707993ab27b7b675627b6cad3f864e45749ec4cf54207b58d26ac"
+        },
+        {
+          "src": "/cities/cards/dali.webp",
+          "role": "card",
+          "subject": "大理",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 37722,
+          "hash": "59d32908baba27a143b86fd253b86efd10c80d89feb43ae207d3c30abea953e8"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "拉萨",
+      "slug": "lhasa",
+      "images": 3,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 2,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/lhasa.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 165428,
+          "hash": "a038700afc1fcd2a1b66c08ebbb5ff46f11190c68a46b3ef257765723ecd980b"
+        },
+        {
+          "src": "/cities/media/lhasa/02-poi.webp",
+          "role": "poi",
+          "subject": "八廓街—大昭寺外围",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 113590,
+          "hash": "b45f36cd3345a1dc842658497cfad7f89b7cf48265ae40f402719dfebc054630"
+        },
+        {
+          "src": "/cities/media/lhasa/06-poi.webp",
+          "role": "poi",
+          "subject": "哲蚌寺",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 73572,
+          "hash": "a44b606912e5c672eb83b450e03999e231a973c97ae15bfd50a2a3ecbb1f92d1"
+        },
+        {
+          "src": "/cities/media/lhasa/10-food.webp",
+          "role": "food",
+          "subject": "糌粑",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 116078,
+          "hash": "ad15c91398e15799ceef7c41c76b4d04cd798bde553342c59821e9c7ba7be661"
+        },
+        {
+          "src": "/cities/cards/lhasa.webp",
+          "role": "card",
+          "subject": "拉萨",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 144584,
+          "hash": "aad4e126b88fc5adc96b0672acbd48257e05a6ade8d6c74794a109b7be58cff0"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 2/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "昆明",
+      "slug": "kunming",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/kunming.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 296552,
+          "hash": "6f3594fad6263ae161a863b382bf0f6c357ebd2d5ef9885f631a286945bf484e"
+        },
+        {
+          "src": "/cities/media/kunming/10-food.webp",
+          "role": "food",
+          "subject": "鲜花饼",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 30184,
+          "hash": "94ec3deca233e7ca69ee35a4a717ae5c4ce59358ac7045a1c77a688d7ac31c91"
+        },
+        {
+          "src": "/cities/cards/kunming.webp",
+          "role": "card",
+          "subject": "昆明",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 247998,
+          "hash": "a1192bbe3e0911d43f60331f4c745c663d30fea7e72204684ba6cc760de180f9"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "丽江",
+      "slug": "lijiang",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/lijiang.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 167130,
+          "hash": "25f283a0bb0969b6ee4c38fb218e688d4fd1333d2fffa4839ecb656a15e597c7"
+        },
+        {
+          "src": "/cities/cards/lijiang.webp",
+          "role": "card",
+          "subject": "丽江",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 134148,
+          "hash": "6819436a6b0304de8d4b1240f498ed7e4e80ad9546afe4bce70055a1921b400a"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "贵阳",
+      "slug": "guiyang",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/guiyang.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 100278,
+          "hash": "e766971d05f3a20050b7d10bbb3a8775b5c1b9ff4c9c7273478dc3ed19dcfc70"
+        },
+        {
+          "src": "/cities/cards/guiyang.webp",
+          "role": "card",
+          "subject": "贵阳",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 95712,
+          "hash": "efe1620fbdc2f4e3a0d2b554897746e14b4c2ac181f2310f199b7e318d74717a"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "西安",
+      "slug": "xian",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/xian.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 100236,
+          "hash": "f3f69ebb46923b8958656424df68467128beac261344c641afaa78e8e81aabd8"
+        },
+        {
+          "src": "/cities/media/xian/02-poi.webp",
+          "role": "poi",
+          "subject": "秦始皇帝陵博物院",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 94334,
+          "hash": "99f3d1a0dfefb19df2bee0c69a946765b8b8f076a5fbba7a7230a65153e50ede"
+        },
+        {
+          "src": "/cities/cards/xian.webp",
+          "role": "card",
+          "subject": "西安",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 97838,
+          "hash": "48a5d9f5a82eee905a04a198f62c1c1d24acbb50fb32a396d978a40adf094bd4"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "兰州",
+      "slug": "lanzhou",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/lanzhou.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 113964,
+          "hash": "88390a18e8b382a14b14ef125dc6c623cb04286f8c78247decf2b36403522da8"
+        },
+        {
+          "src": "/cities/media/lanzhou/08-food.webp",
+          "role": "food",
+          "subject": "兰州牛肉面",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 102352,
+          "hash": "ab2b405038b655166a865aa50fddbc99ece2cdb735654f8dc86fc564470f267b"
+        },
+        {
+          "src": "/cities/cards/lanzhou.webp",
+          "role": "card",
+          "subject": "兰州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 116720,
+          "hash": "cea2c32fdcd7a2d49e110edaa7f6b9f9841ad3568a0705be7e3d4de7eb1f7960"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "敦煌",
+      "slug": "dunhuang",
+      "images": 3,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 2,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/dunhuang.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 192786,
+          "hash": "4727877cd94ee79e3e8dd724045dbb7bea5324946dbe1a1355be95b2aceefd0b"
+        },
+        {
+          "src": "/cities/media/dunhuang/06-poi.webp",
+          "role": "poi",
+          "subject": "阳关",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 43232,
+          "hash": "1b4b89c8a30324e216f4847d0d50771a8f41a25238637f9044becdc3c7be641e"
+        },
+        {
+          "src": "/cities/media/dunhuang/07-poi.webp",
+          "role": "poi",
+          "subject": "玉门关—雅丹",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 53160,
+          "hash": "723d8f0d45b8cd98e0485dbf8d14d19879b6f762e5017340d1c703ed202e159b"
+        },
+        {
+          "src": "/cities/cards/dunhuang.webp",
+          "role": "card",
+          "subject": "敦煌",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 146612,
+          "hash": "4642ec55846d1c3bfb124846a96472856a5ec030ce6f106960dc5f9c757a5ff4"
+        }
+      ],
+      "missing": [
+        "景点图片 2/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "乌鲁木齐",
+      "slug": "urumqi",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/urumqi.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 109202,
+          "hash": "7d3e09b7526ca15cb660af9fae5ed7b6dd107ec92de6dbd7869e603a9d28fcc5"
+        },
+        {
+          "src": "/cities/media/urumqi/07-poi.webp",
+          "role": "poi",
+          "subject": "乌鲁木齐市博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 119024,
+          "hash": "616370e078bbfc9cb9f2f8861f049ac6503b23e7bd2d839f87ed64e3d1532948"
+        },
+        {
+          "src": "/cities/cards/urumqi.webp",
+          "role": "card",
+          "subject": "乌鲁木齐",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 88996,
+          "hash": "75ae888f56ca0f0c18f7c2dc36bc4fa0cc9ddd6fe80c679ff82bb0ed5663d7a8"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "香港",
+      "slug": "hongkong",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/hongkong.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 96174,
+          "hash": "645ada90e5f8e7941d0c4e1c886bf8c41530f5392fb974df89693dac22cdccdf"
+        },
+        {
+          "src": "/cities/cards/hongkong.webp",
+          "role": "card",
+          "subject": "香港",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 77870,
+          "hash": "a98bb4ce81472f7c251c034acb1f5cdac81a97b8e3bc12e5f0f0718d4b952c81"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "澳门",
+      "slug": "macau",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/macau.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 182278,
+          "hash": "e8d799aec3dac5a925e19344088e53cebaf8da09f3edc4a6d9dcd8b0f27d10f1"
+        },
+        {
+          "src": "/cities/media/macau/09-food.webp",
+          "role": "food",
+          "subject": "猪扒包",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 56164,
+          "hash": "79d3df06332d6ee3c219e0c63927fb82b62ec3b45bfb2ad573cfe1dfed06324f"
+        },
+        {
+          "src": "/cities/cards/macau.webp",
+          "role": "card",
+          "subject": "澳门",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 161388,
+          "hash": "16d84a63568790df0e5ade44776e5c381bf92c28573e888407f76378fa24c8d2"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "台北",
+      "slug": "taipei",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/taipei.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 209242,
+          "hash": "1f46974aae444b8fa349a6f2fff140220904aa68f7a85a96f156ddb85a0bdf5b"
+        },
+        {
+          "src": "/cities/cards/taipei.webp",
+          "role": "card",
+          "subject": "台北",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 159256,
+          "hash": "02117e2d93991c007505363592595cfc8641528fff5bdedb26387f45dd215fe4"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "高雄",
+      "slug": "kaohsiung",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/kaohsiung.webp",
+          "role": "cover",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 257180,
+          "hash": "c4cc9322fb167e1e4ec8b42359d12d8501bacc46da315c10e272146df538b1ce"
+        },
+        {
+          "src": "/cities/cards/kaohsiung.webp",
+          "role": "card",
+          "subject": "高雄",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 239724,
+          "hash": "fec6b9f58caba575dc654910e0cf3fd1ad351347ac8e0aa8c1b79d89a0473186"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "太原",
+      "slug": "taiyuan",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/taiyuan.webp",
+          "role": "cover",
+          "subject": "太原",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 141174,
+          "hash": "8685da093aa6a6b336a9969133a157f89c2ebfef02c912135273bdc88a1f08c4"
+        },
+        {
+          "src": "/cities/media/taiyuan/02-poi.webp",
+          "role": "poi",
+          "subject": "晋祠博物馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 192258,
+          "hash": "4e907554eafc2e9868137d97855740df0b819bf59722b97ca797e751e6a120be"
+        },
+        {
+          "src": "/cities/cards/taiyuan.webp",
+          "role": "card",
+          "subject": "太原",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 99924,
+          "hash": "f1d6a4e3ff3638c10e17f95c8070ebcddfbd384d92a0732fcee0d6bf13df37cb"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "承德",
+      "slug": "chengde",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/chengde.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 15222,
+          "hash": "0649fe410b164401e0a80681edc1f8965919128082247f6bc451734c69dbb216"
+        },
+        {
+          "src": "/cities/cards/chengde.webp",
+          "role": "card",
+          "subject": "承德",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 11892,
+          "hash": "65e3b876703232d9cc81410762ba79615efeb62e994b904fef759f41c062a33f"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "长春",
+      "slug": "changchun",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/changchun.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 16054,
+          "hash": "4d2d4d9d736f34d8c7906a0150c6162ea675b4d2fb7168c6d888aed232566873"
+        },
+        {
+          "src": "/cities/cards/changchun.webp",
+          "role": "card",
+          "subject": "长春",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 12768,
+          "hash": "7b5ee9f3b7e8f53b2cee34c75ff12802e1706024c56e236cf2fc1545b4073f34"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "扬州",
+      "slug": "yangzhou",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 1,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/yangzhou.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 14046,
+          "hash": "b29afba7ad29534abcada78c880da8d53fd086b62bd9d31aa72f7c22bb0fd16c"
+        },
+        {
+          "src": "/cities/media/yangzhou/15-restaurant.webp",
+          "role": "restaurant",
+          "subject": "冶春茶社",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 28270,
+          "hash": "abf20862d3edfbb884bb597ff860b2c908d368398c1c5e815f1961f0a5f45eda"
+        },
+        {
+          "src": "/cities/cards/yangzhou.webp",
+          "role": "card",
+          "subject": "扬州",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 11336,
+          "hash": "01203aed350c1940a273ac337af7a4a93c4da6f1801a5e9cc1db6be7993af7d7"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 1/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "无锡",
+      "slug": "wuxi",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 0,
+        "food": 1,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/wuxi.webp",
+          "role": "cover",
+          "subject": "无锡",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 127170,
+          "hash": "b150443207a04028ba74e7da822fe1b6e66fb4a9e4eae9f40b8729122cb370c6"
+        },
+        {
+          "src": "/cities/media/wuxi/10-food.webp",
+          "role": "food",
+          "subject": "太湖三白",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 64854,
+          "hash": "cb298ca349354da3d9b16c324067047e2324a732367e6b9e87b7fa4a2f7a5b69"
+        },
+        {
+          "src": "/cities/cards/wuxi.webp",
+          "role": "card",
+          "subject": "无锡",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 90696,
+          "hash": "64a7f2d289e67ca64421256cf6aad7a70d9817213dbb6fe6971fcd07f031a80e"
+        }
+      ],
+      "missing": [
+        "景点图片 0/6",
+        "美食图片 1/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "黄山",
+      "slug": "huangshan",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/huangshan.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 13346,
+          "hash": "d2f1a75eb3245a55ee29a67260d259691c613164a51007ccb14b19cd1c719789"
+        },
+        {
+          "src": "/cities/cards/huangshan.webp",
+          "role": "card",
+          "subject": "黄山",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 10784,
+          "hash": "09e2f039cffe75fe468cd28d5cd0252bffef5f7e6890f02f3ca4842aa9ba1006"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "开封",
+      "slug": "kaifeng",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/kaifeng.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 14118,
+          "hash": "68fb4dd201bf5de1ed76f808c7a8d731782f0fb86bede922ed61cd4b6e367390"
+        },
+        {
+          "src": "/cities/cards/kaifeng.webp",
+          "role": "card",
+          "subject": "开封",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 11316,
+          "hash": "3694b09bcc92f0f0f61f39856241fb2b80b8f0b51039858a8dbe0212ce65b37d"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "景德镇",
+      "slug": "jingdezhen",
+      "images": 0,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 0,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/jingdezhen.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 16390,
+          "hash": "201d621b67474996e90689c52e3a7d4af0b97caf7df52acdbf23a1b1609ccc5b"
+        },
+        {
+          "src": "/cities/cards/jingdezhen.webp",
+          "role": "card",
+          "subject": "景德镇",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 13166,
+          "hash": "04ecbd1a8f921177204db72806060c31aeaac6c6ba59082e6238e06079df3918"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 0/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "珠海",
+      "slug": "zhuhai",
+      "images": 2,
+      "imageFailures": 0,
+      "placeholderImages": 0,
+      "imageCategories": {
+        "cover": 1,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/zhuhai.webp",
+          "role": "cover",
+          "subject": "珠海",
+          "placeholder": false,
+          "width": 1440,
+          "height": 810,
+          "bytes": 64114,
+          "hash": "af06603d11269e6179e337691c9b55081829871788d6f03944e0995fc231b1ea"
+        },
+        {
+          "src": "/cities/media/zhuhai/03-poi.webp",
+          "role": "poi",
+          "subject": "珠海博物馆—规划展览馆",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 133690,
+          "hash": "eabca5a6d191ffe3fbd8a79dd19d213b9081f9b4cd5a880497eaa11e47f19ea4"
+        },
+        {
+          "src": "/cities/cards/zhuhai.webp",
+          "role": "card",
+          "subject": "珠海",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 48818,
+          "hash": "7fffd32e736e37d841118c5e802d7c1afffe412105eafece974ae8a60f7bed1f"
+        }
+      ],
+      "missing": [
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    },
+    {
+      "city": "南宁",
+      "slug": "nanning",
+      "images": 1,
+      "imageFailures": 0,
+      "placeholderImages": 1,
+      "imageCategories": {
+        "cover": 0,
+        "card": 1,
+        "poi": 1,
+        "food": 0,
+        "restaurant": 0,
+        "lifestyle": 0
+      },
+      "experiences": 6,
+      "foods": 8,
+      "restaurants": 4,
+      "neighborhoods": 3,
+      "rainyPlans": 3,
+      "nightIdeas": 2,
+      "pitfalls": 10,
+      "routes": [
+        2,
+        3,
+        4
+      ],
+      "routePreferences": 13,
+      "routeNodes": 276,
+      "invalidRouteDays": 0,
+      "xiaohongshuReferences": 0,
+      "officialSources": 0,
+      "preferenceCoverage": "12/12",
+      "checkedImages": [
+        {
+          "src": "/cities/heroes/nanning.webp",
+          "role": "cover",
+          "placeholder": true,
+          "width": 1440,
+          "height": 810,
+          "bytes": 14468,
+          "hash": "5bc9b05c70d6070c0d5ca3883715fad3d70a573b21bcab1bba27b191a034eccb"
+        },
+        {
+          "src": "/cities/media/nanning/07-poi.webp",
+          "role": "poi",
+          "subject": "扬美古镇",
+          "placeholder": false,
+          "width": 1200,
+          "height": 900,
+          "bytes": 178940,
+          "hash": "2ce289dae27469162d1acbc5cf09234964a1cc5e4b35e7a1e4a7f493e01c4336"
+        },
+        {
+          "src": "/cities/cards/nanning.webp",
+          "role": "card",
+          "subject": "南宁",
+          "placeholder": false,
+          "width": 1200,
+          "height": 800,
+          "bytes": 11584,
+          "hash": "e8456b992b5aafc34f17fb059400ca5ddddc02d09fc2db9b2b9003d1acb3456d"
+        }
+      ],
+      "missing": [
+        "可追溯城市首图",
+        "景点图片 1/6",
+        "美食图片 0/6",
+        "餐厅或代表菜图片 0/4",
+        "街区与生活图片 0/3",
+        "小红书公开攻略 0/5",
+        "已人工确认的官方资料 0/2",
+        "未获授权或占位图片 1"
+      ],
+      "duplicateImages": [],
+      "complete": false
+    }
+  ]
+}

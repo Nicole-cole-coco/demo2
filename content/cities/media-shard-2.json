@@ -1,0 +1,137 @@
+﻿{
+    "generatedAt":  "2026-08-09",
+    "shard":  2,
+    "shardCount":  5,
+    "cities":  {
+                   "beijing":  {
+                                   "city":  "北京",
+                                   "assets":  [
+                                                  {
+                                                      "status":  "missing",
+                                                      "category":  "cover",
+                                                      "subject":  "北京",
+                                                      "alt":  "北京城市标志性首图",
+                                                      "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                  },
+                                                  {
+                                                      "status":  "missing",
+                                                      "category":  "poi",
+                                                      "subject":  "故宫博物院",
+                                                      "alt":  "北京故宫博物院景观",
+                                                      "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                  },
+                                                  {
+                                                      "status":  "missing",
+                                                      "category":  "poi",
+                                                      "subject":  "景山—北海东岸",
+                                                      "alt":  "北京景山—北海东岸景观",
+                                                      "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                  }
+                                              ]
+                               },
+                   "harbin":  {
+                                  "city":  "哈尔滨",
+                                  "assets":  [
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "cover",
+                                                     "subject":  "哈尔滨",
+                                                     "alt":  "哈尔滨城市标志性首图",
+                                                     "reason":  "No open-license match found"
+                                                 },
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "poi",
+                                                     "subject":  "圣索菲亚教堂",
+                                                     "alt":  "哈尔滨圣索菲亚教堂景观",
+                                                     "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                 },
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "poi",
+                                                     "subject":  "中央大街—防洪纪念塔",
+                                                     "alt":  "哈尔滨中央大街—防洪纪念塔景观",
+                                                     "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                 }
+                                             ]
+                              },
+                   "jinan":  {
+                                 "city":  "济南",
+                                 "assets":  [
+                                                {
+                                                    "status":  "missing",
+                                                    "category":  "cover",
+                                                    "subject":  "济南",
+                                                    "alt":  "济南城市标志性首图",
+                                                    "reason":  "No open-license match found"
+                                                },
+                                                {
+                                                    "status":  "missing",
+                                                    "category":  "poi",
+                                                    "subject":  "趵突泉—五龙潭",
+                                                    "alt":  "济南趵突泉—五龙潭景观",
+                                                    "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                },
+                                                {
+                                                    "status":  "missing",
+                                                    "category":  "poi",
+                                                    "subject":  "泉城广场—黑虎泉",
+                                                    "alt":  "济南泉城广场—黑虎泉景观",
+                                                    "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                }
+                                            ]
+                             },
+                   "fuzhou":  {
+                                  "city":  "福州",
+                                  "assets":  [
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "cover",
+                                                     "subject":  "福州",
+                                                     "alt":  "福州城市标志性首图",
+                                                     "reason":  "No open-license match found"
+                                                 },
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "poi",
+                                                     "subject":  "三坊七巷支巷",
+                                                     "alt":  "福州三坊七巷支巷景观",
+                                                     "reason":  "远程服务器返回错误: (429) Too Many Requests。"
+                                                 },
+                                                 {
+                                                     "status":  "missing",
+                                                     "category":  "poi",
+                                                     "subject":  "乌山—于山",
+                                                     "alt":  "福州乌山—于山景观",
+                                                     "reason":  "远程服务器返回错误: (429) Too Many Requests。"
+                                                 }
+                                             ]
+                              },
+                   "guangzhou":  {
+                                     "city":  "广州",
+                                     "assets":  [
+                                                    {
+                                                        "status":  "missing",
+                                                        "category":  "cover",
+                                                        "subject":  "广州",
+                                                        "alt":  "广州城市标志性首图",
+                                                        "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                    },
+                                                    {
+                                                        "status":  "missing",
+                                                        "category":  "poi",
+                                                        "subject":  "陈家祠",
+                                                        "alt":  "广州陈家祠景观",
+                                                        "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                    },
+                                                    {
+                                                        "status":  "missing",
+                                                        "category":  "poi",
+                                                        "subject":  "永庆坊—恩宁路",
+                                                        "alt":  "广州永庆坊—恩宁路景观",
+                                                        "reason":  "远程服务器返回错误: (429) Too Many Requests。"
+                                                    }
+                                                ]
+                                 }
+               }
+}

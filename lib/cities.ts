@@ -2,6 +2,8 @@ import type { TravelPlan, TravelRequest } from "./deepseek";
 import { assertCityKnowledgeCoverage, getCityKnowledge } from "./city-knowledge";
 import type { TravelSource } from "./travel-data";
 
+export type CitySeason = "全年适合" | "春季" | "夏季" | "秋季" | "冬季";
+
 export type CityProfile = {
   city: string;
   province: string;
@@ -257,6 +259,56 @@ export const CITY_PROFILES: CityProfile[] = [
     hook: "港湾、轻轨与南方日光", idealDays: "3–5 天", dailyBudget: "NT$1,600–3,300 / 人",
     tags: ["港湾", "艺术", "海滨"], foods: ["鸭肉饭", "海产粥", "木瓜牛奶"],
     sights: ["驳二艺术特区", "旗津", "莲池潭"], transit: "捷运与轻轨串联港区，旗津轮渡受天气影响需当天确认",
+  },
+  {
+    city: "太原", province: "山西", region: "华北", image: "/cities/taiyuan.jpg", aliases: ["太原市", "taiyuan", "并州", "龙城"],
+    hook: "晋祠古建、汾河与晋菜", idealDays: "2–4 天", dailyBudget: "¥380–680 / 人", tags: ["古建", "博物馆", "面食"],
+    foods: ["刀削面", "头脑", "过油肉"], sights: ["晋祠博物馆", "山西博物院", "汾河公园"], transit: "市区地铁公交为主，晋祠与天龙山按南线单独安排",
+  },
+  {
+    city: "承德", province: "河北", region: "华北", image: "/cities/chengde.jpg", aliases: ["承德市", "chengde", "热河"],
+    hook: "皇家园林与外八庙", idealDays: "2–4 天", dailyBudget: "¥400–720 / 人", tags: ["园林", "古建", "避暑"],
+    foods: ["羊汤", "荞面饸饹", "御土荷叶鸡"], sights: ["避暑山庄", "普宁寺", "普陀宗乘之庙"], transit: "老城步行与公交结合，外八庙分散需按片区安排",
+  },
+  {
+    city: "长春", province: "吉林", region: "东北", image: "/cities/changchun.jpg", aliases: ["长春市", "changchun", "春城"],
+    hook: "近代建筑、电影与汽车城", idealDays: "2–4 天", dailyBudget: "¥380–680 / 人", tags: ["历史", "电影", "工业"],
+    foods: ["锅包肉", "雪衣豆沙", "熏肉大饼"], sights: ["伪满皇宫博物院", "长影旧址博物馆", "净月潭"], transit: "轨道交通连接主要城区，净月潭和文博区单独分日",
+  },
+  {
+    city: "扬州", province: "江苏", region: "华东", image: "/cities/yangzhou.jpg", aliases: ["扬州市", "yangzhou", "广陵"],
+    hook: "园林、运河与淮扬早茶", idealDays: "2–4 天", dailyBudget: "¥420–760 / 人", tags: ["园林", "运河", "美食"],
+    foods: ["扬州早茶", "狮子头", "大煮干丝"], sights: ["瘦西湖", "个园", "中国大运河博物馆"], transit: "古城公交与步行为主，瘦西湖和运河三湾分片安排",
+  },
+  {
+    city: "无锡", province: "江苏", region: "华东", image: "/cities/wuxi.jpg", aliases: ["无锡市", "wuxi", "梁溪"],
+    hook: "太湖、古运河与工商文化", idealDays: "2–4 天", dailyBudget: "¥420–760 / 人", tags: ["湖泊", "园林", "美食"],
+    foods: ["无锡小笼", "酱排骨", "太湖三白"], sights: ["鼋头渚", "惠山古镇", "清名桥"], transit: "地铁公交覆盖城区，鼋头渚等太湖景区按独立半日安排",
+  },
+  {
+    city: "黄山", province: "安徽", region: "华东", image: "/cities/huangshan.jpg", aliases: ["黄山市", "huangshan", "徽州"],
+    hook: "奇松云海与徽州古村", idealDays: "4–6 天", dailyBudget: "¥520–980 / 人", tags: ["山岳", "古村", "摄影"],
+    foods: ["臭鳜鱼", "毛豆腐", "一品锅"], sights: ["黄山风景区", "宏村", "徽州古城"], transit: "黄山北站、屯溪、汤口与黟县方向不同，按住宿分段安排",
+  },
+  {
+    city: "开封", province: "河南", region: "华中", image: "/cities/kaifeng.jpg", aliases: ["开封市", "kaifeng", "汴京", "东京"],
+    hook: "北宋遗址与市井小吃", idealDays: "2–4 天", dailyBudget: "¥350–620 / 人", tags: ["宋史", "古建", "美食"],
+    foods: ["灌汤包", "桶子鸡", "鲤鱼焙面"], sights: ["开封博物馆", "龙亭", "铁塔"], transit: "老城景点以公交步行为主，高铁北站进城需预留接驳",
+  },
+  {
+    city: "景德镇", province: "江西", region: "华东", image: "/cities/jingdezhen.jpg", aliases: ["景德镇市", "jingdezhen", "瓷都"],
+    hook: "御窑、瓷厂与手作山谷", idealDays: "2–4 天", dailyBudget: "¥380–700 / 人", tags: ["陶瓷", "工业遗产", "手作"],
+    foods: ["冷粉", "饺子粑", "碱水粑"], sights: ["御窑博物院", "中国陶瓷博物馆", "陶溪川"], transit: "市区打车公交为主，瑶里与高岭属于远郊一日线",
+  },
+  {
+    city: "珠海", province: "广东", region: "华南", image: "/cities/zhuhai.jpg", aliases: ["珠海市", "zhuhai"],
+    hook: "海岸、岛屿与慢节奏湾区", idealDays: "2–4 天", dailyBudget: "¥480–900 / 人", tags: ["海滨", "海岛", "亲子"],
+    foods: ["横琴生蚝", "白蕉海鲈", "海鲜粥"], sights: ["情侣路", "唐家湾古镇", "东澳岛"], transit: "公交和打车串联香洲，海岛船班受天气影响需核对",
+  },
+  {
+    city: "南宁", province: "广西", region: "华南", image: "/cities/nanning.jpg", aliases: ["南宁市", "nanning", "绿城", "邕城"],
+    hook: "壮乡文化、绿城与米粉", idealDays: "2–4 天", dailyBudget: "¥350–650 / 人", tags: ["民族文化", "绿城", "美食"],
+    foods: ["老友粉", "卷筒粉", "柠檬鸭"], sights: ["广西民族博物馆", "青秀山", "三街两巷"], transit: "地铁连接主城区，青秀山与扬美古镇按片区分日",
   },
 ];
 

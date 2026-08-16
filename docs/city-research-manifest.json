@@ -1,0 +1,861 @@
+{
+  "generatedAt": "2026-08-09",
+  "policy": "小红书仅记录公开搜索可见的单篇索引或摘要，不绕过登录；动态事实另以官方详情页交叉核验。",
+  "cities": {
+    "hangzhou": {
+      "city": "杭州",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "北京市海淀区 人民政府门户网站",
+          "url": "https://www.bjhd.gov.cn/",
+          "visibleSummary": "2026年7月20日&ensp;&#0183;&ensp;【咨询】 生育津贴是否计入当年度工资总额，参与核算社保基... 是否继续？",
+          "subject": "北山街—白堤—孤山",
+          "query": "北山街—白堤—孤山 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "chengdu": {
+      "city": "成都",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "成都 市人民政府",
+          "url": "http://www.chengdu.gov.cn/",
+          "visibleSummary": "[医保] 成都市医保门诊慢特病，3步轻松办理！",
+          "subject": "成都大熊猫繁育研究基地",
+          "query": "成都大熊猫繁育研究基地 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "beijing": {
+      "city": "北京",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "故宫 博物院",
+          "url": "https://www.dpm.org.cn/Home.html",
+          "visibleSummary": "故宫博物院成立于1925年10月10日，是以明清两代皇宫和宫廷旧藏文物为基础建立起来的大型综合性古代艺术博物馆，是世界文化遗 …",
+          "subject": "故宫博物院",
+          "query": "故宫博物院 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "景山 公园_ 景山 公园_首都之窗_ 北京市 人民政府门户网站",
+          "url": "https://www.beijing.gov.cn/renwen/rwzyd/qxdw/gdshyqyxc/jshgy/202309/t20230920_3263094.html",
+          "visibleSummary": "2023年9月20日&ensp;&#0183;&ensp;景山公园 位于北京内城南北中轴线中心点上，是元、明、清三代的皇宫后苑，曾是北京城中心的最高点。 1928年开 …",
+          "subject": "景山—北海东岸",
+          "query": "景山—北海东岸 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "tianjin": {
+      "city": "天津",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "datong": {
+      "city": "大同",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "云冈 区人民政府",
+          "url": "https://www.yungang.gov.cn/",
+          "visibleSummary": "云冈区人民政府门户网站由云冈区人民政府办公室主办，云冈区人民政府信息化中心负责运行维护,是云冈区和各部门，以及各街道区 …",
+          "subject": "云冈石窟",
+          "query": "云冈石窟 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "大同 市人民政府门户网站",
+          "url": "https://www.dt.gov.cn/",
+          "visibleSummary": "4 天之前&ensp;&#0183;&ensp;大同市人民政府门户网站由大同市人民政府办公室主办，大同市人民政府信息化中心负责运行维护,是大同市和大同市各部 …",
+          "subject": "大同市博物馆",
+          "query": "大同市博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "shenyang": {
+      "city": "沈阳",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "Shenyang - 沈阳 市人民政府",
+          "url": "https://www.shenyang.gov.cn/index.html",
+          "visibleSummary": "2026年7月21日&ensp;&#0183;&ensp;沈阳市人民政府关于印发沈阳市国民经济和社会发展第十五个五年规... 沈阳市人民政府办公厅关于调整市政府部分领 …",
+          "subject": "沈阳故宫",
+          "query": "沈阳故宫 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "dalian": {
+      "city": "大连",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "中山 市人民政府门户网站（ 中山 市人民政府办公室）",
+          "url": "https://www.zs.gov.cn/",
+          "visibleSummary": "2025年11月4日&ensp;&#0183;&ensp;中山市人民政府门户网站--孙中山故乡欢迎您 08-07 广东省人民政府关于中山市土地征收成片开发SX13地块范围的批复 08-07 广东省人民政府关于中山市土地征收成片开发GK16地块范 …",
+          "subject": "中山广场建筑群",
+          "query": "中山广场建筑群 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "harbin": {
+      "city": "哈尔滨",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "中国政府网_ 中央 人民政府门户网站",
+          "url": "https://www.gov.cn/",
+          "visibleSummary": "国务院关于出境入境管理的规定 国务院关于印发《知识产权保护和运用“十五五”规划》的通知 中共中央 国务院转发《中央宣传部、司 …",
+          "subject": "中央大街—防洪纪念塔",
+          "query": "中央大街—防洪纪念塔 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "shanghai": {
+      "city": "上海",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "外滩 风景区",
+          "url": "https://www.shanghai.gov.cn/citywalk/20260625/9dfb6f86b9664e018607b5cc9ec9a53c.html",
+          "visibleSummary": "2026年6月25日&ensp;&#0183;&ensp;近年来，随着浦江游览和十六铺项目的深度开发，外滩金融中心（BFC）的升级建设，外滩风景区持续向南延伸拓 …",
+          "subject": "外滩—北外滩",
+          "query": "外滩—北外滩 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "苏州 市人民政府",
+          "url": "https://www.suzhou.gov.cn/",
+          "visibleSummary": "苏州持续深耕“人工智能+金融”赛道 2026-08-07 苏州举办“AI赋能&#183;技能焕新”首期人工智能通识培训 2026-08-07 苏州市国动办迎高温查隐患 扎实开展防空警报设备专项巡检 2026-08-06 苏州召开退役军人移 …",
+          "subject": "苏州河历史街区",
+          "query": "苏州河历史街区 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "suzhou": {
+      "city": "苏州",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "苏州 市人民政府",
+          "url": "https://www.suzhou.gov.cn/",
+          "visibleSummary": "苏州持续深耕“人工智能+金融”赛道 2026-08-07 苏州举办“AI赋能&#183;技能焕新”首期人工智能通识培训 2026-08-07 苏州市国动办迎高温查 …",
+          "subject": "苏州博物馆本馆",
+          "query": "苏州博物馆本馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "平江 县人民政府",
+          "url": "https://www.pingjiang.gov.cn/",
+          "visibleSummary": "1 天前&ensp;&#0183;&ensp;平江县人民政府关于禁止开垦陡坡地范围的公告 岳阳市人力资源和社会保障局关于调整岳阳市2025年最低工资标准的通知 法 …",
+          "subject": "平江路—大儒巷支路",
+          "query": "平江路—大儒巷支路 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "nanjing": {
+      "city": "南京",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "_ 中山陵 景区_南京市中山陵园管理局 - Nanjing",
+          "url": "https://zschina.nanjing.gov.cn/fjms/jqjd/zsljq/",
+          "visibleSummary": "中山陵位于钟山中茅峰南麓，是伟大的民主革命先行者孙中山先生的陵墓，陵墓于1926年1月动工，1929年春主体建筑竣工，同年6 …",
+          "subject": "中山陵—音乐台",
+          "query": "中山陵—音乐台 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "_ 明孝陵 景区_南京市中山陵园管理局 - Nanjing",
+          "url": "http://zschina.nanjing.gov.cn/fjms/jqjd/mxljq/",
+          "visibleSummary": "还原了明孝陵空间序列的完整性和统一性，最大限度恢复了600多年前孝陵下马坊至大金门故道和明楼的历史风貌。 明孝陵博物馆新 …",
+          "subject": "明孝陵—石象路",
+          "query": "明孝陵—石象路 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "qingdao": {
+      "city": "青岛",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "青岛 栈桥",
+          "url": "http://qdsq.qingdao.gov.cn/szfz_86/zyz_86/qdyxjzz_86/dyzxzyjsjz_86/dejjsjz_86/202204/t20220414_5494114.shtml",
+          "visibleSummary": "5 天之前&ensp;&#0183;&ensp;1891年，清政府颁发上谕，派登州镇总兵章高元驻扎胶澳。 1892年，章高元率兵驻防胶澳。 为供应部队军需，在前海搭建一铁木结构、以木铺面的简易码头一一栈桥。 栈桥长约200米，宽10 …",
+          "subject": "栈桥—大鲍岛老城",
+          "query": "栈桥—大鲍岛老城 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "株洲市 芦淞区 人民政府",
+          "url": "https://www.lusong.gov.cn/",
+          "visibleSummary": "2026年7月28日&ensp;&#0183;&ensp;7月29日上午，中国共产党株洲市芦淞区第七次代表大会圆满完成各项议程，胜利闭幕。 杨喜兰同志发表讲话，王强同志主... [查看详情] 划重点！ 一图读懂芦淞区第七次党代会报告！ …",
+          "subject": "八大关",
+          "query": "八大关 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "jinan": {
+      "city": "济南",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "泉城 办",
+          "url": "https://www.jinan.gov.cn/col/col57776/index.html?areaCode=370100000000",
+          "visibleSummary": "2025年8月19日&ensp;&#0183;&ensp;版权所有：济南市人民政府办公厅主办 网站标识码：3701000001 鲁ICP备：05041920号 鲁公网安备 …",
+          "subject": "泉城广场—黑虎泉",
+          "query": "泉城广场—黑虎泉 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "大明湖 风景名胜区",
+          "url": "https://jnly.jinan.gov.cn/col117783/art/2025/art_117783_4779721.html",
+          "visibleSummary": "2025年4月7日&ensp;&#0183;&ensp;大明湖风景名胜区位于济南市中心，古城北部，面积103.74公顷，由济南旧城区四大泉群泉水汇流而成，是国内罕见的城区内由泉水汇聚而成的湖泊，素有“泉城明珠”的美誉。 为加强对大明 …",
+          "subject": "大明湖—曲水亭街",
+          "query": "大明湖—曲水亭街 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "xiamen": {
+      "city": "厦门",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "厦门市 鼓浪屿",
+          "url": "http://gly.xm.gov.cn/",
+          "visibleSummary": "2026年7月29日&ensp;&#0183;&ensp;早安周一丨这是鼓浪屿独有的慢时光 今明两天，来鼓浪屿菽庄花园解锁人文研学之旅！ 夏天的快乐，是鼓浪屿的云 …",
+          "subject": "鼓浪屿历史建筑线",
+          "query": "鼓浪屿历史建筑线 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "quanzhou": {
+      "city": "泉州",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "开元 - 故宫博物院",
+          "url": "https://www.dpm.org.cn/lemmas/243261.html",
+          "visibleSummary": "唐玄宗李隆基在位时使用的年号，共29年，始于公元713年，止于公元741年。 唐玄宗李隆基在位时使用的年号，共29年，始于公元713年，止于公元741年。",
+          "subject": "开元寺—东西塔",
+          "query": "开元寺—东西塔 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "南京 西街 遗址考古最新发现 六朝时期的“国门”找到了_中共 江苏 ...",
+          "url": "https://www.zgjssw.gov.cn/shixianchuanzhen/nanjing/202402/t20240227_8217736.shtml",
+          "visibleSummary": "2024年2月27日&ensp;&#0183;&ensp;本报讯 （记者 杨民仆） 六朝时期位于长干里的“国门”找到了！记者从2月26日在南京举行的2023年度江苏地域文明探源重要进展汇报会上了解到，南京西街遗址考古有了最新发现。 西街 …",
+          "subject": "西街支巷—钟楼",
+          "query": "西街支巷—钟楼 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "ningbo": {
+      "city": "宁波",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "北京市文物局-龙尾之曜——浅记北京 鼓楼 - Beijing",
+          "url": "https://wwj.beijing.gov.cn/bjww/362760/362770/1757494/index.html",
+          "visibleSummary": "2020年4月10日&ensp;&#0183;&ensp;北京鼓楼、钟楼位于钟楼湾胡同临字9号，为古都北京标志性建筑，元、明、清三代的报时中心。 1996年被公布为第四批全国重点文物保护单位。 鼓楼始建于元至元九年（1272），初名 …",
+          "subject": "鼓楼—永寿街",
+          "query": "鼓楼—永寿街 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "宁波 市人民政府",
+          "url": "https://www.ningbo.gov.cn/",
+          "visibleSummary": "9 小时之前&ensp;&#0183;&ensp;宁波提升防台风应急响应至Ⅰ级 2026-08-08 宁波提升防台风应急响应至II级 2026-08-08 宁波提升防台风应急响应至Ⅲ级 …",
+          "subject": "宁波博物院",
+          "query": "宁波博物院 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "shaoxing": {
+      "city": "绍兴",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "fuzhou": {
+      "city": "福州",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "wuhan": {
+      "city": "武汉",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "江陵县 人民政府网",
+          "url": "http://www.jiangling.gov.cn/",
+          "visibleSummary": "2 天之前&ensp;&#0183;&ensp;荆州市人大常委会来江陵督导县乡两级人大换届选举工作 湖北省华裔新生代一行来江调研 江陵县“五联五促”“四群十链”工作 …",
+          "subject": "湖北省博物馆",
+          "query": "湖北省博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "东湖 风景区概况-武汉 东湖 生态旅游风景区管理委员会",
+          "url": "https://www.whdonghu.gov.cn/zwgk_6255/xxgkml/jgsz/dwjj/",
+          "visibleSummary": "2026年1月15日&ensp;&#0183;&ensp;东湖风景区前身为爱国民族资本家周苍柏1930年创设的“海光农圃”，新中国成立后更名为“东湖公园”，后又改建为“东 …",
+          "subject": "东湖听涛—梨园",
+          "query": "东湖听涛—梨园 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "changsha": {
+      "city": "长沙",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "欢迎光临 湖南 省人民政府门户网站",
+          "url": "https://www.hunan.gov.cn/",
+          "visibleSummary": "湖南省人民政府门户网站是由湖南省人民政府主办、湖南省人民政府发展研究中心承办的省政府门户网站。 网站是湖南政务信息公开 …",
+          "subject": "湖南博物院",
+          "query": "湖南博物院 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "中华英烈网",
+          "url": "https://www.chinamartyrs.gov.cn/",
+          "visibleSummary": "3 天之前&ensp;&#0183;&ensp;更多>> 退役军人事务部代表团赴马来西亚、巴布亚新几内亚踏勘祭扫境外抗战烈士纪念设施 2025-08-27 驻哥打基纳巴卢总领事朱兴龙出席“卓还来烈士公祭典礼” 2025-07-30 中国驻黎巴嫩使馆 …",
+          "subject": "烈士公园",
+          "query": "烈士公园 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "luoyang": {
+      "city": "洛阳",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "龙门 县人民政府门户网站",
+          "url": "https://www.longmen.gov.cn/",
+          "visibleSummary": "1 天前&ensp;&#0183;&ensp;龙门县人民政府办公室关于印发龙门县2026年政府投资项目计划的通知 02-06 龙门县公安局交管大队司法鉴定服务采购项目（二次）招标公告 08-06 省道S254线龙门永汉李屋至南昆佛坳段安全提 …",
+          "subject": "龙门石窟",
+          "query": "龙门石窟 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "香山 景区（国家AAAA级旅游景区） - 张家港市人民政府",
+          "url": "https://www.zjg.gov.cn/zjg/aboutajjq/202308/d343cad2df234f3fa0229c4253bca0fe.shtml",
+          "visibleSummary": "2023年8月16日&ensp;&#0183;&ensp;香山景区占地面积 6.69平方公里，山体面积约2平方公里，海拔136.6米,为全市之冠。 自古迄今，无数名人在香山留下许多足迹，不仅有西施采香留下的采香径，苏东坡亲笔题额的梅花 …",
+          "subject": "香山寺—白园",
+          "query": "香山寺—白园 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "zhangjiajie": {
+      "city": "张家界",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "guangzhou": {
+      "city": "广州",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "shenzhen": {
+      "city": "深圳",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "sanya": {
+      "city": "三亚",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "guilin": {
+      "city": "桂林",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "走进 靖江",
+          "url": "https://www.jingjiang.gov.cn/zjjj/index.html",
+          "visibleSummary": "2026年4月20日&ensp;&#0183;&ensp;靖江市位于长江下游，襟江近海，东、西、南三面临江，总面积655.58平方公里，拥有52.3公里的长江岸线。 全市辖1个国家级经济技术开发区（靖江经济技术开发区）、1个省级开发 …",
+          "subject": "靖江王城—独秀峰",
+          "query": "靖江王城—独秀峰 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "chongqing": {
+      "city": "重庆",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "山城 重庆：山水之城 美丽之地_重庆市人民政府网",
+          "url": "https://www.cq.gov.cn/ywdt/tpxw/202404/t20240425_13158604.html",
+          "visibleSummary": "2024年4月25日&ensp;&#0183;&ensp;4月23日拍摄的重庆风光。 新华社记者 唐奕 摄 新华社消息，重庆，中国中西部地区唯一的直辖市，是一座独具特色的“山城”“江城”。 这里是巴渝文化的发祥地，有文字记载的历史达3000 …",
+          "subject": "山城巷—十八梯支路",
+          "query": "山城巷—十八梯支路 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "dali": {
+      "city": "大理",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "大理 白族自治州人民政府",
+          "url": "https://www.dali.gov.cn/",
+          "visibleSummary": "主办：大理白族自治州人民政府办公室 承办：大理白族自治州电子政务管理中心 滇ICP备05001542号 政府网站标识码：5329000057 …",
+          "subject": "大理古城支巷",
+          "query": "大理古城支巷 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "苍山 - 大理白族自治州人民政府",
+          "url": "https://www.dali.gov.cn/dlzrmzf/c101724/pc/content/1968887167324360704/content_1968887167324360704.html",
+          "visibleSummary": "2021年3月17日&ensp;&#0183;&ensp;苍山是国际著名的第四纪末次冰期“大理冰期”的命名地，山中盛产五彩斑斓、天然的大理石。 苍山无论在地质学、生态学和生物多样性等学科领域中，都有很高的科学价值，被公认为世 …",
+          "subject": "苍山感通索道线",
+          "query": "苍山感通索道线 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "lhasa": {
+      "city": "拉萨",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "株洲市 芦淞区 人民政府",
+          "url": "https://www.lusong.gov.cn/",
+          "visibleSummary": "2026年7月28日&ensp;&#0183;&ensp;7月29日上午，中国共产党株洲市芦淞区第七次代表大会圆满完成各项议程，胜利闭幕。 杨喜兰同志发表讲话，王强 …",
+          "subject": "八廓街—大昭寺外围",
+          "query": "八廓街—大昭寺外围 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "西藏 概况 - MOFCOM",
+          "url": "https://fdi.mofcom.gov.cn/resource/pdf/2020/10/21/8f0ad6993ee14637bf8e35fa9ac5c1f1.pdf",
+          "visibleSummary": "2020年10月21日&ensp;&#0183;&ensp;西藏自治区人民政府网 西藏自治匙简称藏。 位亍中国的西南边陲,青藏高原的西南部。 面积122.84万平方公 里,约 …",
+          "subject": "西藏博物馆",
+          "query": "西藏博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "kunming": {
+      "city": "昆明",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "陆军 - 中华人民共和国国防部",
+          "url": "http://www.mod.gov.cn/gfbw/wzll/lj/index.html",
+          "visibleSummary": "3 天之前&ensp;&#0183;&ensp;树立和践行正确政绩观丨陆军某保障大队引导机关干部事不避难担当作为 2026-05-22 06:13",
+          "subject": "陆军讲武堂—文林街",
+          "query": "陆军讲武堂—文林街 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "云南 省人民政府门户网站",
+          "url": "https://www.yn.gov.cn/",
+          "visibleSummary": "1 天前&ensp;&#0183;&ensp;云南省第二十三期“厅局长坐诊接诉”活动公告 07-01 云南省人民政府办公厅面向选定高校招录2026年定向选调生公示 06-18 云 …",
+          "subject": "云南省博物馆",
+          "query": "云南省博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "lijiang": {
+      "city": "丽江",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "Lijiang - 丽江 市人民政府",
+          "url": "https://www.lijiang.gov.cn/",
+          "visibleSummary": "丽江市2026年7月份粮油价格变化情况通报 08-04 丽江市民政2026年暑期公益托管班圆满结束 08-03 植树添新绿 警营护青山｜丽江市 …",
+          "subject": "丽江古城清晨线",
+          "query": "丽江古城清晨线 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "白沙 黎族自治县人民政府 - hainan.gov.cn",
+          "url": "https://baisha.hainan.gov.cn/baisha/index.html",
+          "visibleSummary": "2026年6月26日&ensp;&#0183;&ensp;海南日报 | 白沙昌江联动推出暑期研学攻略 海南日报 | 白沙培优做强6条重点产业链 海南日报 | 白沙：补齐橡胶林间基建短板，助力胶农增收 从深山到诊室 白沙黎医黎药焕发新生机 白沙 …",
+          "subject": "白沙古镇—壁画",
+          "query": "白沙古镇—壁画 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "guiyang": {
+      "city": "贵阳",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "文昌 市人民政府网",
+          "url": "https://wenchang.hainan.gov.cn/",
+          "visibleSummary": "2 天之前&ensp;&#0183;&ensp;&#183; 关于文昌机动车尾气遥感监测系统运行维护项目询价的公告 &#183; 关于公开遴选文昌市2026年度5个高标准农田建设项目监理单位... &#183; 关于开展海南文昌海水集中取水项目社会稳定风险评估公众 …",
+          "subject": "文昌阁—电台街",
+          "query": "文昌阁—电台街 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "贵州 省人民政府",
+          "url": "https://www.guizhou.gov.cn/",
+          "visibleSummary": "2026年7月31日&ensp;&#0183;&ensp;贵州省人民政府门户网站 (http://www.guizhou.gov.cn)由贵州省人民政府办公厅主办，以宣传贵州、构架桥梁、信息 …",
+          "subject": "贵州省博物馆",
+          "query": "贵州省博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "xian": {
+      "city": "西安",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "陕西 省人民政府",
+          "url": "https://www.shaanxi.gov.cn/",
+          "visibleSummary": "陕西到2027年将形成3个千亿级消费领域 08-09 陕西深化“政银”联动促项目建设提速 08-09 省委管理党费划拨2050万元支持防汛抢险... 08-09 陕西紧急下达1.2亿元省级水利救灾资金 08-09 陕西铁路部门多 …",
+          "subject": "陕西历史博物馆",
+          "query": "陕西历史博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "lanzhou": {
+      "city": "兰州",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "中山 市人民政府门户网站（ 中山 市人民政府办公室）",
+          "url": "https://www.zs.gov.cn/",
+          "visibleSummary": "2025年11月4日&ensp;&#0183;&ensp;中山市人民政府门户网站--孙中山故乡欢迎您 08-07 广东省人民政府关于中山市土地征收成片开发SX13地块范围的批复 08-07 广东省人民政府关于中山市土地征收成片开发GK16地块范 …",
+          "subject": "中山桥—黄河母亲",
+          "query": "中山桥—黄河母亲 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "万部华严经塔 ( 白塔 ）简介",
+          "url": "https://www.saihan.gov.cn/zjsh/ljsh/lsyg/201308/t20130808_508440.html",
+          "visibleSummary": "2013年8月8日&ensp;&#0183;&ensp;白塔又名万部华严经塔。 位于呼和浩特市赛罕区东郊白塔村西南方、丰州故城西北角，距市区17公里。 约建于辽圣宗 …",
+          "subject": "白塔山低线",
+          "query": "白塔山低线 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "dunhuang": {
+      "city": "敦煌",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "urumqi": {
+      "city": "乌鲁木齐",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "玉出 红山 —— 红山 文化考古成就展 - chnmuseum.cn",
+          "url": "https://www.chnmuseum.cn/portals/0/web/zt/202010ychsh/",
+          "visibleSummary": "2020年11月11日&ensp;&#0183;&ensp;展品中既有被誉为“中华第一龙”的碧玉C形龙和玉玦形龙，也有红山文化独具特色的玉斜口筒形器和玉勾云形器，还 …",
+          "subject": "红山公园",
+          "query": "红山公园 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "hongkong": {
+      "city": "香港",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "macau": {
+      "city": "澳门",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "中华人民共和国全国人民代表大会 议事 规则_中国人大网",
+          "url": "http://www.npc.gov.cn/npc//c2/kgfb/202103/t20210312_310724.html",
+          "visibleSummary": "2021年3月12日&ensp;&#0183;&ensp;第二十一条 全国人民代表大会举行会议，应当合理安排会议日程，提高议事质量和效率。 各代表团应当按照会议日 …",
+          "subject": "议事亭前地—岗顶",
+          "query": "议事亭前地—岗顶 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "沈阳市大 东 区人民政府",
+          "url": "https://www.sydd.gov.cn/",
+          "visibleSummary": "2026年7月31日&ensp;&#0183;&ensp;主办单位：大东区人民政府 承办单位：大东区大数据管理中心 技术支持单位：沈阳市大数据管理中心（沈阳市信息 …",
+          "subject": "东望洋炮台",
+          "query": "东望洋炮台 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "taipei": {
+      "city": "台北",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "kaohsiung": {
+      "city": "高雄",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "第二章 港口规模 - Qingdao",
+          "url": "http://qdsq.qingdao.gov.cn/szfz_86/slqdsz_86/hgz_86_77/dyphgfb_86/202204/t20220414_5491930.shtml",
+          "visibleSummary": "2026年7月31日&ensp;&#0183;&ensp;积米崖港可靠泊渔船1000余艘，常年卸鱼量为0.6～1万余吨，为山东省和国家重点群众渔业港口基地。 东营港 分为渔码头和盐码头两部分，渔业码头位于胶州市营海东南，胶州湾北岸大 …",
+          "subject": "大港桥—栈贰库",
+          "query": "大港桥—栈贰库 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "中华人民共和国国旗_中国政府网",
+          "url": "https://www.gov.cn/guoqing/guoqi/index.htm",
+          "visibleSummary": "2026年1月8日&ensp;&#0183;&ensp;在直立的旗杆上升降国旗，应当徐徐升降。 升起时，必须将国旗升至杆顶；降下时，不得使国旗落地。 下半旗时，应当先将国旗升至杆顶，然后降至旗顶与杆顶之间的距离为旗杆全长的 …",
+          "subject": "旗津老街—灯塔外围",
+          "query": "旗津老街—灯塔外围 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "taiyuan": {
+      "city": "太原",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "太原市人民政府门户网站- 晋祠 公园",
+          "url": "https://taiyuan.gov.cn/jcgy.html",
+          "visibleSummary": "2026年4月26日&ensp;&#0183;&ensp;晋祠的历史可以追溯到西周时期，历经多个朝代的不断重建与扩建，形成了集中国古代祠祀建筑、园林、雕塑、壁画 …",
+          "subject": "晋祠博物馆",
+          "query": "晋祠博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "山西 省人民政府",
+          "url": "https://www.shanxi.gov.cn/",
+          "visibleSummary": "2026年7月23日&ensp;&#0183;&ensp;山西省人民政府网现开通“省政府、省长、政务、服务、互动、数据、省情”等栏目，第一时间权威发布山西省相关重要会议、重要活动、重大决策信息，同时面向社会提供与政府业务相关 …",
+          "subject": "山西博物院",
+          "query": "山西博物院 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "chengde": {
+      "city": "承德",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "普宁 市政府门户网站",
+          "url": "http://www.puning.gov.cn/",
+          "visibleSummary": "2024年9月30日&ensp;&#0183;&ensp;主办：普宁市人民政府办公室 承办：普宁市政务服务和数据管理局 电话：0663-2489999（仅受理网站建设维护相关事宜） 邮箱：pnxxcy@163.com 地址：普宁市政府办公大院南 …",
+          "subject": "普宁寺",
+          "query": "普宁寺 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "changchun": {
+      "city": "长春",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "yangzhou": {
+      "city": "扬州",
+      "xiaohongshu": [],
+      "official": []
+    },
+    "wuxi": {
+      "city": "无锡",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "无锡市 惠山 区人民政府",
+          "url": "https://www.huishan.gov.cn/",
+          "visibleSummary": "2023年7月17日&ensp;&#0183;&ensp;惠山区发展和改革委员会（粮食和物资储备局） 惠山区教育局 惠山区科学技术局 惠山区工业和信息化局 惠山区民政 …",
+          "subject": "惠山古镇—寄畅园",
+          "query": "惠山古镇—寄畅园 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "huangshan": {
+      "city": "黄山",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "走进 黄山 _ 黄山 风景区管理委员会 - huangshan.gov.cn",
+          "url": "https://hsgwh.huangshan.gov.cn/zjhs/index.html",
+          "visibleSummary": "2026年7月20日&ensp;&#0183;&ensp;黄山，雄踞在安徽省南部黄山市境内，山境南北长约40公里，东西宽约30公里，总面积约1200平方公里，连绵横亘于黄山区、徽州区、休宁、黟县之间。 黄山风景区面积160.6平方公里， …",
+          "subject": "黄山风景区前山或后山主线",
+          "query": "黄山风景区前山或后山主线 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "一网游_黄山市人民政府 - huangshan.gov.cn",
+          "url": "https://www.huangshan.gov.cn/site/tpl/4636?type=scenic&id=19779",
+          "visibleSummary": "2023年10月31日&ensp;&#0183;&ensp;宏村也是国家重点文保单位，中国历史文化名村、国家5A级景区、中国十佳最具魅力名镇、中国最美的村镇，全国旅游标准化示范单位、全国青年安全生产示范岗、全国文明单位、全国 …",
+          "subject": "宏村",
+          "query": "宏村 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "kaifeng": {
+      "city": "开封",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "Kaifeng - 开封 市人民政府网站",
+          "url": "https://www.kaifeng.gov.cn/",
+          "visibleSummary": "主办单位：开封市人民政府办公室协办单位：开封日报社 豫ICP备14019204号 豫公网安备41021102000181号 政府网站标识码：4102000008 地址：开封市晋安路158号邮编：475004",
+          "subject": "开封博物馆",
+          "query": "开封博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "开封 龙亭 区人民政府",
+          "url": "http://www.longting.gov.cn/",
+          "visibleSummary": "开封市龙亭区人民政府关于印发《开封市龙亭区创建河南省营商环境 创新示范区实施方案》的通知 06-15 开封市龙亭区2.5产业园产业用房分割转让实施细则（试行） 12-18 开封市龙亭区人民政府 关于公布 …",
+          "subject": "龙亭—天波杨府外围",
+          "query": "龙亭—天波杨府外围 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "jingdezhen": {
+      "city": "景德镇",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "抚州 市人民政府",
+          "url": "https://www.jxfz.gov.cn/",
+          "visibleSummary": "1 天前&ensp;&#0183;&ensp;政府工作报告（2026年） 02-06 抚州市人民政府办公室关于印发《发挥文化力量助... 11-19 抚州市人民政府办公室关于印发 …",
+          "subject": "抚州弄—老城窑址支路",
+          "query": "抚州弄—老城窑址支路 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "中国 政府网_中央人民政府门户网站",
+          "url": "https://www.gov.cn/",
+          "visibleSummary": "主办单位：国务院办公厅 运行维护单位：中国政府网运行中心 版权所有：中国政府网 中文域名： 中国政府网.政务 网站标识码bm01000001 京ICP备05070218号 京公网安备11010202000001号",
+          "subject": "中国陶瓷博物馆",
+          "query": "中国陶瓷博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "zhuhai": {
+      "city": "珠海",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "珠海 市人民政府门户网站",
+          "url": "https://www.zhuhai.gov.cn/?select_edition=hu",
+          "visibleSummary": "9 小时之前&ensp;&#0183;&ensp;珠海开展个体工商户金融服务 扩面提质三年行动 构建“四专”服... 2026-08-07 珠海落地全省首个同城家电绿色循环经济项目 年产约7.8万吨再... 2026-08-06 2026年省高企服务团珠海企业服务 …",
+          "subject": "珠海博物馆—规划展览馆",
+          "query": "珠海博物馆—规划展览馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    },
+    "nanning": {
+      "city": "南宁",
+      "xiaohongshu": [],
+      "official": [
+        {
+          "title": "广西 壮族自治区人民政府门户网站 - www.gxzf.gov.cn",
+          "url": "http://www.gxzf.gov.cn/",
+          "visibleSummary": "2026年7月30日&ensp;&#0183;&ensp;广西发布暴雨四级预警 同日发布红色山洪灾害气象预警 广西发布住房城乡建设领域“人工智能+”三年行动方案——加 …",
+          "subject": "广西民族博物馆",
+          "query": "广西民族博物馆 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        },
+        {
+          "title": "广西南宁市 青秀 区人民政府门户网站 - www.qingxiu.gov.cn",
+          "url": "http://www.qingxiu.gov.cn/",
+          "visibleSummary": "2026年8月2日&ensp;&#0183;&ensp;青秀区，隶属于广西壮族自治区南宁市，位于南宁市东部，总面积865平方公里。 目前，青秀区共辖长塘镇、伶俐镇 …",
+          "subject": "青秀山",
+          "query": "青秀山 官方 开放时间 预约 参观",
+          "checkedAt": "2026-08-09",
+          "sourceType": "official-detail-candidate"
+        }
+      ]
+    }
+  }
+}

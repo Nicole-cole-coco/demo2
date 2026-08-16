@@ -1,0 +1,33 @@
+﻿{
+    "generatedAt":  "2026-08-09",
+    "shard":  0,
+    "shardCount":  5,
+    "cities":  {
+                   "hangzhou":  {
+                                    "city":  "杭州",
+                                    "assets":  [
+                                                   {
+                                                       "status":  "missing",
+                                                       "category":  "cover",
+                                                       "subject":  "杭州",
+                                                       "alt":  "杭州城市标志性首图",
+                                                       "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                   },
+                                                   {
+                                                       "status":  "missing",
+                                                       "category":  "poi",
+                                                       "subject":  "北山街—白堤—孤山",
+                                                       "alt":  "杭州北山街—白堤—孤山景观",
+                                                       "reason":  "远程服务器返回错误: (429) Too many requests. Please contact bot-traffic@wikimedia.org (fceb99d)。"
+                                                   },
+                                                   {
+                                                       "status":  "missing",
+                                                       "category":  "poi",
+                                                       "subject":  "湖滨—南山路",
+                                                       "alt":  "杭州湖滨—南山路景观",
+                                                       "reason":  "远程服务器返回错误: (429) Your request does not comply with our robot policy, https://w.wiki/4wJS. Please contact noc@wikimedia.org for further information (0fa5166)。"
+                                                   }
+                                               ]
+                                }
+               }
+}

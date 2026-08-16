@@ -36,13 +36,18 @@ test("renders an anonymous editorial homepage with only completed city guides", 
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
   assert.match(html, /<title>旅策｜把零散经验整理成可直接执行的城市攻略<\/title>/);
-  for (const [city, slug] of [["杭州", "hangzhou"], ["成都", "chengdu"], ["北京", "beijing"]]) {
+  for (const [city, slug] of [["杭州", "hangzhou"], ["成都", "chengdu"], ["北京", "beijing"], ["上海", "shanghai"], ["黄山", "huangshan"], ["澳门", "macau"]]) {
     assert.match(html, new RegExp(`href="/city/${slug}"[\\s\\S]{0,800}${city}`));
   }
-  assert.match(html, /EDITORIAL CITY GUIDES[\s\S]{0,80}3/);
-  assert.match(html, /攻略先解决真实问题/);
-  assert.match(html, /把餐厅放进路线/);
-  assert.doesNotMatch(html, /哈尔滨|苏州|武汉|深圳|丽江|敦煌|香港/);
+  assert.match(html, /中国城市旅行指南[\s\S]{0,80}50/);
+  assert.match(html, /搜索城市、内容或旅行问题/);
+  assert.match(html, /综合推荐/);
+  assert.match(html, /加入对比/);
+  assert.match(html, /第一次必去/);
+  assert.match(html, /地道美食/);
+  assert.match(html, /港澳台/);
+  assert.doesNotMatch(html, /THE EDITORIAL METHOD|攻略整理方法/);
+  assert.doesNotMatch(html, /不是更多信息|是一条明确主路线|上午去哪里|午晚餐吃什么|太累删什么|hero-insight/);
   assert.doesNotMatch(html, /京都|KYOTO|signin-with-chatgpt|路线 API 待接入|地图调用次数|DeepSeek 待接入|搜索待接入|等待搜索 API|0 次搜索|缓存 24 小时|成本控制|DEMO MODE|AI预算估算|待配置/);
   assert.doesNotMatch(html, /穷游|经济|适中|舒适|奢华|控制花费|体验均衡|时间优先|预算百分比|住宿占比|餐饮占比/);
 });
@@ -68,23 +73,35 @@ test("keeps consecutive static homepage renders deterministic", async () => {
   assert.doesNotMatch(pageSource, /api-stack|live-data-strip|\/api\/ai\/status|\/api\/data\/status/);
 });
 
-test("serves independent shareable Hangzhou, Chengdu and Beijing pages", async () => {
+test("serves 50 independent shareable city pages without Hangzhou fallback", async () => {
   const worker = await getWorker();
+  const citiesSource = await readFile(new URL("../lib/cities.ts", import.meta.url), "utf8");
+  const entries = [...citiesSource.matchAll(/city:\s*"([^"]+)"[\s\S]{0,180}?image:\s*"\/cities\/([^".]+)\.[^"]+"/g)].slice(0, 50).map((match) => [match[2], match[1]]);
+  assert.equal(entries.length, 50);
   const pages = {};
-  for (const [slug, city] of [["hangzhou", "杭州"], ["chengdu", "成都"], ["beijing", "北京"]]) {
+  for (const [slug, city] of entries) {
     const response = await worker.fetch(new Request(`http://localhost/city/${slug}`, { headers: { accept: "text/html" } }), env, ctx);
     assert.equal(response.status, 200);
     const html = await response.text();
     pages[slug] = html;
     assert.match(html, new RegExp(`<title>${city}实用旅行攻略｜旅策<\\/title>`));
-    assert.match(html, new RegExp(`${city}[345]日`));
+    assert.match(html, new RegExp(city));
     assert.match(html, /旅行者真正会遇到的问题/);
     assert.match(html, /你想要哪一种攻略/);
+    assert.match(html, /出行月份/);
+    assert.match(html, /雨天版/);
+    assert.match(html, /保存完整行程/);
+    assert.match(html, /导出长图/);
     assert.match(html, /太累时先删/);
+    assert.match(html, /排队严重/);
+    assert.match(html, /不想早起/);
+    assert.match(html, /停留/);
+    assert.match(html, /怎么衔接/);
     assert.match(html, /餐厅必须放进具体一天/);
     assert.match(html, /下雨、节假日和特殊情况/);
     assert.match(html, /<details class="source-details editorial-sources">/);
-    assert.doesNotMatch(html, /穷游|经济|适中|舒适|奢华|控制花费|体验均衡|时间优先|TRIP BUDGET|预计¥\s?\d/);
+    assert.doesNotMatch(html, /穷游|经济型预算|舒适型预算|奢华|控制花费|体验均衡|时间优先|TRIP BUDGET|预计¥\s?\d/);
+    if (city !== "杭州") assert.doesNotMatch(html, /灵隐飞来峰|北山街—白堤|片儿川/);
   }
   assert.match(pages.hangzhou, /灵隐与梅灵/);
   assert.doesNotMatch(pages.hangzhou, /成都大熊猫|故宫博物院/);
@@ -97,6 +114,20 @@ test("serves independent shareable Hangzhou, Chengdu and Beijing pages", async (
   const unknownHtml = await unknown.text();
   assert.match(unknownHtml, /完整攻略还没整理好/);
   assert.doesNotMatch(unknownHtml, /湖山、茶香与城市日常|北山街—白堤/);
+});
+
+test("uses fixed discovery enums and ships complete local discovery controls", async () => {
+  const [pageSource, discoverySource, knowledgeSource] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../content/cities/discovery.ts", import.meta.url), "utf8"),
+    readFile(new URL("../lib/city-knowledge.ts", import.meta.url), "utf8"),
+  ]);
+  for (const value of ["华北", "东北", "华东", "华中", "华南", "西南", "西北", "港澳台"]) assert.match(discoverySource, new RegExp(`"${value}"`));
+  for (const value of ["全年适合", "春季", "夏季", "秋季", "冬季"]) assert.match(discoverySource, new RegExp(`"${value}"`));
+  for (const value of ["综合推荐", "当前季节推荐", "第一次旅行推荐", "美食丰富度", "少排队优先", "松弛度优先"]) assert.match(discoverySource, new RegExp(`"${value}"`));
+  assert.match(knowledgeSource, /桂林: \{ seasons: \["春季", "夏季", "秋季"\]/);
+  assert.doesNotMatch(pageSource, /item\.includes\(season|replace\("季"/);
+  for (const feature of ["searchCities", "toggleFavorite", "toggleCompare", "nearestCities", "pushState", "popstate"]) assert.match(pageSource, new RegExp(feature));
 });
 
 test("shows ticket and dynamic facts only with a reliable source and checked date", async () => {
@@ -160,10 +191,10 @@ test("ships a complete four-day Hangzhou editorial itinerary", async () => {
   assert.ok(plan.liveData.sources.every((source) => !/^\/(?:index(?:\.html?)?)?\/?$/i.test(new URL(source.url).pathname)));
 });
 
-test("keeps all 40 city covers unique and records image licenses", async () => {
+test("keeps all 50 city covers unique and records image provenance", async () => {
   const citiesSource = await readFile(new URL("../lib/cities.ts", import.meta.url), "utf8");
   const images = [...citiesSource.matchAll(/image:\s*"(\/cities\/[^"]+)"/g)].map((match) => match[1]);
-  assert.equal(images.length, 40);
+  assert.equal(images.length, 50);
   assert.equal(new Set(images).size, images.length);
   const manifest = JSON.parse((await readFile(new URL("../public/cities/attribution.json", import.meta.url), "utf8")).replace(/^\uFEFF/, ""));
   assert.equal(manifest.count, 26);
@@ -171,13 +202,60 @@ test("keeps all 40 city covers unique and records image licenses", async () => {
   assert.ok(manifest.items.every((item) => item.city && item.author && item.source_page && item.license && item.local_path));
   const guiyang = manifest.items.find((item) => item.city === "贵阳");
   assert.match(`${guiyang.caption} ${guiyang.file_name}`, /Jiaxiu|甲秀/i);
+  const placeholders = JSON.parse((await readFile(new URL("../docs/city-placeholder-manifest.json", import.meta.url), "utf8")).replace(/^\uFEFF/, ""));
+  assert.equal(placeholders.length, 110);
+  assert.ok(placeholders.every((item) => item.city && item.local_path && item.source_page === "internal://city-placeholder"));
+});
+
+test("keeps generated city media licensed, local, unique and honestly audited", async () => {
+  const manifest = JSON.parse((await readFile(new URL("../content/cities/media-manifest.json", import.meta.url), "utf8")).replace(/^\uFEFF/, ""));
+  const research = JSON.parse((await readFile(new URL("../content/cities/research-manifest.json", import.meta.url), "utf8")).replace(/^\uFEFF/, ""));
+  const audit = JSON.parse((await readFile(new URL("../docs/content-completeness-report.json", import.meta.url), "utf8")).replace(/^\uFEFF/, ""));
+  assert.equal(Object.keys(manifest.cities).length, 50);
+  assert.equal(Object.keys(research.cities).length, 50);
+  assert.equal(audit.summary.cityCount, 50);
+  const licensed = Object.values(manifest.cities).flatMap((city) => city.assets).filter((asset) => asset.status === "licensed");
+  assert.equal(new Set(licensed.map((asset) => asset.originalUrl)).size, licensed.length);
+  for (const asset of licensed) {
+    assert.ok(asset.localPath && asset.alt && asset.author && asset.sourcePage && asset.license);
+    await assert.doesNotReject(() => readFile(path.resolve("public", asset.localPath.replace(/^\//, ""))));
+  }
+  for (const city of audit.cities) {
+    if (city.images < 20 || city.xiaohongshuReferences < 5 || city.officialSources < 2) assert.equal(city.complete, false);
+    assert.equal(city.routePreferences, 13);
+    assert.equal(city.invalidRouteDays, 0);
+    assert.ok(city.routeNodes >= 150);
+  }
+  const cardFiles = await readdir(path.resolve("public/cities/cards"));
+  assert.equal(cardFiles.filter((file) => file.endsWith(".webp")).length, 50);
+  assert.equal(audit.summary.crossCityDuplicateGroups, 0);
+  assert.equal(audit.summary.structuredRouteEditions, 800);
+});
+
+test("route summaries are structured and contain real stop sequences", async () => {
+  const [factorySource, discoverySource, pageSource, citySource] = await Promise.all([
+    readFile(new URL("../content/cities/factory.ts", import.meta.url), "utf8"),
+    readFile(new URL("../content/cities/discovery.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/city/[slug]/CityGuideView.tsx", import.meta.url), "utf8"),
+  ]);
+  assert.match(factorySource, /preferenceTags/);
+  assert.match(factorySource, /transportSummary/);
+  assert.match(factorySource, /queueAlternative/);
+  assert.match(factorySource, /lateStartAdjustment/);
+  assert.match(factorySource, /雨天替代4日路线/);
+  assert.match(discoverySource, /sequence: day\.nodes/);
+  assert.match(pageSource, /card-route-summary/);
+  assert.match(citySource, /day-operating-brief/);
+  assert.match(citySource, /node-facts/);
+  assert.doesNotMatch(`${factorySource}\n${discoverySource}`, /感受城市魅力|经典景点一网打尽|体验当地美食文化|轻松游览城市/);
 });
 
 test("provides structured pre-curated knowledge for every city", async () => {
   const citiesSource = await readFile(new URL("../lib/cities.ts", import.meta.url), "utf8");
   const knowledgeSource = await readFile(new URL("../lib/city-knowledge.ts", import.meta.url), "utf8");
-  const cityNames = [...citiesSource.matchAll(/city:\s*"([^"]+)"/g)].slice(0, 40).map((match) => match[1]);
-  assert.equal(cityNames.length, 40);
+  const cityNames = [...citiesSource.matchAll(/city:\s*"([^"]+)"/g)].slice(0, 50).map((match) => match[1]);
+  assert.equal(cityNames.length, 50);
   for (const city of cityNames) assert.match(knowledgeSource, new RegExp(`\\n\\s*${city}: \\{`));
   assert.match(knowledgeSource, /suggestedDuration/);
   assert.match(knowledgeSource, /ticketReference/);
