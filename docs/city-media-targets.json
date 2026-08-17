@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-09",
+  "generatedAt": "2026-08-17",
   "cities": [
     {
       "city": "杭州",
@@ -850,20 +850,20 @@
         },
         {
           "category": "food",
-          "subject": "浑源凉粉",
-          "wikiTitle": "浑源凉粉",
-          "alt": "大同特色食物浑源凉粉",
-          "queries": [
-            "浑源凉粉 大同 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "羊杂",
           "wikiTitle": "羊杂",
           "alt": "大同特色食物羊杂",
           "queries": [
             "羊杂 大同 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "大同铜火锅",
+          "wikiTitle": "大同铜火锅",
+          "alt": "大同特色食物大同铜火锅",
+          "queries": [
+            "大同铜火锅 大同 food"
           ]
         },
         {
@@ -1213,29 +1213,29 @@
         },
         {
           "category": "food",
-          "subject": "海菜包子",
-          "wikiTitle": "海菜包子",
-          "alt": "大连特色食物海菜包子",
-          "queries": [
-            "海菜包子 大连 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "焖子",
-          "wikiTitle": "焖子",
-          "alt": "大连特色食物焖子",
-          "queries": [
-            "焖子 大连 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "咸鱼饼子",
           "wikiTitle": "咸鱼饼子",
           "alt": "大连特色食物咸鱼饼子",
           "queries": [
             "咸鱼饼子 大连 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "海鲜饺子",
+          "wikiTitle": "海鲜饺子",
+          "alt": "大连特色食物海鲜饺子",
+          "queries": [
+            "海鲜饺子 大连 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "樱桃肉",
+          "wikiTitle": "樱桃肉",
+          "alt": "大连特色食物樱桃肉",
+          "queries": [
+            "樱桃肉 大连 food"
           ]
         },
         {
@@ -1585,29 +1585,29 @@
         },
         {
           "category": "food",
-          "subject": "生煎馒头",
-          "wikiTitle": "生煎馒头",
-          "alt": "上海特色食物生煎馒头",
-          "queries": [
-            "生煎馒头 上海 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "排骨年糕",
-          "wikiTitle": "排骨年糕",
-          "alt": "上海特色食物排骨年糕",
-          "queries": [
-            "排骨年糕 上海 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "葱油拌面",
           "wikiTitle": "葱油拌面",
           "alt": "上海特色食物葱油拌面",
           "queries": [
             "葱油拌面 上海 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "本帮熏鱼",
+          "wikiTitle": "本帮熏鱼",
+          "alt": "上海特色食物本帮熏鱼",
+          "queries": [
+            "本帮熏鱼 上海 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "鲜肉月饼",
+          "wikiTitle": "鲜肉月饼",
+          "alt": "上海特色食物鲜肉月饼",
+          "queries": [
+            "鲜肉月饼 上海 food"
           ]
         },
         {
@@ -1771,15 +1771,6 @@
         },
         {
           "category": "food",
-          "subject": "苏式汤面",
-          "wikiTitle": "苏式汤面",
-          "alt": "苏州特色食物苏式汤面",
-          "queries": [
-            "苏式汤面 苏州 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "松鼠桂鱼",
           "wikiTitle": "松鼠桂鱼",
           "alt": "苏州特色食物松鼠桂鱼",
@@ -1794,6 +1785,15 @@
           "alt": "苏州特色食物鸡头米甜品",
           "queries": [
             "鸡头米甜品 苏州 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "响油鳝糊",
+          "wikiTitle": "响油鳝糊",
+          "alt": "苏州特色食物响油鳝糊",
+          "queries": [
+            "响油鳝糊 苏州 food"
           ]
         },
         {
@@ -1957,29 +1957,29 @@
         },
         {
           "category": "food",
-          "subject": "盐水鸭",
-          "wikiTitle": "盐水鸭",
-          "alt": "南京特色食物盐水鸭",
-          "queries": [
-            "盐水鸭 南京 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "鸡鸣汤包",
-          "wikiTitle": "鸡鸣汤包",
-          "alt": "南京特色食物鸡鸣汤包",
-          "queries": [
-            "鸡鸣汤包 南京 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "桂花糖芋苗",
           "wikiTitle": "桂花糖芋苗",
           "alt": "南京特色食物桂花糖芋苗",
           "queries": [
             "桂花糖芋苗 南京 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "牛肉锅贴",
+          "wikiTitle": "牛肉锅贴",
+          "alt": "南京特色食物牛肉锅贴",
+          "queries": [
+            "牛肉锅贴 南京 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "梅花糕",
+          "wikiTitle": "梅花糕",
+          "alt": "南京特色食物梅花糕",
+          "queries": [
+            "梅花糕 南京 food"
           ]
         },
         {
@@ -2143,29 +2143,29 @@
         },
         {
           "category": "food",
-          "subject": "鲅鱼水饺",
-          "wikiTitle": "鲅鱼水饺",
-          "alt": "青岛特色食物鲅鱼水饺",
-          "queries": [
-            "鲅鱼水饺 青岛 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "辣炒蛤蜊",
-          "wikiTitle": "辣炒蛤蜊",
-          "alt": "青岛特色食物辣炒蛤蜊",
-          "queries": [
-            "辣炒蛤蜊 青岛 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "海菜凉粉",
           "wikiTitle": "海菜凉粉",
           "alt": "青岛特色食物海菜凉粉",
           "queries": [
             "海菜凉粉 青岛 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "排骨米饭",
+          "wikiTitle": "排骨米饭",
+          "alt": "青岛特色食物排骨米饭",
+          "queries": [
+            "排骨米饭 青岛 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "香酥鸡",
+          "wikiTitle": "香酥鸡",
+          "alt": "青岛特色食物香酥鸡",
+          "queries": [
+            "香酥鸡 青岛 food"
           ]
         },
         {
@@ -2338,20 +2338,20 @@
         },
         {
           "category": "food",
-          "subject": "甜沫",
-          "wikiTitle": "甜沫",
-          "alt": "济南特色食物甜沫",
+          "subject": "奶汤蒲菜",
+          "wikiTitle": "奶汤蒲菜",
+          "alt": "济南特色食物奶汤蒲菜",
           "queries": [
-            "甜沫 济南 food"
+            "奶汤蒲菜 济南 food"
           ]
         },
         {
           "category": "food",
-          "subject": "油旋",
-          "wikiTitle": "油旋",
-          "alt": "济南特色食物油旋",
+          "subject": "糖醋鲤鱼",
+          "wikiTitle": "糖醋鲤鱼",
+          "alt": "济南特色食物糖醋鲤鱼",
           "queries": [
-            "油旋 济南 food"
+            "糖醋鲤鱼 济南 food"
           ]
         },
         {
@@ -2515,29 +2515,29 @@
         },
         {
           "category": "food",
-          "subject": "沙茶面",
-          "wikiTitle": "沙茶面",
-          "alt": "厦门特色食物沙茶面",
-          "queries": [
-            "沙茶面 厦门 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "海蛎煎",
-          "wikiTitle": "海蛎煎",
-          "alt": "厦门特色食物海蛎煎",
-          "queries": [
-            "海蛎煎 厦门 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "花生汤",
           "wikiTitle": "花生汤",
           "alt": "厦门特色食物花生汤",
           "queries": [
             "花生汤 厦门 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "面线糊",
+          "wikiTitle": "面线糊",
+          "alt": "厦门特色食物面线糊",
+          "queries": [
+            "面线糊 厦门 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "韭菜盒",
+          "wikiTitle": "韭菜盒",
+          "alt": "厦门特色食物韭菜盒",
+          "queries": [
+            "韭菜盒 厦门 food"
           ]
         },
         {
@@ -2701,29 +2701,29 @@
         },
         {
           "category": "food",
-          "subject": "面线糊",
-          "wikiTitle": "面线糊",
-          "alt": "泉州特色食物面线糊",
+          "subject": "润饼菜",
+          "wikiTitle": "润饼菜",
+          "alt": "泉州特色食物润饼菜",
           "queries": [
-            "面线糊 泉州 food"
+            "润饼菜 泉州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "姜母鸭",
-          "wikiTitle": "姜母鸭",
-          "alt": "泉州特色食物姜母鸭",
+          "subject": "牛肉羹",
+          "wikiTitle": "牛肉羹",
+          "alt": "泉州特色食物牛肉羹",
           "queries": [
-            "姜母鸭 泉州 food"
+            "牛肉羹 泉州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "土笋冻",
-          "wikiTitle": "土笋冻",
-          "alt": "泉州特色食物土笋冻",
+          "subject": "牛排",
+          "wikiTitle": "牛排",
+          "alt": "泉州特色食物牛排",
           "queries": [
-            "土笋冻 泉州 food"
+            "牛排 泉州 food"
           ]
         },
         {
@@ -2887,29 +2887,29 @@
         },
         {
           "category": "food",
-          "subject": "宁波汤圆",
-          "wikiTitle": "宁波汤圆",
-          "alt": "宁波特色食物宁波汤圆",
+          "subject": "年糕",
+          "wikiTitle": "年糕",
+          "alt": "宁波特色食物年糕",
           "queries": [
-            "宁波汤圆 宁波 food"
+            "年糕 宁波 food"
           ]
         },
         {
           "category": "food",
-          "subject": "雪菜大黄鱼",
-          "wikiTitle": "雪菜大黄鱼",
-          "alt": "宁波特色食物雪菜大黄鱼",
+          "subject": "苔菜拖黄鱼",
+          "wikiTitle": "苔菜拖黄鱼",
+          "alt": "宁波特色食物苔菜拖黄鱼",
           "queries": [
-            "雪菜大黄鱼 宁波 food"
+            "苔菜拖黄鱼 宁波 food"
           ]
         },
         {
           "category": "food",
-          "subject": "红膏炝蟹",
-          "wikiTitle": "红膏炝蟹",
-          "alt": "宁波特色食物红膏炝蟹",
+          "subject": "酒酿圆子",
+          "wikiTitle": "酒酿圆子",
+          "alt": "宁波特色食物酒酿圆子",
           "queries": [
-            "红膏炝蟹 宁波 food"
+            "酒酿圆子 宁波 food"
           ]
         },
         {
@@ -3073,29 +3073,29 @@
         },
         {
           "category": "food",
-          "subject": "绍兴醉鸡",
-          "wikiTitle": "绍兴醉鸡",
-          "alt": "绍兴特色食物绍兴醉鸡",
+          "subject": "茴香豆",
+          "wikiTitle": "茴香豆",
+          "alt": "绍兴特色食物茴香豆",
           "queries": [
-            "绍兴醉鸡 绍兴 food"
+            "茴香豆 绍兴 food"
           ]
         },
         {
           "category": "food",
-          "subject": "霉干菜焖肉",
-          "wikiTitle": "霉干菜焖肉",
-          "alt": "绍兴特色食物霉干菜焖肉",
+          "subject": "糟鸡",
+          "wikiTitle": "糟鸡",
+          "alt": "绍兴特色食物糟鸡",
           "queries": [
-            "霉干菜焖肉 绍兴 food"
+            "糟鸡 绍兴 food"
           ]
         },
         {
           "category": "food",
-          "subject": "黄酒奶茶",
-          "wikiTitle": "黄酒奶茶",
-          "alt": "绍兴特色食物黄酒奶茶",
+          "subject": "生煎",
+          "wikiTitle": "生煎",
+          "alt": "绍兴特色食物生煎",
           "queries": [
-            "黄酒奶茶 绍兴 food"
+            "生煎 绍兴 food"
           ]
         },
         {
@@ -3259,29 +3259,29 @@
         },
         {
           "category": "food",
-          "subject": "佛跳墙",
-          "wikiTitle": "佛跳墙",
-          "alt": "福州特色食物佛跳墙",
+          "subject": "锅边糊",
+          "wikiTitle": "锅边糊",
+          "alt": "福州特色食物锅边糊",
           "queries": [
-            "佛跳墙 福州 food"
+            "锅边糊 福州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "鱼丸",
-          "wikiTitle": "鱼丸",
-          "alt": "福州特色食物鱼丸",
+          "subject": "荔枝肉",
+          "wikiTitle": "荔枝肉",
+          "alt": "福州特色食物荔枝肉",
           "queries": [
-            "鱼丸 福州 food"
+            "荔枝肉 福州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "肉燕",
-          "wikiTitle": "肉燕",
-          "alt": "福州特色食物肉燕",
+          "subject": "芋泥",
+          "wikiTitle": "芋泥",
+          "alt": "福州特色食物芋泥",
           "queries": [
-            "肉燕 福州 food"
+            "芋泥 福州 food"
           ]
         },
         {
@@ -3445,29 +3445,29 @@
         },
         {
           "category": "food",
-          "subject": "热干面",
-          "wikiTitle": "热干面",
-          "alt": "武汉特色食物热干面",
+          "subject": "糊汤粉",
+          "wikiTitle": "糊汤粉",
+          "alt": "武汉特色食物糊汤粉",
           "queries": [
-            "热干面 武汉 food"
+            "糊汤粉 武汉 food"
           ]
         },
         {
           "category": "food",
-          "subject": "三鲜豆皮",
-          "wikiTitle": "三鲜豆皮",
-          "alt": "武汉特色食物三鲜豆皮",
+          "subject": "武昌鱼",
+          "wikiTitle": "武昌鱼",
+          "alt": "武汉特色食物武昌鱼",
           "queries": [
-            "三鲜豆皮 武汉 food"
+            "武昌鱼 武汉 food"
           ]
         },
         {
           "category": "food",
-          "subject": "排骨藕汤",
-          "wikiTitle": "排骨藕汤",
-          "alt": "武汉特色食物排骨藕汤",
+          "subject": "糊米酒",
+          "wikiTitle": "糊米酒",
+          "alt": "武汉特色食物糊米酒",
           "queries": [
-            "排骨藕汤 武汉 food"
+            "糊米酒 武汉 food"
           ]
         },
         {
@@ -3631,29 +3631,29 @@
         },
         {
           "category": "food",
-          "subject": "长沙米粉",
-          "wikiTitle": "长沙米粉",
-          "alt": "长沙特色食物长沙米粉",
+          "subject": "糖油粑粑",
+          "wikiTitle": "糖油粑粑",
+          "alt": "长沙特色食物糖油粑粑",
           "queries": [
-            "长沙米粉 长沙 food"
+            "糖油粑粑 长沙 food"
           ]
         },
         {
           "category": "food",
-          "subject": "臭豆腐",
-          "wikiTitle": "臭豆腐",
-          "alt": "长沙特色食物臭豆腐",
+          "subject": "剁椒鱼头",
+          "wikiTitle": "剁椒鱼头",
+          "alt": "长沙特色食物剁椒鱼头",
           "queries": [
-            "臭豆腐 长沙 food"
+            "剁椒鱼头 长沙 food"
           ]
         },
         {
           "category": "food",
-          "subject": "口味虾",
-          "wikiTitle": "口味虾",
-          "alt": "长沙特色食物口味虾",
+          "subject": "麻辣子鸡",
+          "wikiTitle": "麻辣子鸡",
+          "alt": "长沙特色食物麻辣子鸡",
           "queries": [
-            "口味虾 长沙 food"
+            "麻辣子鸡 长沙 food"
           ]
         },
         {
@@ -3817,29 +3817,29 @@
         },
         {
           "category": "food",
-          "subject": "洛阳水席",
-          "wikiTitle": "洛阳水席",
-          "alt": "洛阳特色食物洛阳水席",
+          "subject": "不翻汤",
+          "wikiTitle": "不翻汤",
+          "alt": "洛阳特色食物不翻汤",
           "queries": [
-            "洛阳水席 洛阳 food"
+            "不翻汤 洛阳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "牛肉汤",
-          "wikiTitle": "牛肉汤",
-          "alt": "洛阳特色食物牛肉汤",
+          "subject": "牡丹燕菜",
+          "wikiTitle": "牡丹燕菜",
+          "alt": "洛阳特色食物牡丹燕菜",
           "queries": [
-            "牛肉汤 洛阳 food"
+            "牡丹燕菜 洛阳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "浆面条",
-          "wikiTitle": "浆面条",
-          "alt": "洛阳特色食物浆面条",
+          "subject": "连汤肉片",
+          "wikiTitle": "连汤肉片",
+          "alt": "洛阳特色食物连汤肉片",
           "queries": [
-            "浆面条 洛阳 food"
+            "连汤肉片 洛阳 food"
           ]
         },
         {
@@ -4003,29 +4003,29 @@
         },
         {
           "category": "food",
-          "subject": "三下锅",
-          "wikiTitle": "三下锅",
-          "alt": "张家界特色食物三下锅",
-          "queries": [
-            "三下锅 张家界 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "土家腊肉",
-          "wikiTitle": "土家腊肉",
-          "alt": "张家界特色食物土家腊肉",
-          "queries": [
-            "土家腊肉 张家界 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "葛根粉",
           "wikiTitle": "葛根粉",
           "alt": "张家界特色食物葛根粉",
           "queries": [
             "葛根粉 张家界 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "酸酢鱼",
+          "wikiTitle": "酸酢鱼",
+          "alt": "张家界特色食物酸酢鱼",
+          "queries": [
+            "酸酢鱼 张家界 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "合渣",
+          "wikiTitle": "合渣",
+          "alt": "张家界特色食物合渣",
+          "queries": [
+            "合渣 张家界 food"
           ]
         },
         {
@@ -4189,29 +4189,29 @@
         },
         {
           "category": "food",
-          "subject": "广式早茶",
-          "wikiTitle": "广式早茶",
-          "alt": "广州特色食物广式早茶",
+          "subject": "艇仔粥",
+          "wikiTitle": "艇仔粥",
+          "alt": "广州特色食物艇仔粥",
           "queries": [
-            "广式早茶 广州 food"
+            "艇仔粥 广州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "烧鹅",
-          "wikiTitle": "烧鹅",
-          "alt": "广州特色食物烧鹅",
+          "subject": "煲仔饭",
+          "wikiTitle": "煲仔饭",
+          "alt": "广州特色食物煲仔饭",
           "queries": [
-            "烧鹅 广州 food"
+            "煲仔饭 广州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "云吞面",
-          "wikiTitle": "云吞面",
-          "alt": "广州特色食物云吞面",
+          "subject": "虾饺",
+          "wikiTitle": "虾饺",
+          "alt": "广州特色食物虾饺",
           "queries": [
-            "云吞面 广州 food"
+            "虾饺 广州 food"
           ]
         },
         {
@@ -4375,29 +4375,29 @@
         },
         {
           "category": "food",
-          "subject": "光明乳鸽",
-          "wikiTitle": "光明乳鸽",
-          "alt": "深圳特色食物光明乳鸽",
+          "subject": "潮汕牛肉火锅",
+          "wikiTitle": "潮汕牛肉火锅",
+          "alt": "深圳特色食物潮汕牛肉火锅",
           "queries": [
-            "光明乳鸽 深圳 food"
+            "潮汕牛肉火锅 深圳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "沙井蚝",
-          "wikiTitle": "沙井蚝",
-          "alt": "深圳特色食物沙井蚝",
+          "subject": "椰子鸡",
+          "wikiTitle": "椰子鸡",
+          "alt": "深圳特色食物椰子鸡",
           "queries": [
-            "沙井蚝 深圳 food"
+            "椰子鸡 深圳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "客家酿豆腐",
-          "wikiTitle": "客家酿豆腐",
-          "alt": "深圳特色食物客家酿豆腐",
+          "subject": "炒牛奶",
+          "wikiTitle": "炒牛奶",
+          "alt": "深圳特色食物炒牛奶",
           "queries": [
-            "客家酿豆腐 深圳 food"
+            "炒牛奶 深圳 food"
           ]
         },
         {
@@ -4561,29 +4561,29 @@
         },
         {
           "category": "food",
-          "subject": "海南粉",
-          "wikiTitle": "海南粉",
-          "alt": "三亚特色食物海南粉",
+          "subject": "文昌鸡",
+          "wikiTitle": "文昌鸡",
+          "alt": "三亚特色食物文昌鸡",
           "queries": [
-            "海南粉 三亚 food"
+            "文昌鸡 三亚 food"
           ]
         },
         {
           "category": "food",
-          "subject": "清补凉",
-          "wikiTitle": "清补凉",
-          "alt": "三亚特色食物清补凉",
+          "subject": "椰子饭",
+          "wikiTitle": "椰子饭",
+          "alt": "三亚特色食物椰子饭",
           "queries": [
-            "清补凉 三亚 food"
+            "椰子饭 三亚 food"
           ]
         },
         {
           "category": "food",
-          "subject": "糟粕醋海鲜",
-          "wikiTitle": "糟粕醋海鲜",
-          "alt": "三亚特色食物糟粕醋海鲜",
+          "subject": "藤桥排骨",
+          "wikiTitle": "藤桥排骨",
+          "alt": "三亚特色食物藤桥排骨",
           "queries": [
-            "糟粕醋海鲜 三亚 food"
+            "藤桥排骨 三亚 food"
           ]
         },
         {
@@ -4747,15 +4747,6 @@
         },
         {
           "category": "food",
-          "subject": "桂林米粉",
-          "wikiTitle": "桂林米粉",
-          "alt": "桂林特色食物桂林米粉",
-          "queries": [
-            "桂林米粉 桂林 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "啤酒鱼",
           "wikiTitle": "啤酒鱼",
           "alt": "桂林特色食物啤酒鱼",
@@ -4770,6 +4761,15 @@
           "alt": "桂林特色食物荔浦芋扣肉",
           "queries": [
             "荔浦芋扣肉 桂林 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "油茶",
+          "wikiTitle": "油茶",
+          "alt": "桂林特色食物油茶",
+          "queries": [
+            "油茶 桂林 food"
           ]
         },
         {
@@ -4933,15 +4933,6 @@
         },
         {
           "category": "food",
-          "subject": "重庆火锅",
-          "wikiTitle": "重庆火锅",
-          "alt": "重庆特色食物重庆火锅",
-          "queries": [
-            "重庆火锅 重庆 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "小面",
           "wikiTitle": "小面",
           "alt": "重庆特色食物小面",
@@ -4951,11 +4942,20 @@
         },
         {
           "category": "food",
-          "subject": "酸辣粉",
-          "wikiTitle": "酸辣粉",
-          "alt": "重庆特色食物酸辣粉",
+          "subject": "江湖菜",
+          "wikiTitle": "江湖菜",
+          "alt": "重庆特色食物江湖菜",
           "queries": [
-            "酸辣粉 重庆 food"
+            "江湖菜 重庆 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "豆花饭",
+          "wikiTitle": "豆花饭",
+          "alt": "重庆特色食物豆花饭",
+          "queries": [
+            "豆花饭 重庆 food"
           ]
         },
         {
@@ -5119,29 +5119,29 @@
         },
         {
           "category": "food",
-          "subject": "乳扇",
-          "wikiTitle": "乳扇",
-          "alt": "大理特色食物乳扇",
-          "queries": [
-            "乳扇 大理 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "喜洲粑粑",
-          "wikiTitle": "喜洲粑粑",
-          "alt": "大理特色食物喜洲粑粑",
-          "queries": [
-            "喜洲粑粑 大理 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "酸辣鱼",
           "wikiTitle": "酸辣鱼",
           "alt": "大理特色食物酸辣鱼",
           "queries": [
             "酸辣鱼 大理 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "生皮",
+          "wikiTitle": "生皮",
+          "alt": "大理特色食物生皮",
+          "queries": [
+            "生皮 大理 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "饵丝",
+          "wikiTitle": "饵丝",
+          "alt": "大理特色食物饵丝",
+          "queries": [
+            "饵丝 大理 food"
           ]
         },
         {
@@ -5305,29 +5305,29 @@
         },
         {
           "category": "food",
-          "subject": "藏面",
-          "wikiTitle": "藏面",
-          "alt": "拉萨特色食物藏面",
+          "subject": "牦牛肉",
+          "wikiTitle": "牦牛肉",
+          "alt": "拉萨特色食物牦牛肉",
           "queries": [
-            "藏面 拉萨 food"
+            "牦牛肉 拉萨 food"
           ]
         },
         {
           "category": "food",
-          "subject": "甜茶",
-          "wikiTitle": "甜茶",
-          "alt": "拉萨特色食物甜茶",
+          "subject": "酸奶",
+          "wikiTitle": "酸奶",
+          "alt": "拉萨特色食物酸奶",
           "queries": [
-            "甜茶 拉萨 food"
+            "酸奶 拉萨 food"
           ]
         },
         {
           "category": "food",
-          "subject": "糌粑",
-          "wikiTitle": "糌粑",
-          "alt": "拉萨特色食物糌粑",
+          "subject": "藏式咖喱",
+          "wikiTitle": "藏式咖喱",
+          "alt": "拉萨特色食物藏式咖喱",
           "queries": [
-            "糌粑 拉萨 food"
+            "藏式咖喱 拉萨 food"
           ]
         },
         {
@@ -5491,29 +5491,29 @@
         },
         {
           "category": "food",
-          "subject": "过桥米线",
-          "wikiTitle": "过桥米线",
-          "alt": "昆明特色食物过桥米线",
+          "subject": "野生菌火锅",
+          "wikiTitle": "野生菌火锅",
+          "alt": "昆明特色食物野生菌火锅",
           "queries": [
-            "过桥米线 昆明 food"
+            "野生菌火锅 昆明 food"
           ]
         },
         {
           "category": "food",
-          "subject": "汽锅鸡",
-          "wikiTitle": "汽锅鸡",
-          "alt": "昆明特色食物汽锅鸡",
+          "subject": "豆花米线",
+          "wikiTitle": "豆花米线",
+          "alt": "昆明特色食物豆花米线",
           "queries": [
-            "汽锅鸡 昆明 food"
+            "豆花米线 昆明 food"
           ]
         },
         {
           "category": "food",
-          "subject": "鲜花饼",
-          "wikiTitle": "鲜花饼",
-          "alt": "昆明特色食物鲜花饼",
+          "subject": "小锅米线",
+          "wikiTitle": "小锅米线",
+          "alt": "昆明特色食物小锅米线",
           "queries": [
-            "鲜花饼 昆明 food"
+            "小锅米线 昆明 food"
           ]
         },
         {
@@ -5677,29 +5677,29 @@
         },
         {
           "category": "food",
-          "subject": "鸡豆凉粉",
-          "wikiTitle": "鸡豆凉粉",
-          "alt": "丽江特色食物鸡豆凉粉",
+          "subject": "丽江粑粑",
+          "wikiTitle": "丽江粑粑",
+          "alt": "丽江特色食物丽江粑粑",
           "queries": [
-            "鸡豆凉粉 丽江 food"
+            "丽江粑粑 丽江 food"
           ]
         },
         {
           "category": "food",
-          "subject": "腊排骨",
-          "wikiTitle": "腊排骨",
-          "alt": "丽江特色食物腊排骨",
+          "subject": "米灌肠",
+          "wikiTitle": "米灌肠",
+          "alt": "丽江特色食物米灌肠",
           "queries": [
-            "腊排骨 丽江 food"
+            "米灌肠 丽江 food"
           ]
         },
         {
           "category": "food",
-          "subject": "纳西烤肉",
-          "wikiTitle": "纳西烤肉",
-          "alt": "丽江特色食物纳西烤肉",
+          "subject": "腊排骨火锅",
+          "wikiTitle": "腊排骨火锅",
+          "alt": "丽江特色食物腊排骨火锅",
           "queries": [
-            "纳西烤肉 丽江 food"
+            "腊排骨火锅 丽江 food"
           ]
         },
         {
@@ -5863,29 +5863,29 @@
         },
         {
           "category": "food",
-          "subject": "肠旺面",
-          "wikiTitle": "肠旺面",
-          "alt": "贵阳特色食物肠旺面",
+          "subject": "恋爱豆腐果",
+          "wikiTitle": "恋爱豆腐果",
+          "alt": "贵阳特色食物恋爱豆腐果",
           "queries": [
-            "肠旺面 贵阳 food"
+            "恋爱豆腐果 贵阳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "丝娃娃",
-          "wikiTitle": "丝娃娃",
-          "alt": "贵阳特色食物丝娃娃",
+          "subject": "洋芋粑",
+          "wikiTitle": "洋芋粑",
+          "alt": "贵阳特色食物洋芋粑",
           "queries": [
-            "丝娃娃 贵阳 food"
+            "洋芋粑 贵阳 food"
           ]
         },
         {
           "category": "food",
-          "subject": "酸汤鱼",
-          "wikiTitle": "酸汤鱼",
-          "alt": "贵阳特色食物酸汤鱼",
+          "subject": "米豆腐",
+          "wikiTitle": "米豆腐",
+          "alt": "贵阳特色食物米豆腐",
           "queries": [
-            "酸汤鱼 贵阳 food"
+            "米豆腐 贵阳 food"
           ]
         },
         {
@@ -6049,15 +6049,6 @@
         },
         {
           "category": "food",
-          "subject": "肉夹馍",
-          "wikiTitle": "肉夹馍",
-          "alt": "西安特色食物肉夹馍",
-          "queries": [
-            "肉夹馍 西安 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "牛羊肉泡馍",
           "wikiTitle": "牛羊肉泡馍",
           "alt": "西安特色食物牛羊肉泡馍",
@@ -6072,6 +6063,15 @@
           "alt": "西安特色食物biangbiang面",
           "queries": [
             "biangbiang面 西安 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "葫芦鸡",
+          "wikiTitle": "葫芦鸡",
+          "alt": "西安特色食物葫芦鸡",
+          "queries": [
+            "葫芦鸡 西安 food"
           ]
         },
         {
@@ -6235,29 +6235,29 @@
         },
         {
           "category": "food",
-          "subject": "兰州牛肉面",
-          "wikiTitle": "兰州牛肉面",
-          "alt": "兰州特色食物兰州牛肉面",
+          "subject": "酿皮",
+          "wikiTitle": "酿皮",
+          "alt": "兰州特色食物酿皮",
           "queries": [
-            "兰州牛肉面 兰州 food"
+            "酿皮 兰州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "灰豆子",
-          "wikiTitle": "灰豆子",
-          "alt": "兰州特色食物灰豆子",
+          "subject": "手抓羊肉",
+          "wikiTitle": "手抓羊肉",
+          "alt": "兰州特色食物手抓羊肉",
           "queries": [
-            "灰豆子 兰州 food"
+            "手抓羊肉 兰州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "甜醅子",
-          "wikiTitle": "甜醅子",
-          "alt": "兰州特色食物甜醅子",
+          "subject": "牛肉面",
+          "wikiTitle": "牛肉面",
+          "alt": "兰州特色食物牛肉面",
           "queries": [
-            "甜醅子 兰州 food"
+            "牛肉面 兰州 food"
           ]
         },
         {
@@ -6421,29 +6421,29 @@
         },
         {
           "category": "food",
-          "subject": "驴肉黄面",
-          "wikiTitle": "驴肉黄面",
-          "alt": "敦煌特色食物驴肉黄面",
+          "subject": "酿皮子",
+          "wikiTitle": "酿皮子",
+          "alt": "敦煌特色食物酿皮子",
           "queries": [
-            "驴肉黄面 敦煌 food"
+            "酿皮子 敦煌 food"
           ]
         },
         {
           "category": "food",
-          "subject": "胡羊焖饼",
-          "wikiTitle": "胡羊焖饼",
-          "alt": "敦煌特色食物胡羊焖饼",
+          "subject": "羊肉粉汤",
+          "wikiTitle": "羊肉粉汤",
+          "alt": "敦煌特色食物羊肉粉汤",
           "queries": [
-            "胡羊焖饼 敦煌 food"
+            "羊肉粉汤 敦煌 food"
           ]
         },
         {
           "category": "food",
-          "subject": "杏皮水",
-          "wikiTitle": "杏皮水",
-          "alt": "敦煌特色食物杏皮水",
+          "subject": "手抓羊肉",
+          "wikiTitle": "手抓羊肉",
+          "alt": "敦煌特色食物手抓羊肉",
           "queries": [
-            "杏皮水 敦煌 food"
+            "手抓羊肉 敦煌 food"
           ]
         },
         {
@@ -6607,29 +6607,29 @@
         },
         {
           "category": "food",
-          "subject": "抓饭",
-          "wikiTitle": "抓饭",
-          "alt": "乌鲁木齐特色食物抓饭",
+          "subject": "馕",
+          "wikiTitle": "馕",
+          "alt": "乌鲁木齐特色食物馕",
           "queries": [
-            "抓饭 乌鲁木齐 food"
+            "馕 乌鲁木齐 food"
           ]
         },
         {
           "category": "food",
-          "subject": "烤包子",
-          "wikiTitle": "烤包子",
-          "alt": "乌鲁木齐特色食物烤包子",
+          "subject": "椒麻鸡",
+          "wikiTitle": "椒麻鸡",
+          "alt": "乌鲁木齐特色食物椒麻鸡",
           "queries": [
-            "烤包子 乌鲁木齐 food"
+            "椒麻鸡 乌鲁木齐 food"
           ]
         },
         {
           "category": "food",
-          "subject": "大盘鸡",
-          "wikiTitle": "大盘鸡",
-          "alt": "乌鲁木齐特色食物大盘鸡",
+          "subject": "烤肉",
+          "wikiTitle": "烤肉",
+          "alt": "乌鲁木齐特色食物烤肉",
           "queries": [
-            "大盘鸡 乌鲁木齐 food"
+            "烤肉 乌鲁木齐 food"
           ]
         },
         {
@@ -6793,29 +6793,29 @@
         },
         {
           "category": "food",
-          "subject": "港式点心",
-          "wikiTitle": "港式点心",
-          "alt": "香港特色食物港式点心",
+          "subject": "烧鹅",
+          "wikiTitle": "烧鹅",
+          "alt": "香港特色食物烧鹅",
           "queries": [
-            "港式点心 香港 food"
+            "烧鹅 香港 food"
           ]
         },
         {
           "category": "food",
-          "subject": "云吞面",
-          "wikiTitle": "云吞面",
-          "alt": "香港特色食物云吞面",
+          "subject": "蛋挞",
+          "wikiTitle": "蛋挞",
+          "alt": "香港特色食物蛋挞",
           "queries": [
-            "云吞面 香港 food"
+            "蛋挞 香港 food"
           ]
         },
         {
           "category": "food",
-          "subject": "菠萝油",
-          "wikiTitle": "菠萝油",
-          "alt": "香港特色食物菠萝油",
+          "subject": "点心",
+          "wikiTitle": "点心",
+          "alt": "香港特色食物点心",
           "queries": [
-            "菠萝油 香港 food"
+            "点心 香港 food"
           ]
         },
         {
@@ -6979,29 +6979,29 @@
         },
         {
           "category": "food",
-          "subject": "葡挞",
-          "wikiTitle": "葡挞",
-          "alt": "澳门特色食物葡挞",
-          "queries": [
-            "葡挞 澳门 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "猪扒包",
-          "wikiTitle": "猪扒包",
-          "alt": "澳门特色食物猪扒包",
-          "queries": [
-            "猪扒包 澳门 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "非洲鸡",
           "wikiTitle": "非洲鸡",
           "alt": "澳门特色食物非洲鸡",
           "queries": [
             "非洲鸡 澳门 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "木糠布甸",
+          "wikiTitle": "木糠布甸",
+          "alt": "澳门特色食物木糠布甸",
+          "queries": [
+            "木糠布甸 澳门 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "葡国鸡",
+          "wikiTitle": "葡国鸡",
+          "alt": "澳门特色食物葡国鸡",
+          "queries": [
+            "葡国鸡 澳门 food"
           ]
         },
         {
@@ -7165,29 +7165,29 @@
         },
         {
           "category": "food",
-          "subject": "牛肉面",
-          "wikiTitle": "牛肉面",
-          "alt": "台北特色食物牛肉面",
+          "subject": "小笼包",
+          "wikiTitle": "小笼包",
+          "alt": "台北特色食物小笼包",
           "queries": [
-            "牛肉面 台北 food"
+            "小笼包 台北 food"
           ]
         },
         {
           "category": "food",
-          "subject": "卤肉饭",
-          "wikiTitle": "卤肉饭",
-          "alt": "台北特色食物卤肉饭",
+          "subject": "蚵仔煎",
+          "wikiTitle": "蚵仔煎",
+          "alt": "台北特色食物蚵仔煎",
           "queries": [
-            "卤肉饭 台北 food"
+            "蚵仔煎 台北 food"
           ]
         },
         {
           "category": "food",
-          "subject": "胡椒饼",
-          "wikiTitle": "胡椒饼",
-          "alt": "台北特色食物胡椒饼",
+          "subject": "排骨蛋炒饭",
+          "wikiTitle": "排骨蛋炒饭",
+          "alt": "台北特色食物排骨蛋炒饭",
           "queries": [
-            "胡椒饼 台北 food"
+            "排骨蛋炒饭 台北 food"
           ]
         },
         {
@@ -7351,29 +7351,29 @@
         },
         {
           "category": "food",
-          "subject": "鸭肉饭",
-          "wikiTitle": "鸭肉饭",
-          "alt": "高雄特色食物鸭肉饭",
+          "subject": "旗鱼黑轮",
+          "wikiTitle": "旗鱼黑轮",
+          "alt": "高雄特色食物旗鱼黑轮",
           "queries": [
-            "鸭肉饭 高雄 food"
+            "旗鱼黑轮 高雄 food"
           ]
         },
         {
           "category": "food",
-          "subject": "海产粥",
-          "wikiTitle": "海产粥",
-          "alt": "高雄特色食物海产粥",
+          "subject": "牛肉面",
+          "wikiTitle": "牛肉面",
+          "alt": "高雄特色食物牛肉面",
           "queries": [
-            "海产粥 高雄 food"
+            "牛肉面 高雄 food"
           ]
         },
         {
           "category": "food",
-          "subject": "木瓜牛奶",
-          "wikiTitle": "木瓜牛奶",
-          "alt": "高雄特色食物木瓜牛奶",
+          "subject": "下水汤",
+          "wikiTitle": "下水汤",
+          "alt": "高雄特色食物下水汤",
           "queries": [
-            "木瓜牛奶 高雄 food"
+            "下水汤 高雄 food"
           ]
         },
         {
@@ -7537,29 +7537,29 @@
         },
         {
           "category": "food",
-          "subject": "刀削面",
-          "wikiTitle": "刀削面",
-          "alt": "太原特色食物刀削面",
+          "subject": "羊杂割",
+          "wikiTitle": "羊杂割",
+          "alt": "太原特色食物羊杂割",
           "queries": [
-            "刀削面 太原 food"
+            "羊杂割 太原 food"
           ]
         },
         {
           "category": "food",
-          "subject": "头脑",
-          "wikiTitle": "头脑",
-          "alt": "太原特色食物头脑",
+          "subject": "莜面栲栳栳",
+          "wikiTitle": "莜面栲栳栳",
+          "alt": "太原特色食物莜面栲栳栳",
           "queries": [
-            "头脑 太原 food"
+            "莜面栲栳栳 太原 food"
           ]
         },
         {
           "category": "food",
-          "subject": "过油肉",
-          "wikiTitle": "过油肉",
-          "alt": "太原特色食物过油肉",
+          "subject": "羊肉蒸饺",
+          "wikiTitle": "羊肉蒸饺",
+          "alt": "太原特色食物羊肉蒸饺",
           "queries": [
-            "过油肉 太原 food"
+            "羊肉蒸饺 太原 food"
           ]
         },
         {
@@ -7723,29 +7723,29 @@
         },
         {
           "category": "food",
-          "subject": "羊汤",
-          "wikiTitle": "羊汤",
-          "alt": "承德特色食物羊汤",
+          "subject": "汽锅野味",
+          "wikiTitle": "汽锅野味",
+          "alt": "承德特色食物汽锅野味",
           "queries": [
-            "羊汤 承德 food"
+            "汽锅野味 承德 food"
           ]
         },
         {
           "category": "food",
-          "subject": "荞面饸饹",
-          "wikiTitle": "荞面饸饹",
-          "alt": "承德特色食物荞面饸饹",
+          "subject": "南沙饼",
+          "wikiTitle": "南沙饼",
+          "alt": "承德特色食物南沙饼",
           "queries": [
-            "荞面饸饹 承德 food"
+            "南沙饼 承德 food"
           ]
         },
         {
           "category": "food",
-          "subject": "御土荷叶鸡",
-          "wikiTitle": "御土荷叶鸡",
-          "alt": "承德特色食物御土荷叶鸡",
+          "subject": "八大碗",
+          "wikiTitle": "八大碗",
+          "alt": "承德特色食物八大碗",
           "queries": [
-            "御土荷叶鸡 承德 food"
+            "八大碗 承德 food"
           ]
         },
         {
@@ -7909,29 +7909,29 @@
         },
         {
           "category": "food",
-          "subject": "锅包肉",
-          "wikiTitle": "锅包肉",
-          "alt": "长春特色食物锅包肉",
+          "subject": "冷面",
+          "wikiTitle": "冷面",
+          "alt": "长春特色食物冷面",
           "queries": [
-            "锅包肉 长春 food"
+            "冷面 长春 food"
           ]
         },
         {
           "category": "food",
-          "subject": "雪衣豆沙",
-          "wikiTitle": "雪衣豆沙",
-          "alt": "长春特色食物雪衣豆沙",
+          "subject": "酸菜白肉",
+          "wikiTitle": "酸菜白肉",
+          "alt": "长春特色食物酸菜白肉",
           "queries": [
-            "雪衣豆沙 长春 food"
+            "酸菜白肉 长春 food"
           ]
         },
         {
           "category": "food",
-          "subject": "熏肉大饼",
-          "wikiTitle": "熏肉大饼",
-          "alt": "长春特色食物熏肉大饼",
+          "subject": "炭火锅",
+          "wikiTitle": "炭火锅",
+          "alt": "长春特色食物炭火锅",
           "queries": [
-            "熏肉大饼 长春 food"
+            "炭火锅 长春 food"
           ]
         },
         {
@@ -8095,29 +8095,29 @@
         },
         {
           "category": "food",
-          "subject": "扬州早茶",
-          "wikiTitle": "扬州早茶",
-          "alt": "扬州特色食物扬州早茶",
+          "subject": "扬州炒饭",
+          "wikiTitle": "扬州炒饭",
+          "alt": "扬州特色食物扬州炒饭",
           "queries": [
-            "扬州早茶 扬州 food"
+            "扬州炒饭 扬州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "狮子头",
-          "wikiTitle": "狮子头",
-          "alt": "扬州特色食物狮子头",
+          "subject": "三丁包",
+          "wikiTitle": "三丁包",
+          "alt": "扬州特色食物三丁包",
           "queries": [
-            "狮子头 扬州 food"
+            "三丁包 扬州 food"
           ]
         },
         {
           "category": "food",
-          "subject": "大煮干丝",
-          "wikiTitle": "大煮干丝",
-          "alt": "扬州特色食物大煮干丝",
+          "subject": "蟹黄汤包",
+          "wikiTitle": "蟹黄汤包",
+          "alt": "扬州特色食物蟹黄汤包",
           "queries": [
-            "大煮干丝 扬州 food"
+            "蟹黄汤包 扬州 food"
           ]
         },
         {
@@ -8281,29 +8281,29 @@
         },
         {
           "category": "food",
-          "subject": "无锡小笼",
-          "wikiTitle": "无锡小笼",
-          "alt": "无锡特色食物无锡小笼",
+          "subject": "镜箱豆腐",
+          "wikiTitle": "镜箱豆腐",
+          "alt": "无锡特色食物镜箱豆腐",
           "queries": [
-            "无锡小笼 无锡 food"
+            "镜箱豆腐 无锡 food"
           ]
         },
         {
           "category": "food",
-          "subject": "酱排骨",
-          "wikiTitle": "酱排骨",
-          "alt": "无锡特色食物酱排骨",
+          "subject": "玉兰饼",
+          "wikiTitle": "玉兰饼",
+          "alt": "无锡特色食物玉兰饼",
           "queries": [
-            "酱排骨 无锡 food"
+            "玉兰饼 无锡 food"
           ]
         },
         {
           "category": "food",
-          "subject": "太湖三白",
-          "wikiTitle": "太湖三白",
-          "alt": "无锡特色食物太湖三白",
+          "subject": "小笼包",
+          "wikiTitle": "小笼包",
+          "alt": "无锡特色食物小笼包",
           "queries": [
-            "太湖三白 无锡 food"
+            "小笼包 无锡 food"
           ]
         },
         {
@@ -8467,29 +8467,29 @@
         },
         {
           "category": "food",
-          "subject": "臭鳜鱼",
-          "wikiTitle": "臭鳜鱼",
-          "alt": "黄山特色食物臭鳜鱼",
+          "subject": "黄山烧饼",
+          "wikiTitle": "黄山烧饼",
+          "alt": "黄山特色食物黄山烧饼",
           "queries": [
-            "臭鳜鱼 黄山 food"
+            "黄山烧饼 黄山 food"
           ]
         },
         {
           "category": "food",
-          "subject": "毛豆腐",
-          "wikiTitle": "毛豆腐",
-          "alt": "黄山特色食物毛豆腐",
+          "subject": "刀板香",
+          "wikiTitle": "刀板香",
+          "alt": "黄山特色食物刀板香",
           "queries": [
-            "毛豆腐 黄山 food"
+            "刀板香 黄山 food"
           ]
         },
         {
           "category": "food",
-          "subject": "一品锅",
-          "wikiTitle": "一品锅",
-          "alt": "黄山特色食物一品锅",
+          "subject": "徽州刀板香",
+          "wikiTitle": "徽州刀板香",
+          "alt": "黄山特色食物徽州刀板香",
           "queries": [
-            "一品锅 黄山 food"
+            "徽州刀板香 黄山 food"
           ]
         },
         {
@@ -8653,29 +8653,29 @@
         },
         {
           "category": "food",
-          "subject": "灌汤包",
-          "wikiTitle": "灌汤包",
-          "alt": "开封特色食物灌汤包",
+          "subject": "炒凉粉",
+          "wikiTitle": "炒凉粉",
+          "alt": "开封特色食物炒凉粉",
           "queries": [
-            "灌汤包 开封 food"
+            "炒凉粉 开封 food"
           ]
         },
         {
           "category": "food",
-          "subject": "桶子鸡",
-          "wikiTitle": "桶子鸡",
-          "alt": "开封特色食物桶子鸡",
+          "subject": "羊肉炕馍",
+          "wikiTitle": "羊肉炕馍",
+          "alt": "开封特色食物羊肉炕馍",
           "queries": [
-            "桶子鸡 开封 food"
+            "羊肉炕馍 开封 food"
           ]
         },
         {
           "category": "food",
-          "subject": "鲤鱼焙面",
-          "wikiTitle": "鲤鱼焙面",
-          "alt": "开封特色食物鲤鱼焙面",
+          "subject": "套四宝",
+          "wikiTitle": "套四宝",
+          "alt": "开封特色食物套四宝",
           "queries": [
-            "鲤鱼焙面 开封 food"
+            "套四宝 开封 food"
           ]
         },
         {
@@ -8839,29 +8839,29 @@
         },
         {
           "category": "food",
-          "subject": "冷粉",
-          "wikiTitle": "冷粉",
-          "alt": "景德镇特色食物冷粉",
+          "subject": "瓷泥煨鸡",
+          "wikiTitle": "瓷泥煨鸡",
+          "alt": "景德镇特色食物瓷泥煨鸡",
           "queries": [
-            "冷粉 景德镇 food"
+            "瓷泥煨鸡 景德镇 food"
           ]
         },
         {
           "category": "food",
-          "subject": "饺子粑",
-          "wikiTitle": "饺子粑",
-          "alt": "景德镇特色食物饺子粑",
+          "subject": "油条包麻糍",
+          "wikiTitle": "油条包麻糍",
+          "alt": "景德镇特色食物油条包麻糍",
           "queries": [
-            "饺子粑 景德镇 food"
+            "油条包麻糍 景德镇 food"
           ]
         },
         {
           "category": "food",
-          "subject": "碱水粑",
-          "wikiTitle": "碱水粑",
-          "alt": "景德镇特色食物碱水粑",
+          "subject": "小黄鱼",
+          "wikiTitle": "小黄鱼",
+          "alt": "景德镇特色食物小黄鱼",
           "queries": [
-            "碱水粑 景德镇 food"
+            "小黄鱼 景德镇 food"
           ]
         },
         {
@@ -9025,29 +9025,29 @@
         },
         {
           "category": "food",
-          "subject": "横琴生蚝",
-          "wikiTitle": "横琴生蚝",
-          "alt": "珠海特色食物横琴生蚝",
-          "queries": [
-            "横琴生蚝 珠海 food"
-          ]
-        },
-        {
-          "category": "food",
-          "subject": "白蕉海鲈",
-          "wikiTitle": "白蕉海鲈",
-          "alt": "珠海特色食物白蕉海鲈",
-          "queries": [
-            "白蕉海鲈 珠海 food"
-          ]
-        },
-        {
-          "category": "food",
           "subject": "斗门重壳蟹",
           "wikiTitle": "斗门重壳蟹",
           "alt": "珠海特色食物斗门重壳蟹",
           "queries": [
             "斗门重壳蟹 珠海 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "鸡仔饼",
+          "wikiTitle": "鸡仔饼",
+          "alt": "珠海特色食物鸡仔饼",
+          "queries": [
+            "鸡仔饼 珠海 food"
+          ]
+        },
+        {
+          "category": "food",
+          "subject": "早茶",
+          "wikiTitle": "早茶",
+          "alt": "珠海特色食物早茶",
+          "queries": [
+            "早茶 珠海 food"
           ]
         },
         {
@@ -9211,29 +9211,29 @@
         },
         {
           "category": "food",
-          "subject": "老友粉",
-          "wikiTitle": "老友粉",
-          "alt": "南宁特色食物老友粉",
+          "subject": "酸嘢",
+          "wikiTitle": "酸嘢",
+          "alt": "南宁特色食物酸嘢",
           "queries": [
-            "老友粉 南宁 food"
+            "酸嘢 南宁 food"
           ]
         },
         {
           "category": "food",
-          "subject": "卷筒粉",
-          "wikiTitle": "卷筒粉",
-          "alt": "南宁特色食物卷筒粉",
+          "subject": "粉饺",
+          "wikiTitle": "粉饺",
+          "alt": "南宁特色食物粉饺",
           "queries": [
-            "卷筒粉 南宁 food"
+            "粉饺 南宁 food"
           ]
         },
         {
           "category": "food",
-          "subject": "柠檬鸭",
-          "wikiTitle": "柠檬鸭",
-          "alt": "南宁特色食物柠檬鸭",
+          "subject": "炒时蔬",
+          "wikiTitle": "炒时蔬",
+          "alt": "南宁特色食物炒时蔬",
           "queries": [
-            "柠檬鸭 南宁 food"
+            "炒时蔬 南宁 food"
           ]
         },
         {

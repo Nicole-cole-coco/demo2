@@ -51,7 +51,7 @@ export function validateCompleteCityGuide(guide: CompleteCityGuide): GuideValida
   const errors: string[] = [];
   if (!guide.slug || !guide.image) errors.push("缺少独立 URL 或首图");
   if (!guide.cardImage || !guide.cardImageAlt) errors.push("缺少首页城市卡片图");
-  if (guide.experiences.length < 6) errors.push("代表体验少于 6 项");
+  if (guide.experiences.length < 8) errors.push("代表体验少于 8 项");
   if (guide.foods.length < 8) errors.push("代表美食少于 8 项");
   if (guide.restaurants.length < 4) errors.push("标志性餐厅少于 4 家");
   if (![2, 3, 4].every((days) => guide.routes.some((route) => route.days === days && route.itinerary.length === days))) errors.push("缺少独立 2/3/4 日路线");

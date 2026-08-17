@@ -20,6 +20,8 @@ import {
   type CityPreference,
   type DiscoveryFilters,
 } from "@/content/cities";
+import CityRecommender from "@/app/components/CityRecommender";
+import MyTravelDrawer, { notifyPersonalTravelChanged } from "@/app/components/MyTravelDrawer";
 
 const DEFAULT_FILTERS: DiscoveryFilters = {
   query: "",
@@ -70,6 +72,16 @@ function consumptionNote(value: string) {
   return "丰俭由人，住宿位置对支出影响较大";
 }
 
+function savedFilters(value: unknown): DiscoveryFilters | null {
+  if (!value || typeof value !== "object") return null;
+  const item = value as Partial<DiscoveryFilters>;
+  const preference = item.preference === "全部" || (typeof item.preference === "string" && isPreference(item.preference)) ? item.preference : "全部";
+  const region = typeof item.region === "string" && isRegionFilter(item.region) ? item.region : "全部地区";
+  const season = typeof item.season === "string" && isSeasonFilter(item.season) ? item.season : "全年适合";
+  const sort = typeof item.sort === "string" && isCitySort(item.sort) ? item.sort : "综合推荐";
+  return { query: typeof item.query === "string" ? item.query : "", preference, region, season, sort };
+}
+
 export default function Home() {
   const [filters, setFilters] = useState<DiscoveryFilters>(DEFAULT_FILTERS);
   const [searchInput, setSearchInput] = useState("");
@@ -79,10 +91,15 @@ export default function Home() {
   const [compareSlugs, setCompareSlugs] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const [compareNotice, setCompareNotice] = useState("");
+  const [toast, setToast] = useState("");
 
   useEffect(() => {
     const applyLocation = () => {
-      const next = filtersFromUrl(new URL(window.location.href));
+      const url = new URL(window.location.href);
+      let next = filtersFromUrl(url);
+      if (!["q", "pref", "region", "season", "sort"].some((key) => url.searchParams.has(key))) {
+        try { next = savedFilters(JSON.parse(localStorage.getItem("lvce-last-city-filters") ?? "null")) ?? next; } catch { /* 损坏的筛选记录忽略 */ }
+      }
       setFilters(next);
       setSearchInput(next.query);
     };
@@ -100,10 +117,19 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!toast) return;
+    const timer = window.setTimeout(() => setToast(""), 2800);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
+
   const commitFilters = (patch: Partial<DiscoveryFilters>, history: "push" | "replace" = "push") => {
     const next = { ...filters, ...patch };
     setFilters(next);
-    if (typeof window !== "undefined") window.history[history === "push" ? "pushState" : "replaceState"]({}, "", urlForFilters(next));
+    if (typeof window !== "undefined") {
+      window.history[history === "push" ? "pushState" : "replaceState"]({}, "", urlForFilters(next));
+      try { localStorage.setItem("lvce-last-city-filters", JSON.stringify(next)); } catch { /* 无法持久化时筛选仍可在当前页面使用 */ }
+    }
   };
 
   const clearFilters = () => {
@@ -119,11 +145,15 @@ export default function Home() {
   };
 
   const toggleFavorite = (slug: string) => {
-    setFavoriteSlugs((current) => {
-      const next = current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug];
+    const guide = PUBLISHED_CITY_GUIDES.find((item) => item.slug === slug);
+    const removing = favoriteSlugs.includes(slug);
+    const next = removing ? favoriteSlugs.filter((item) => item !== slug) : [...favoriteSlugs, slug];
+    setFavoriteSlugs(next);
+    try {
       localStorage.setItem("lvce-favorite-cities", JSON.stringify(next));
-      return next;
-    });
+      notifyPersonalTravelChanged();
+      setToast(removing ? `已取消收藏${guide?.city ?? "城市"}` : `已收藏${guide?.city ?? "城市"}`);
+    } catch { setToast("当前浏览器无法保存收藏"); }
   };
 
   const toggleCompare = (slug: string) => {
@@ -158,7 +188,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <Link className="brand" href="/" aria-label="旅策首页"><span>旅</span><div><b>旅策</b><small>ROUTE &amp; TASTE</small></div></Link>
-        <nav aria-label="主导航"><a href="#cities">选城市</a><a href="#cities">按兴趣筛选</a></nav>
+        <nav aria-label="主导航"><a href="#cities">选城市</a><a href="#cities">按兴趣筛选</a><MyTravelDrawer onToast={setToast} /></nav>
       </header>
 
       <section className="hero home-editorial-hero" id="top">
@@ -173,10 +203,13 @@ export default function Home() {
       </section>
 
       <section className="city-section launch-city-section" id="cities">
-        <div className="discovery-heading">
-          <p className="eyebrow dark">中国城市旅行指南 · {PUBLISHED_CITY_GUIDES.length}</p>
-          <h2>找到适合你的中国城市与旅行方式</h2>
-          <p>搜索一座城、一种味道或一个旅行问题，再用偏好和季节缩小范围。</p>
+        <div className="discovery-heading-row">
+          <div className="discovery-heading">
+            <p className="eyebrow dark">中国城市旅行指南 · {PUBLISHED_CITY_GUIDES.length}</p>
+            <h2>找到适合你的中国城市与旅行方式</h2>
+            <p>搜索一座城、一种味道或一个旅行问题，再用偏好和季节缩小范围。</p>
+          </div>
+          <CityRecommender />
         </div>
 
         <div className="discovery-search-wrap">
@@ -301,9 +334,12 @@ export default function Home() {
             <tr><th>博物馆</th>{compareCities.map((guide) => <td key={guide.slug}>{comparisonLevel(guide, "博物馆")}</td>)}</tr>
             <tr><th>夜生活</th>{compareCities.map((guide) => <td key={guide.slug}>{comparisonLevel(guide, "夜生活")}</td>)}</tr>
             <tr><th>步行强度</th>{compareCities.map((guide) => <td key={guide.slug}>{/山|坡|徒步/.test(guide.transit) ? "较高" : /步行/.test(guide.transit) ? "中等" : "较低"}</td>)}</tr>
+            <tr><th>排队应对</th>{compareCities.map((guide) => <td key={guide.slug}>{comparisonLevel(guide, "少排队")}：{guide.routes.find((route) => route.days === 3)?.crowdAdvice ?? guide.experiences[0].pitfall}</td>)}</tr>
+            <tr><th>雨天韧性</th>{compareCities.map((guide) => <td key={guide.slug}>{guide.rainyPlans.length >= 3 ? "已有三套室内或同区替代" : "需要额外准备雨天方案"}；{guide.rainyPlans[0]}</td>)}</tr>
             <tr><th>少折返</th>{compareCities.map((guide) => <td key={guide.slug}>{comparisonLevel(guide, "少折返")}</td>)}</tr>
             <tr><th>消费特点</th>{compareCities.map((guide) => <td key={guide.slug}>{consumptionNote(guide.dailyBudget)}</td>)}</tr>
             <tr><th>交通便利</th>{compareCities.map((guide) => <td key={guide.slug}>{guide.transit}</td>)}</tr>
+            <tr><th>更适合谁</th>{compareCities.map((guide) => <td key={guide.slug}>{guide.fit} 推荐理由：{cityCardPresentation(guide, filters.preference).reason}</td>)}</tr>
           </tbody></table></div>
         </section>}
 
@@ -316,6 +352,7 @@ export default function Home() {
       <section className="home-boundary"><p>每座城市都有独立链接；收藏、最近浏览和已保存行程只保存在当前设备，不要求登录。</p></section>
 
       <footer><Link className="brand" href="/"><span>旅</span><div><b>旅策</b><small>ROUTE &amp; TASTE</small></div></Link><p>中国城市实用旅行攻略 · 路线、餐厅与取舍一次整理清楚</p><small>© 2026 旅策</small></footer>
+      {toast && <div className="toast" role="status"><span>✓</span>{toast}</div>}
     </main>
   );
 }

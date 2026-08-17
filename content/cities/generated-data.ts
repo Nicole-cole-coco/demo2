@@ -41,6 +41,25 @@ function researchReference(entry: ResearchEntry): CityResearchReference {
   };
 }
 
+function ensureEightExperiences(guide: CompleteCityGuide) {
+  const existing = new Set(guide.experiences.map((item) => item.name));
+  const additions = guide.preferenceContent
+    .filter((item) => item.kind === "体验" && !existing.has(item.title) && !item.title.startsWith("雨天替代"))
+    .map((item, index) => ({
+      name: item.title,
+      area: `${item.title}周边`,
+      duration: /博物馆|美术馆|纪念馆|展览|馆$/.test(item.title) ? "2—3小时" : "建议预留半天",
+      bestTime: /博物馆|美术馆|纪念馆|展览|馆$/.test(item.title) ? "开馆后的首个可用时段" : "天气稳定的上午或傍晚",
+      why: item.summary,
+      pitfall: /博物馆|美术馆|纪念馆|展览|馆$/.test(item.title)
+        ? "闭馆日、预约和入馆要求可能变化，出发前查看场馆官方公告。"
+        : "天气、交通和季节会改变体验，不在信息不足时承诺实时客流或精确耗时。",
+      alternative: guide.rainyPlans[index % guide.rainyPlans.length] ?? "天气或开放安排不合适时，改走同片区室内项目。",
+    }));
+
+  return [...guide.experiences, ...additions].slice(0, 8);
+}
+
 export function enrichGuideWithGeneratedData(guide: CompleteCityGuide): CompleteCityGuide {
   const media = (mediaManifest as MediaManifest).cities[guide.slug]?.assets ?? [];
   const licensed = media.filter((item) => item.status === "licensed" && item.localPath);
@@ -78,6 +97,7 @@ export function enrichGuideWithGeneratedData(guide: CompleteCityGuide): Complete
     xiaohongshu: (researchEntry?.xiaohongshu ?? []).map(researchReference),
     official: (researchEntry?.official ?? []).map(researchReference),
   };
+  const experiences = ensureEightExperiences(guide);
   return {
     ...guide,
     image: heroSrc,
@@ -85,6 +105,7 @@ export function enrichGuideWithGeneratedData(guide: CompleteCityGuide): Complete
     cardImage: `/cities/cards/${guide.slug}.webp`,
     cardImageAlt: `${guide.city}${cover?.subject ?? guide.experiences[0]?.name ?? "城市地标"}首页卡片图`,
     images: displayImages,
+    experiences,
     sources: guide.sources,
     research,
   };

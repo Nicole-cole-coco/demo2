@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 import { PUBLISHED_CITY_GUIDES, getCompleteCityGuide } from "@/content/cities";
 import CityGuideView from "./CityGuideView";
 
@@ -22,19 +22,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
 export default async function CityPage({ params }: CityPageProps) {
   const { slug } = await params;
   const guide = getCompleteCityGuide(slug);
-
-  if (!guide) {
-    return (
-      <main className="unsupported-city-page">
-        <div>
-          <span>NOT AVAILABLE YET</span>
-          <h1>这座城市的完整攻略还没整理好。</h1>
-          <p>旅策不会在找不到城市内容时回退到杭州。城市路线、餐厅和来源完成编辑后，才会正式开放。</p>
-          <Link href="/">返回已开放城市</Link>
-        </div>
-      </main>
-    );
-  }
+  if (!guide) notFound();
 
   return <CityGuideView guide={guide} />;
 }

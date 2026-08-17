@@ -116,7 +116,7 @@ function semanticQuery(query: string) {
   if (/建筑|摄影|拍照/.test(value)) preferences.push("建筑摄影");
   if (/博物馆|展览|文博/.test(value)) preferences.push("博物馆");
   if (/自然|山水|海边|海滨|避暑/.test(value)) preferences.push("自然风景");
-  if (/不想太累|轻松|松弛|休息/.test(value)) preferences.push("松弛休息");
+  if (/不想太累|不想.{0,5}(走|累)|少走|步行少|轻松|松弛|休息/.test(value)) preferences.push("松弛休息");
   if (/周末|两天|2天|少折返/.test(value)) preferences.push("少折返");
   if (/小众|避开人|少排队/.test(value)) preferences.push("少排队");
   if (/夜生活|夜景|夜游/.test(value)) preferences.push("夜生活");
@@ -125,6 +125,7 @@ function semanticQuery(query: string) {
   if (/夏天|夏季|避暑/.test(value)) seasons.push("夏季");
   if (/秋天|秋季/.test(value)) seasons.push("秋季");
   if (/冬天|冬季|冰雪/.test(value)) seasons.push("冬季");
+  const days = /(?:2|两)天/.test(value) ? 2 : /(?:3|三)天/.test(value) ? 3 : /(?:4|四)天/.test(value) ? 4 : undefined;
   return {
     value,
     preferences: [...new Set(preferences)],
@@ -133,7 +134,8 @@ function semanticQuery(query: string) {
     coolSummer: /避暑/.test(value),
     budgetSensitive: /不想太贵|便宜|省钱|控制/.test(value),
     rainy: /下雨|雨天/.test(value),
-    question: /怎么|哪里|哪座|适合|想|不想|第一次|周末|几天/.test(value),
+    days,
+    question: /怎么|哪里|哪座|适合|想|不想|第一次|周末|几天|\d天|两天|三天|四天/.test(value),
   };
 }
 
@@ -154,6 +156,7 @@ export function searchCities(guides: CompleteCityGuide[], query: string): CityDi
   const intent = semanticQuery(query);
   if (!intent.value) return guides.map((guide, index) => ({ guide, score: guides.length - index, reason: guide.fit, kind: "偏好" }));
   const exactPreferenceQuery = intent.preferences.some((preference) => clean(preference) === intent.value);
+  const queryNamesACity = guides.some((guide) => [guide.city, ...guide.aliases].map(clean).filter(Boolean).some((term) => intent.value.includes(term)));
 
   return guides
     .map((guide) => {
@@ -197,6 +200,10 @@ export function searchCities(guides: CompleteCityGuide[], query: string): CityDi
         kind = "旅行问题";
       }
       if (intent.budgetSensitive) score += Math.max(0, 20 - budgetCeiling(guide.dailyBudget) / 80);
+      if (intent.days) {
+        const idealDays = guide.idealDays.match(/\d+/g)?.map(Number) ?? [];
+        if (!idealDays.length || (intent.days >= Math.min(...idealDays) && intent.days <= Math.max(...idealDays))) score += 24;
+      }
       if (intent.rainy && guide.rainyPlans.length >= 3) {
         score += 18;
         if (namedCity || normalized.city.includes(intent.value)) reason = `${guide.city}已有可执行的雨天替代路线`;
@@ -204,7 +211,7 @@ export function searchCities(guides: CompleteCityGuide[], query: string): CityDi
 
       return { guide, score, reason, kind };
     })
-    .filter((item) => item.score >= (intent.question ? intent.coolSummer ? 60 : 18 : exactPreferenceQuery ? 45 : 70))
+    .filter((item) => item.score >= (queryNamesACity ? 90 : intent.question ? intent.coolSummer ? 60 : 18 : exactPreferenceQuery ? 45 : 70))
     .sort((a, b) => b.score - a.score || a.guide.city.localeCompare(b.guide.city, "zh-CN"));
 }
 
